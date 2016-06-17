@@ -1,0 +1,10 @@
+---
+applications:
+- name: design-line
+  host: design-line
+  command: npm run production
+  disk_limit: 1GB
+  instances: 3
+  memory: 1GB
+  timeout: 180
+  
