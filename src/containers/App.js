@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import * as Actions from '../Actions';
 
 import styles from '../app.css';
+import Section from '../components/Section';
 
 export class App extends Component {
 
@@ -18,7 +19,7 @@ export class App extends Component {
   render() {
     return (
       <div>
-        <h1>hello world</h1>
+        <Section />
       </div>
     );
   }

@@ -1,25 +1,26 @@
 import React from 'react';
-import { render } from 'react-dom';
+import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import configureStore from './store/configureStore';
 import Root from './containers/Root';
 
 const store = configureStore();
-
-render(
+const rootEl = document.getElementById('root');
+ReactDOM.render(
   <AppContainer>
     <Root store={{store}} />
   </AppContainer>,
-  document.getElementById('root')
+  rootEl
 );
 
 if (module.hot) {
   module.hot.accept('./containers/Root', () => {
-    render(
+    const NextApp = require('./containers/Root').default;
+    ReactDOM.render(
       <AppContainer>
-        <Root store={{store}} />
+         <NextApp store={{store}} />
       </AppContainer>,
-      document.getElementById('root')
+      rootEl
     );
   });
 }

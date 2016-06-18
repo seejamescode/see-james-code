@@ -1,7 +1,4 @@
-var cfenv = require('cfenv');
-var path = require('path');
 var express = require('express');
-var router = express.Router();
 var webpack = require('webpack');
 var request = require('request');
 var Twitter = require('twitter');

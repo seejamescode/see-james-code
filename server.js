@@ -1,7 +1,5 @@
-var cfenv = require('cfenv');
 var path = require('path');
 var express = require('express');
-var router = express.Router();
 var webpack = require('webpack');
 var proxy = require('http-proxy-middleware');
 var request = require('request');
@@ -41,7 +39,7 @@ if (NODE_ENV === 'production') {
     proxy: {
       '/api/*': 'http://localhost:' + portAPI
     }
-  }).listen(3000, 'localhost', function (err) {
+  }).listen(port, 'localhost', function (err) {
     if (err) {
       console.log(err);
     }

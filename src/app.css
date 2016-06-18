@@ -58,3 +58,11 @@ small {
     margin-bottom: calc(1rem);
   }
 }
+
+.car {
+  color: red;
+}
+
+.door {
+  font-size: 10rem;
+}

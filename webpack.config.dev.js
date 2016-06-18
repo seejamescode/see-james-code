@@ -8,10 +8,9 @@ var definePlugin = new webpack.DefinePlugin({
 module.exports = {
   devtool: 'eval',
   entry: [
-    'eventsource-polyfill', // necessary for hot reloading with IE
+    'react-hot-loader/patch',
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
-    'react-hot-loader/patch',
     './src/index'
   ],
   output: {
