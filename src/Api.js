@@ -22,6 +22,18 @@ export function mediumLatestPosts(callback) {
   });
 };
 
+export function spotifyUserInfo(callback) {
+  fetch('/api/spotify/me')
+  .then(function(response) {
+    return response.json();
+  }).then(function(data) {
+    callback(data);
+  }).catch(function(err) {
+    console.log('Error ', err);
+  });
+};
+
+
 export function twitterLatestTweets(callback) {
   fetch('/api/twitter/statuses/user_timeline')
   .then(function(response) {

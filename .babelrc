@@ -1,11 +1,4 @@
 {
   "presets": ["es2015", "stage-0", "react"],
-  "env": {
-    "development": {
-      "presets": ["react-hmre"]
-    }
-  },
-  "plugins": [
-    ["transform-decorators-legacy"]
-  ]
+  "plugins": ["react-hot-loader/babel"]
 }

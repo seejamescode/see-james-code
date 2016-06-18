@@ -1,9 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-import Radium from 'radium';
+import CSSModules from 'react-css-modules';
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import * as Actions from './Actions';
+import * as Actions from '../Actions';
+
+import styles from '../app.css';
 
 export class App extends Component {
 
@@ -15,11 +17,9 @@ export class App extends Component {
 
   render() {
     return (
-      <Radium.StyleRoot>
-        <div>
-          hello world
-        </div>
-      </Radium.StyleRoot>
+      <div>
+        <h1>hello world</h1>
+      </div>
     );
   }
 }

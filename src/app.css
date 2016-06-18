@@ -1,0 +1,60 @@
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+//major third
+h1 {
+  font-size: 2.441rem;
+}
+h2 {
+  font-size: 1.953rem;
+  line-height: 2.714rem;
+  margin-bottom: calc(2.714rem);
+}
+h3 {
+  font-size: 1.563rem;
+  line-height: 2.142rem;
+  margin-bottom: calc(2.142rem);
+}
+h4 {
+  font-size: 1.25rem;
+  line-height: 1.714rem;
+  margin-bottom: calc(1.714rem);
+}
+p {
+  font-size: 1rem;
+  line-height: 1.429rem;
+  margin-bottom: calc(1.429rem);
+}
+small {
+  font-size: .8rem;
+  line-height: 1.143rem;
+  margin-bottom: calc(1.143rem);
+}
+
+//perfect fifth
+@media (min-width: 768px) {
+  h1 {
+    font-size: 5.063rem;
+  }
+  h2 {
+    font-size: 3.375rem;
+    line-height: 4.643rem;
+    margin-bottom: calc(4.643rem);
+  }
+  h3 {
+    font-size: 2.25rem;
+    line-height: 3.071rem;
+    margin-bottom: calc(3.071rem);
+  }
+  h4 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    margin-bottom: calc(2rem);
+  }
+  small {
+    font-size: .667rem;
+    line-height: 1rem;
+    margin-bottom: calc(1rem);
+  }
+}

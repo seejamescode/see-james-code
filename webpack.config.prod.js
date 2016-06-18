@@ -1,17 +1,16 @@
 var path = require('path');
 var webpack = require('webpack');
-var precss = require('precss');
-var autoprefixer = require('autoprefixer');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  devtool: 'source-map',
+  devtool: 'cheap-module-source-map',
   entry: [
     './src/index'
   ],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/static/'
+    publicPath: '/dist/'
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
@@ -21,7 +20,7 @@ module.exports = {
       'window.fetch': 'exports?self.fetch!whatwg-fetch'
     }),
     new webpack.DefinePlugin({
-      'process.env': {
+    'process.env': {
         'NODE_ENV': JSON.stringify('production')
       }
     }),
@@ -29,6 +28,9 @@ module.exports = {
       compressor: {
         warnings: false
       }
+    }),
+    new ExtractTextPlugin('app.css', {
+      allChunks: true
     })
   ],
   module: {
@@ -43,24 +45,13 @@ module.exports = {
         loader: "json-loader"
       },
       {
-        test: /\.scss$/,
-        loaders: ["style", "css?sourceMap", "sass?sourceMap"]
-      },
-      {
         test: /\.(png|woff|woff2|eot|eot.|jpg|jpeg|ttf|svg)$/,
         loader: 'url-loader?limit=1000'
       },
       {
-        test:   /\.style.js$/,
-        loader: "style-loader!css-loader!postcss-loader?parser=postcss-js"
-      },
-      {
         test: /\.css$/,
-        loader: 'style-loader!css-loader!postcss-loader!sass-loader'
+        loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]')
       }
     ]
-  },
-  postcss: function () {
-      return [precss, autoprefixer];
   }
 };
