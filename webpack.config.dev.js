@@ -1,16 +1,12 @@
 var path = require('path');
 var webpack = require('webpack');
 
-var definePlugin = new webpack.DefinePlugin({  
-  __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
-});
-
 module.exports = {
   devtool: 'eval',
   entry: [
-    'react-hot-loader/patch',
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
+    'react-hot-loader/patch',
     './src/index'
   ],
   output: {
@@ -26,27 +22,12 @@ module.exports = {
       'window.fetch': 'exports?self.fetch!whatwg-fetch'
     })
   ],
-  resolve: {
-    alias: {
-      'react': path.join(__dirname, 'node_modules', 'react')
-    },
-    extensions: ['', '.js']
-  },
-  resolveLoader: {
-    'fallback': path.join(__dirname, 'node_modules')
-  },
   module: {
     loaders: [
       {
         test: /\.js$/,
-        loaders: ['babel'],
-        exclude: /node_modules/,
-        include: __dirname
-      },
-      {
-        test: /\.js$/,
-        loaders: ['babel'],
-        include: path.join(__dirname, '..', '..', 'src')
+        loaders: ['babel', 'eslint-loader'],
+        include: path.join(__dirname, 'src')
       },
       {
         test: /\.json$/,
