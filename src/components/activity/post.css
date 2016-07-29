@@ -1,0 +1,32 @@
+.post {
+  background: white;
+  box-shadow: 8px 8px rgba(0,0,0,0.25);
+  margin: 0 1.5rem 3em;
+  padding: 1rem;
+  width: calc(100% - 5rem);
+}
+
+.title {
+  composes: h4 from '../../typography.css';
+}
+
+.description {
+  composes: p from '../../typography.css';
+}
+
+.date {
+  composes: p from '../../typography.css';
+  margin-bottom: 0;
+}
+
+@media (min-width: 540px) {
+  .post {
+    width: calc(50% - 5rem);
+  }
+}
+
+@media (min-width: 720px) {
+  .post {
+    width: calc(33.33% - 5rem);
+  }
+}

@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.logo {
+  margin: 3rem;
+  position: relative;
+}
+
+.oval {
+  background: #18D8F0;
+  box-sizing: content-box;
+  border: none;
+  border-radius: 50%;
+  height: 90%;
+  position: absolute;
+  text-overflow: clip;
+  top: 5%;
+  width: 100%;
+}
+
+.text {
+  composes: h1 from '../typography.css';
+  color: #F090C0;
+  margin: 0;
+  padding: 0 5%;
+  text-align: center;
+  text-shadow: 2px 2px black;
+  white-space: nowrap;
+  width: 90%;
+}

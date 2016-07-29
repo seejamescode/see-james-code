@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-
-const moment = require('moment');
+import moment from 'moment';
+import styles from './post.css';
 
 export class Post extends Component {
 
@@ -21,21 +21,22 @@ export class Post extends Component {
   render() {
     return (
       <div
-        style={{
-          background: '#ececec',
-          margin: '1rem',
-          width: 'calc(100% - 4rem)',
-          padding: '1rem',
-        }}
+        className={styles.post}
       >
-        <h3>
-          {this.props.title}
-        </h3>
-        <p>{this.props.description}</p>
+        {
+          this.props.title !== 'Tweet' ? (
+            <h4
+              className={styles.title}
+            >
+              {this.props.title}
+            </h4>
+          ) : ''
+        }
         <p
-          style={{
-            marginBottom: 0,
-          }}
+          className={styles.description}
+        >{this.props.description}</p>
+        <p
+          className={styles.date}
         ><small>{this.props.dateContext} {moment(this.props.date).fromNow()}</small></p>
       </div>
     );

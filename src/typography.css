@@ -1,40 +1,44 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400|Permanent+Marker);
 
-h1, h2, h3, h4, p, small {
+.body-font {
   font-family: 'Open Sans', sans-serif;
-  margin: 0;
 }
 
 //Perfect Fourth
-h1 {}
-h1 {
+.h1 {}
+.h1 {
   font-size: 3.157rem;
   line-height: 3.157rem;
   font-family: 'Permanent Marker', cursive;
-  margin-bottom: 3.157rem;
+  margin: 0 0 3.157rem;
 }
-h2 {
+.h2 {
+  composes: body-font;
   font-size: 2.369rem;
   line-height: 2.369rem;
-  margin-bottom: 2.369rem;
+  margin: 0 0 2.369rem;
 }
-h3 {
+.h3 {
+  composes: body-font;
   font-size: 1.777rem;
   line-height: 1.777rem;
-  margin-bottom: 1.777rem;
+  margin: 0 0 1.777rem;
 }
-h4 {
+.h4 {
+  composes: body-font;
   font-size: 1.333rem;
   line-height: 1.333rem;
-  margin-bottom: 1.333rem;
+  margin: 0 0 1.333rem;
 }
-p {
+.p {
+  composes: body-font;
   font-size: 1rem;
   line-height: 1rem;
-  margin-bottom: 1rem;
+  margin: 0 0 1rem;
 }
-small {
+.small {
+  composes: body-font;
   font-size: .75rem;
   line-height: .75rem;
-  margin-bottom: .75rem;
+  margin: 0 0 .75rem;
 }

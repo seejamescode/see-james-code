@@ -23,7 +23,7 @@ export default function reducer(state = initialState, action) {
       const repos = action.repos.map((item) => {
         const formattedRepo = { ...item };
         formattedRepo.date = moment(item.updated_at).valueOf();
-        formattedRepo.dateContext = 'Updated';
+        formattedRepo.dateContext = 'Code updated';
         formattedRepo.title = item.name;
         return formattedRepo;
       });
@@ -42,7 +42,7 @@ export default function reducer(state = initialState, action) {
       const posts = action.posts.map((item) => {
         const formattedPost = { ...item };
         formattedPost.date = item.firstPublishedAt;
-        formattedPost.dateContext = 'Updated';
+        formattedPost.dateContext = 'Blogged';
         formattedPost.description = item.virtuals.snippet;
         return formattedPost;
       });

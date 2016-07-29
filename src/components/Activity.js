@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-
-import FlipMove from 'react-flip-move';
+import Masonry from 'react-masonry-component';
 import Post from './activity/Post';
+import styles from './activity.css';
 
 export class Activity extends Component {
 
@@ -24,18 +24,11 @@ export class Activity extends Component {
     const data = [...posts, ...repos, ...tweets].sort((a, b) => b.props.date - a.props.date);
 
     return (
-      <section>
-        <FlipMove
-          easing="cubic-bezier(0, 0.7, 0.8, 0.1)"
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            transform: 'translateY(-1rem)',
-          }}
-        >
-          {data}
-        </FlipMove>
-      </section>
+      <Masonry
+        className={styles.activity}
+      >
+        {data}
+      </Masonry>
     );
   }
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styles from './logo.css';
 
 export class Logo extends Component {
 
@@ -30,43 +31,21 @@ export class Logo extends Component {
 
     return (
       <section
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          width: '100%',
-        }}
+        className={styles.container}
       >
         <div
-          style={{
-            margin: '3rem',
-            position: 'relative',
-          }}
+          className={styles.logo}
         >
           <div
+            className={styles.oval}
             style={{
-              background: '#18D8F0',
-              boxSizing: 'content-box',
-              border: 'none',
-              borderRadius: '50%',
-              height: '90%',
-              position: 'absolute',
-              textOverflow: 'clip',
-              top: '5%',
-              transform: `translate(${5 * percX}px, ${5 * percY}px) rotateZ(-10deg)`,
-              width: '100%',
-              zIndex: -1,
+              transform: `translate(${10 * percX}px, ${10 * percY}px) rotateZ(-10deg)`,
             }}
           />
           <h1
+            className={styles.text}
             style={{
-              color: '#F090C0',
-              margin: 0,
-              padding: '0 5%',
-              textAlign: 'center',
-              textShadow: '2px 2px black',
-              transform: `translate(${-2.5 * percX}px, ${-2.5 * percY}px)`,
-              whiteSpace: 'nowrap',
-              width: '90%',
+              transform: `translate(${-5 * percX}px, ${-5 * percY}px)`,
             }}
           >
             James Y.

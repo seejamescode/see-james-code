@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as Actions from '../Actions';
 import Activity from '../components/Activity';
 import Logo from '../components/Logo';
-import '../typography.css';
+import styles from './app.css';
 
 class App extends Component {
 
@@ -30,7 +30,9 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div
+        className={styles.container}
+      >
         <Logo />
         <Activity
           posts={this.props.posts}
