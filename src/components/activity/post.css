@@ -1,9 +1,9 @@
 .post {
   background: white;
-  box-shadow: 8px 8px rgba(0,0,0,0.25);
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.25);
   margin: 0 1.5rem 3em;
   padding: 1rem;
-  width: calc(100% - 5rem);
+  width: calc(100% - 5.5rem);
 }
 
 .title {
@@ -21,6 +21,7 @@
 
 @media (min-width: 540px) {
   .post {
+    margin: 0 1.5rem 3em;
     width: calc(50% - 5rem);
   }
 }

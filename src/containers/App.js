@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as Actions from '../Actions';
+import About from '../components/About';
 import Activity from '../components/Activity';
 import Logo from '../components/Logo';
 import styles from './app.css';
@@ -33,12 +34,17 @@ class App extends Component {
       <div
         className={styles.container}
       >
-        <Logo />
-        <Activity
-          posts={this.props.posts}
-          repos={this.props.repos}
-          tweets={this.props.tweets}
-        />
+        <div
+          className={styles.content}
+        >
+          <Logo />
+          <About />
+          <Activity
+            posts={this.props.posts}
+            repos={this.props.repos}
+            tweets={this.props.tweets}
+          />
+        </div>
       </div>
     );
   }

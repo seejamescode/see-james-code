@@ -27,7 +27,7 @@
   margin: 0;
   padding: 0 5%;
   text-align: center;
-  text-shadow: 2px 2px black;
+  text-shadow: 2px 2px 5px black;
   white-space: nowrap;
   width: 90%;
 }

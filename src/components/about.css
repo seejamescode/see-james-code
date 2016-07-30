@@ -1,0 +1,57 @@
+.about {
+  transform: translateY(-1rem);
+}
+
+.half {
+  composes: p from '../typography.css';
+  margin-bottom: 0;
+}
+
+.introduction {
+  align-self: center;
+  composes: half;
+  margin-top: 1rem;
+}
+
+.skills {
+  composes: half;
+  list-style: none;
+  margin-top: 2rem;
+  padding: 0;
+  text-align: center;
+}
+
+.skill {
+  composes: small from '../typography.css';
+  background: #ff9900;
+  border-top: 6px dashed #ececec;
+  display: inline-block;
+  margin: 1rem .75rem 0 .75rem;
+  padding: .6rem 1rem;
+}
+
+.skill:hover {
+  animation: wiggle .25s infinite;
+}
+
+@keyframes wiggle {
+  0% {transform: rotate(3deg);}
+  50% {transform: rotate(-3deg);}
+  100% {transform: rotate(3deg);}
+}
+
+@media (min-width: 720px) {
+  .about {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .half {
+    width: 50%;
+  }
+
+  .skills {
+    margin-top: 0;
+    padding-left: 3rem;
+  }
+}

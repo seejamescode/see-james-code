@@ -1,3 +1,5 @@
 .activity {
-  margin: 0 .5rem;
+  margin-top: 2rem;
+  transform: translateX(-1rem);
+  width: calc(100% + 2rem);
 }
