@@ -7,6 +7,7 @@
 .logo {
   margin: 3rem;
   position: relative;
+  text-decoration: none;
 }
 
 .oval {
@@ -28,6 +29,11 @@
   padding: 0 5%;
   text-align: center;
   text-shadow: 2px 2px 5px black;
+  transition: text-shadow 0.25s ease-in;
   white-space: nowrap;
   width: 90%;
+}
+
+.logo:hover .text, .post:focus .text {
+  text-shadow: 2px 2px 15px 5px rgba(0,0,0,0.25);
 }

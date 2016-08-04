@@ -9,6 +9,7 @@ export class Post extends Component {
     dateContext: '...',
     description: '...',
     title: 'Tweet',
+    url: '...',
   };
 
   static propTypes = {
@@ -16,12 +17,15 @@ export class Post extends Component {
     dateContext: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
   };
 
   render() {
     return (
-      <div
+      <a
         className={styles.post}
+        href={this.props.url}
+        target="_blank"
       >
         {
           this.props.title !== 'Tweet' ? (
@@ -38,7 +42,7 @@ export class Post extends Component {
         <p
           className={styles.date}
         ><small>{this.props.dateContext} {moment(this.props.date).fromNow()}</small></p>
-      </div>
+      </a>
     );
   }
 }

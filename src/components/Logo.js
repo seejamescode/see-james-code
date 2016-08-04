@@ -33,8 +33,9 @@ export class Logo extends Component {
       <section
         className={styles.container}
       >
-        <div
+        <a
           className={styles.logo}
+          href='./'
         >
           <div
             className={styles.oval}
@@ -52,7 +53,7 @@ export class Logo extends Component {
             <br />
             Rauhut
           </h1>
-        </div>
+        </a>
       </section>
     );
   }

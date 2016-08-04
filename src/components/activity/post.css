@@ -1,9 +1,16 @@
 .post {
   background: white;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.25);
+  color: initial;
   margin: 0 1.5rem 3em;
   padding: 1rem;
+  text-decoration: none;
+  transition: box-shadow 0.25s ease-in;
   width: calc(100% - 5.5rem);
+}
+
+.post:hover, .post:focus {
+  box-shadow: 8px 8px 20px rgba(0,0,0,0.25);
 }
 
 .title {

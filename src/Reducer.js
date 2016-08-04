@@ -22,9 +22,10 @@ export default function reducer(state = initialState, action) {
     case GET_GITHUB_REPOS_DONE: {
       const repos = action.repos.map((item) => {
         const formattedRepo = { ...item };
-        formattedRepo.date = moment(item.updated_at).valueOf();
+        formattedRepo.date = moment(item.pushed_at).valueOf();
         formattedRepo.dateContext = 'Code updated';
         formattedRepo.title = item.name;
+        formattedRepo.url = item.html_url;
         return formattedRepo;
       });
       return {
@@ -44,6 +45,7 @@ export default function reducer(state = initialState, action) {
         formattedPost.date = item.firstPublishedAt;
         formattedPost.dateContext = 'Blogged';
         formattedPost.description = item.virtuals.snippet;
+        formattedPost.url = `https://medium.com/@pnowelldesign/${item.uniqueSlug}`;
         return formattedPost;
       });
       return {
@@ -63,6 +65,11 @@ export default function reducer(state = initialState, action) {
         formattedTweet.date = moment(new Date(item.created_at)).valueOf();
         formattedTweet.dateContext = 'Tweeted';
         formattedTweet.description = item.text;
+        if (item.retweeted) {
+          formattedTweet.url = `https://twitter.com/${item.retweeted_status.user.screen_name}/status/${item.retweeted_status.id_str}`;
+        } else {
+          formattedTweet.url = `https://twitter.com/seejamescode/status/${item.id_str}`;
+        }
         return formattedTweet;
       });
       return {
