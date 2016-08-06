@@ -11,10 +11,8 @@ export class About extends Component {
         <p
           className={styles.introduction}
         >
-          I am a web designer in ATX, currently at IBM Design.
-          With a business degree in MIS and a certificate in digital media studies,
-          I like to give a new perspective on web development.
-          Passions include user needs, mobile-first design, and design thinking.
+          ATX Designer working for IBM Design.
+          I love coding, researching, and trying my best for God.
         </p>
         <ul
           className={styles.skills}
@@ -53,11 +51,6 @@ export class About extends Component {
             className={styles.skill}
           >
             User Research
-          </li>
-          <li
-            className={styles.skill}
-          >
-            Creative Cloud
           </li>
         </ul>
       </div>

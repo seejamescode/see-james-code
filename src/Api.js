@@ -1,5 +1,5 @@
 export function githubPersonalRepos(callback) {
-  fetch('/api/github/users/yepnamesjames/repos', {
+  fetch('/api/github/repos', {
     credentials: 'same-origin',
   })
   .then(response => response.json())
@@ -12,7 +12,7 @@ export function githubPersonalRepos(callback) {
 }
 
 export function mediumLatestPosts(callback) {
-  fetch('/api/medium/@pnowelldesign/latest')
+  fetch('/api/medium/latest')
   .then(response => response.json())
   .then(data => {
     callback(data.payload);

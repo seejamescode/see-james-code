@@ -23,22 +23,19 @@ export class Post extends Component {
   render() {
     return (
       <a
-        className={styles.post}
+        className={this.props.title === 'Tweet' ? styles.post__tweet : styles.post}
         href={this.props.url}
         target="_blank"
       >
-        {
-          this.props.title !== 'Tweet' ? (
-            <h4
-              className={styles.title}
-            >
-              {this.props.title}
-            </h4>
-          ) : ''
-        }
+        <h4
+          className={styles.title}
+        >
+          {this.props.title}
+        </h4>
         <p
           className={styles.description}
-        >{this.props.description}</p>
+          dangerouslySetInnerHTML={{ __html: this.props.description }}
+        />
         <p
           className={styles.date}
         ><small>{this.props.dateContext} {moment(this.props.date).fromNow()}</small></p>

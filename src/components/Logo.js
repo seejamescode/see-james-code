@@ -35,7 +35,7 @@ export class Logo extends Component {
       >
         <a
           className={styles.logo}
-          href='./'
+          href="./"
         >
           <div
             className={styles.oval}

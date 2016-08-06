@@ -1,4 +1,6 @@
 .about {
+  display: flex;
+  flex-direction: column;
   transform: translateY(-1rem);
 }
 
@@ -11,14 +13,21 @@
   align-self: center;
   composes: half;
   margin-top: 1rem;
+  max-width: 24rem;
+  text-align: center;
 }
 
 .skills {
   composes: half;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   list-style: none;
   margin-top: 2rem;
   padding: 0;
   text-align: center;
+  transform: translateX(-.75rem);
+  width: calc(100% + 1.5rem);
 }
 
 .skill {
@@ -26,6 +35,7 @@
   background: #ff9900;
   border-top: 6px dashed #ececec;
   display: inline-block;
+  height: 0%;
   margin: 1rem .75rem 0 .75rem;
   padding: .6rem 1rem;
 }
@@ -40,18 +50,9 @@
   100% {transform: rotate(3deg);}
 }
 
-@media (min-width: 720px) {
-  .about {
-    display: flex;
-    flex-direction: row;
-  }
 
-  .half {
-    width: 50%;
-  }
-
+@media (min-width: 888px) {
   .skills {
-    margin-top: 0;
-    padding-left: 3rem;
+    justify-content: space-between;
   }
 }

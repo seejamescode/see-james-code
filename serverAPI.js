@@ -18,7 +18,7 @@ var app = express();
 app.get('/api/github/*', (req, res) => {
   var query = req.originalUrl.replace('/api/github/','');
   request({
-      url: `https://api.github.com/${query}?access_token=${keys.github}`,
+      url: `https://api.github.com/users/${keys.username}/${query}?access_token=${keys.github}`,
       headers: {
         'user-agent': 'node.js'
       }
@@ -32,7 +32,7 @@ app.get('/api/github/*', (req, res) => {
 app.get('/api/medium/*', (req, res) => {
   var query = req.originalUrl.replace('/api/medium/','');
   request({
-      url: `https://medium.com/${query}`,
+      url: `https://medium.com/@${keys.username}/${query}`,
       headers: {
         'Accept': 'application/json'
       }
@@ -48,7 +48,7 @@ app.get('/api/twitter/*', (req, res) => {
 
   new Twitter(keys.twitter).get(query,
     {
-      screen_name: 'seejamescode'
+      screen_name: keys.username
     }, function(error, tweets, response){
     if (!error) {
       res.send(tweets);
