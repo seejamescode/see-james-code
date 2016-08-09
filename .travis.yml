@@ -11,7 +11,7 @@ env:
 before_deploy:
   - wget https://s3.amazonaws.com/go-cli/releases/v6.12.4/cf-cli_amd64.deb -qO temp.deb && sudo dpkg -i temp.deb
   - rm temp.deb
-  - cf login -a ${CF_API} -u ${CF_USERNAME} -p ${BLUEMIX_W3IBM_PASSWORD} -o ${CF_ORG} -s ${CF_SPACE}
+  - cf login -a ${CF_API} -u ${CF_USERNAME} -p ${BLUEMIX_PASSWORD} -o ${CF_ORG} -s ${CF_SPACE}
   - cf install-plugin autopilot -r CF-Community
 deploy:
 - edge: true
