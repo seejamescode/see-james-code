@@ -3,12 +3,11 @@ var webpack = require('webpack');
 var request = require('request');
 var Twitter = require('twitter');
 
-var port = process.env.PORT + 1 || 3001;
+var port = process.env.VCAP_APP_PORT + 1 || 3001;
 var NODE_ENV = process.env.NODE_ENV || 'development';
 
 if (NODE_ENV === 'production') {
-  // var keys = JSON.parse(process.env.VCAP_SERVICES)['user-provided'][0].credentials;
-  var keys = require('./.env');
+  var keys = JSON.parse(process.env.VCAP_SERVICES)['user-provided'][0].credentials;
 } else {
   var keys = require('./.env');
 };

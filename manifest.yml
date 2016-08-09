@@ -1,10 +1,11 @@
 ---
 applications:
-- name: design-line
-  host: design-line
-  command: npm run production
-  disk_limit: 1GB
-  instances: 3
-  memory: 1GB
-  timeout: 180
+- name: seejamescode
+  host: seejamescode
+  command: npm run prod
+  disk_limit: 64MB
+  instances: 1
+  memory: 512MB
+  services:
+   - seejamescode_env
   
