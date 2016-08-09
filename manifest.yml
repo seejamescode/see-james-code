@@ -3,7 +3,6 @@ applications:
 - name: seejamescode
   host: seejamescode
   command: npm run prod
-  disk_limit: 64MB
   instances: 1
   memory: 512MB
   services:
