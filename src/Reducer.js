@@ -1,11 +1,3 @@
-import {
-  GET_GITHUB_REPOS_DONE,
-  GET_GITHUB_REPOS_PENDING,
-  GET_MEDIUM_POSTS_DONE,
-  GET_MEDIUM_POSTS_PENDING,
-  GET_TWITTER_TWEETS_DONE,
-  GET_TWITTER_TWEETS_PENDING,
-} from './ActionTypes';
 const moment = require('moment');
 
 const initialState = {
@@ -15,11 +7,13 @@ const initialState = {
   reposStatus: '',
   tweets: [],
   tweetsStatus: '',
+  videos: [],
+  videosStatus: '',
 };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case GET_GITHUB_REPOS_DONE: {
+    case 'GET_GITHUB_REPOS_DONE': {
       const repos = action.repos.map((item) => {
         const formattedRepo = { ...item };
         formattedRepo.date = moment(item.pushed_at).valueOf();
@@ -34,12 +28,12 @@ export default function reducer(state = initialState, action) {
         reposStatus: 'done',
       };
     }
-    case GET_GITHUB_REPOS_PENDING:
+    case 'GET_GITHUB_REPOS_PENDING':
       return {
         ...state,
         reposStatus: 'searching',
       };
-    case GET_MEDIUM_POSTS_DONE: {
+    case 'GET_MEDIUM_POSTS_DONE': {
       const posts = action.posts.map((item) => {
         const formattedPost = { ...item };
         formattedPost.date = item.firstPublishedAt;
@@ -54,12 +48,12 @@ export default function reducer(state = initialState, action) {
         postsStatus: 'done',
       };
     }
-    case GET_MEDIUM_POSTS_PENDING:
+    case 'GET_MEDIUM_POSTS_PENDING':
       return {
         ...state,
         postsStatus: 'searching',
       };
-    case GET_TWITTER_TWEETS_DONE: {
+    case 'GET_TWITTER_TWEETS_DONE': {
       const tweets = action.tweets.map((item) => {
         const formattedTweet = { ...item };
         formattedTweet.date = moment(new Date(item.created_at)).valueOf();
@@ -78,10 +72,40 @@ export default function reducer(state = initialState, action) {
         tweetsStatus: 'done',
       };
     }
-    case GET_TWITTER_TWEETS_PENDING:
+    case 'GET_TWITTER_TWEETS_PENDING':
       return {
         ...state,
         tweetsStatus: 'searching',
+      };
+    case 'GET_VIMEO_VIDEOS_DONE': {
+      let videos = action.videos.data.map((item) => {
+        let formattedVideo = {};
+        formattedVideo = { ...item };
+        formattedVideo.date = moment(new Date(item.created_time)).valueOf();
+        formattedVideo.dateContext = 'Video posted';
+        if (!formattedVideo.description) {
+          formattedVideo.description = '';
+        }
+        formattedVideo.id = item.uri.substring(item.uri.indexOf('videos/') + 7);
+        if (formattedVideo.id.match(/\D/) !== null) {
+          formattedVideo.id = formattedVideo.id.substring(0, formattedVideo.id.match(/\D/).index);
+        }
+        formattedVideo.title = item.name;
+        formattedVideo.url = item.link;
+        return formattedVideo;
+      });
+      videos = videos.filter(item => item.privacy.view === 'anybody');
+
+      return {
+        ...state,
+        videos,
+        videosStatus: 'done',
+      };
+    }
+    case 'GET_VIMEO_VIDEOS_PENDING':
+      return {
+        ...state,
+        videosStatus: 'searching',
       };
     default:
       return state;

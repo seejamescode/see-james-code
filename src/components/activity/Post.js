@@ -34,6 +34,7 @@ export class Post extends Component {
         </h4>
         <p
           className={styles.description}
+          className={this.props.title === 'Tweet' ? styles.description__tweet : styles.description}
           dangerouslySetInnerHTML={{ __html: this.props.description }}
         />
         <p

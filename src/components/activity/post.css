@@ -1,9 +1,10 @@
 .post {
   background: white;
+  border-top: 3px solid #F090C0;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.25);
   color: initial;
   margin: 0 1.5rem 3em;
-  padding: 1rem;
+  padding: calc(1rem - 3px) 1rem 1rem;
   text-decoration: none;
   transition: box-shadow 0.25s ease-in;
   width: calc(100% - 5rem);
@@ -15,14 +16,21 @@
 
 .title {
   composes: h4 from '../../typography.css';
+  overflow-x: hidden;
+  text-overflow: ellipsis;
 }
 
 .description {
   composes: p from '../../typography.css';
 }
 
+.description__tweet {
+  composes: small from '../../typography.css';
+}
+
 .date {
   composes: p from '../../typography.css';
+  line-height: 1rem;
   margin-bottom: 0;
 }
 
@@ -40,6 +48,8 @@
 
 .post__tweet {
   composes: post;
+  border-top: none;
+  padding: 1rem;
 }
 
 .post__tweet .title {

@@ -14,6 +14,7 @@ class App extends Component {
     posts: [],
     repos: [],
     tweets: [],
+    videos: [],
   };
 
   static propTypes = {
@@ -21,12 +22,14 @@ class App extends Component {
     posts: PropTypes.array,
     repos: PropTypes.array,
     tweets: PropTypes.array,
+    videos: PropTypes.array,
   };
 
   componentDidMount() {
     this.props.actions.getGithubRepos();
     this.props.actions.getMediumPosts();
     this.props.actions.getTwitterTweets();
+    this.props.actions.getVimeoVideos();
   }
 
   render() {
@@ -43,6 +46,7 @@ class App extends Component {
             posts={this.props.posts}
             repos={this.props.repos}
             tweets={this.props.tweets}
+            videos={this.props.videos}
           />
         </div>
       </div>
