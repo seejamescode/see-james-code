@@ -18,6 +18,7 @@ export default function reducer(state = initialState, action) {
         const formattedRepo = { ...item };
         formattedRepo.date = moment(item.pushed_at).valueOf();
         formattedRepo.dateContext = 'Code updated';
+        formattedRepo.source = 'github';
         formattedRepo.title = item.name;
         formattedRepo.url = item.html_url;
         return formattedRepo;
@@ -39,6 +40,7 @@ export default function reducer(state = initialState, action) {
         formattedPost.date = item.firstPublishedAt;
         formattedPost.dateContext = 'Blogged';
         formattedPost.description = item.virtuals.snippet;
+        formattedPost.source = 'medium';
         formattedPost.url = `https://medium.com/@pnowelldesign/${item.uniqueSlug}`;
         return formattedPost;
       });
@@ -59,6 +61,8 @@ export default function reducer(state = initialState, action) {
         formattedTweet.date = moment(new Date(item.created_at)).valueOf();
         formattedTweet.dateContext = 'Tweeted';
         formattedTweet.description = item.text;
+        formattedTweet.popularity = item.retweet_count * 2 + item.favorite_count;
+        formattedTweet.source = 'twitter';
         if (item.retweeted) {
           formattedTweet.url = `https://twitter.com/${item.retweeted_status.user.screen_name}/status/${item.retweeted_status.id_str}`;
         } else {
@@ -90,6 +94,8 @@ export default function reducer(state = initialState, action) {
         if (formattedVideo.id.match(/\D/) !== null) {
           formattedVideo.id = formattedVideo.id.substring(0, formattedVideo.id.match(/\D/).index);
         }
+        formattedVideo.id = Number(formattedVideo.id);
+        formattedVideo.source = 'vimeo';
         formattedVideo.title = item.name;
         formattedVideo.url = item.link;
         return formattedVideo;

@@ -54,7 +54,6 @@ app.get('/api/twitter/*', (req, res) => {
 
 app.get('/api/vimeo/*', (req, res) => {
   var query = req.originalUrl.replace('/api/vimeo/','');
-  console.log(query);
   request(`https://api.vimeo.com/${query}?filter_playable=true&access_token=${keys.vimeo}`, (err, response, body) => {
     if (!err && response.statusCode == 200) {
       res.send(body);
