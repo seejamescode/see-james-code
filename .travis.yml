@@ -19,3 +19,6 @@ deploy:
   script: cf zero-downtime-push seejamescode -f ./manifest.yml
   on:
     branch: master
+notifications:
+  email:
+    - james@seejamescode.com
