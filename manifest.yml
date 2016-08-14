@@ -1,11 +1,6 @@
 ---
 applications:
 - name: seejamescode
-  domains:
-    - seejamescode.com
-  hosts:
-    - seejamescode
-    - www
   no-hostname: true
   command: npm run prod
   instances: 1
