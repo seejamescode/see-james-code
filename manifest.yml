@@ -1,7 +1,7 @@
 ---
 applications:
 - name: seejamescode
-  no-hostname: true
+  host: seejamescode
   command: npm run prod
   instances: 1
   memory: 512MB
