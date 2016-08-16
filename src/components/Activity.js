@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Masonry from 'react-masonry-component';
 import Post from './activity/Post';
 import styles from './activity.css';
+import Tweet from './activity/Tweet';
 
 export class Activity extends Component {
 
@@ -60,7 +61,10 @@ export class Activity extends Component {
     data = data.filter((item) => item.source !== 'twitter');
     data = [...data, ...arrayTweetGroupings]
       .sort((a, b) => b.date - a.date)
-      .map((item) => <Post {...item} key={item.source + item.id} />);
+      .map((item) => item.source === 'twitter' // eslint-disable-line no-confusing-arrow
+        ? <Tweet {...item} key={item.source + item.id} />
+        : <Post {...item} key={item.source + item.id} />
+      );
 
     return (
       <Masonry

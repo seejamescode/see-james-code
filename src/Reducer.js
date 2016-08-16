@@ -20,7 +20,7 @@ export default function reducer(state = initialState, action) {
         formattedRepo.dateContext = 'Code updated';
         formattedRepo.source = 'github';
         formattedRepo.title = item.name;
-        formattedRepo.url = item.html_url;
+        formattedRepo.code = item.html_url;
         return formattedRepo;
       });
       return {
@@ -41,7 +41,7 @@ export default function reducer(state = initialState, action) {
         formattedPost.dateContext = 'Blogged';
         formattedPost.description = item.virtuals.snippet;
         formattedPost.source = 'medium';
-        formattedPost.url = `https://medium.com/@pnowelldesign/${item.uniqueSlug}`;
+        formattedPost.homepage = `https://medium.com/@pnowelldesign/${item.uniqueSlug}`;
         return formattedPost;
       });
       return {
@@ -63,13 +63,9 @@ export default function reducer(state = initialState, action) {
         formattedTweet.description = item.text;
         formattedTweet.popularity = item.retweet_count * 2 + item.favorite_count;
         formattedTweet.source = 'twitter';
-        if (item.retweeted) {
-          formattedTweet.url = `https://twitter.com/${item.retweeted_status.user.screen_name}/status/${item.retweeted_status.id_str}`;
-        } else {
-          formattedTweet.url = `https://twitter.com/seejamescode/status/${item.id_str}`;
-        }
+        formattedTweet.homepage = `https://twitter.com/seejamescode/status/${item.id_str}`;
         return formattedTweet;
-      });
+      }).filter((tweet) => !tweet.retweeted);
       return {
         ...state,
         tweets,
@@ -97,7 +93,7 @@ export default function reducer(state = initialState, action) {
         formattedVideo.id = Number(formattedVideo.id);
         formattedVideo.source = 'vimeo';
         formattedVideo.title = item.name;
-        formattedVideo.url = item.link;
+        formattedVideo.homepage = item.link;
         return formattedVideo;
       });
       videos = videos.filter(item => item.privacy.view === 'anybody');

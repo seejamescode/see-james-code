@@ -1,0 +1,10 @@
+.tweet {
+  composes: post from './post.css';
+  composes: small from '../../typography.css';
+  border: 2px solid #F090C0;
+  padding: 0 calc(1rem - 2px);
+}
+
+.tweet:hover, .tweet:focus {
+  box-shadow: 8px 8px 20px rgba(0,0,0,0.25);
+}

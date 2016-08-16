@@ -1,17 +1,12 @@
 .post {
   background: white;
-  border-top: 3px solid #F090C0;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.25);
   color: initial;
-  margin: 0 1.5rem 3em;
-  padding: calc(1rem - 3px) 1rem 1rem;
+  margin: 0 1.5rem 1.5em;
+  padding: 1rem;
   text-decoration: none;
   transition: box-shadow 0.25s ease-in;
   width: calc(100% - 5rem);
-}
-
-.post:hover, .post:focus {
-  box-shadow: 8px 8px 20px rgba(0,0,0,0.25);
 }
 
 .title {
@@ -24,18 +19,19 @@
   composes: p from '../../typography.css';
 }
 
-.description__tweet {
-  composes: small from '../../typography.css';
-}
-
 .date {
+  background: #18D8F0;
   composes: p from '../../typography.css';
   line-height: 1rem;
-  margin-bottom: 0;
+  margin: 0;
+  padding: .75rem 0 .75rem 1rem;
+  transform: translate(-1rem, -1rem);
+  width: calc(100% + 1rem);
 }
 
 @media (min-width: 540px) {
   .post {
+    margin: 0 1.5rem 3em;
     width: calc(50% - 5rem);
   }
 }
@@ -44,14 +40,4 @@
   .post {
     width: calc(33.33% - 5rem);
   }
-}
-
-.post__tweet {
-  composes: post;
-  border-top: none;
-  padding: 1rem;
-}
-
-.post__tweet .title {
-  display: none;
 }

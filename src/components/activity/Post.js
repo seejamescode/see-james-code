@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+
+import Actions from './Post/Actions';
 import moment from 'moment';
 import styles from './post.css';
 
@@ -9,24 +11,27 @@ export class Post extends Component {
     dateContext: '...',
     description: '...',
     title: 'Tweet',
-    url: '...',
   };
 
   static propTypes = {
+    code: PropTypes.string,
     date: PropTypes.number.isRequired,
     dateContext: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
+    homepage: PropTypes.string,
     title: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired,
   };
 
   render() {
     return (
-      <a
-        className={this.props.title === 'Tweet' ? styles.post__tweet : styles.post}
-        href={this.props.url}
-        target="_blank"
+      <div
+        className={styles.post}
       >
+        <p
+          className={styles.date}
+        >
+          <small>{this.props.dateContext} {moment(this.props.date).fromNow()}</small>
+        </p>
         <h4
           className={styles.title}
         >
@@ -34,13 +39,13 @@ export class Post extends Component {
         </h4>
         <p
           className={styles.description}
-          className={this.props.title === 'Tweet' ? styles.description__tweet : styles.description}
           dangerouslySetInnerHTML={{ __html: this.props.description }}
         />
-        <p
-          className={styles.date}
-        ><small>{this.props.dateContext} {moment(this.props.date).fromNow()}</small></p>
-      </a>
+        <Actions
+          homepage={this.props.homepage}
+          code={this.props.code}
+        />
+      </div>
     );
   }
 }
