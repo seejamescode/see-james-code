@@ -13,6 +13,8 @@ export class About extends Component {
         >
           ATX Designer working for IBM Design.
           I love coding, researching, and trying my best for God.
+          <br />
+          Reach me by <a href="mailto:james@seejamescode.com">email</a> or <a href="https://twitter.com/seejamescode">Twitter</a>.
         </p>
         <ul
           className={styles.skills}

@@ -10,8 +10,6 @@
   border-color: #FFFFFF #808080 #808080 #FFFFFF;
   color: black;
   composes: small from '../../../typography.css';
-  display: block;
-  flex: 0;
   margin: 0 0 0 1rem;
   outline: 1px solid black;
   padding: .35rem 1.5rem;

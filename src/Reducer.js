@@ -19,7 +19,10 @@ export default function reducer(state = initialState, action) {
         formattedRepo.date = moment(item.pushed_at).valueOf();
         formattedRepo.dateContext = 'Code updated';
         formattedRepo.source = 'github';
-        formattedRepo.title = item.name;
+        formattedRepo.title = item.name.replace(/-/g, ' ');
+        if (formattedRepo.title.indexOf('js') > -1) {
+          formattedRepo.title = formattedRepo.title.replace(' js', '.js');
+        }
         formattedRepo.code = item.html_url;
         return formattedRepo;
       });
