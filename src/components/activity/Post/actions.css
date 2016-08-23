@@ -8,7 +8,6 @@
   border-width: 2px;
   border-style: solid;
   border-color: #FFFFFF #808080 #808080 #FFFFFF;
-  color: black;
   composes: small from '../../../typography.css';
   margin: 0 0 0 1rem;
   padding: .35rem 1.5rem;

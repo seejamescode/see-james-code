@@ -1,6 +1,8 @@
 .about {
+  border-bottom: 1px #bdbdbd solid;
   display: flex;
   flex-direction: column;
+  padding-bottom: 3rem;
   transform: translateY(-1rem);
 }
 
@@ -18,7 +20,7 @@
 }
 
 .link {
-  color: black;
+  composes: body-font from '../typography.css';
   display: inline-block;
   position: relative;
   text-decoration: none;
