@@ -22,7 +22,7 @@ export class Actions extends Component {
           className={styles.link}
           href={this.props.code}
           style={{
-            display: !this.props.code ? 'none' : '',
+            display: !this.props.code || (this.props.code && !this.props.homepage) ? 'none' : '',
           }}
           target="_blank"
         >
@@ -33,13 +33,13 @@ export class Actions extends Component {
         </a>
         <a
           className={styles.link}
-          href={this.props.homepage}
+          href={this.props.homepage ? this.props.homepage : this.props.code}
           style={{
-            display: !this.props.homepage ? 'none' : '',
+            display: !this.props.homepage && !this.props.code ? 'none' : '',
           }}
           target="_blank"
         >
-          View
+          {this.props.homepage ? 'View' : 'Code'}
         </a>
       </div>
     );

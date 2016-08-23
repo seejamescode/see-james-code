@@ -1,15 +1,26 @@
-var path = require('path');
+var fileExists = require('file-exists');
 var express = require('express');
-var webpack = require('webpack');
+var path = require('path');
 var proxy = require('http-proxy-middleware');
+var webpack = require('webpack');
 var request = require('request');
-var Twitter = require('twitter');
-var webpack = require("webpack");
-var WebpackDevServer = require('webpack-dev-server');
+var twitter = require('twitter');
+var webpack = require('webpack');
+var webpackDevServer = require('webpack-dev-server');
 
 var port = process.env.VCAP_APP_PORT || 3001;
 var NODE_ENV = process.env.NODE_ENV || 'development';
 var app = express();
+
+console.log('Checking for keys in a .env file...');
+if (fileExists('./.env')) {
+  console.log('Found the keys locally.');
+  var keys = require('./.env');
+} else {
+  console.log('Checking for keys in a user-provided service...');
+  console.log('If error here, there is no way to retrieve api keys.');
+  keys = JSON.parse(process.env.VCAP_SERVICES)['user-provided'][0].credentials;
+};
 
 app.get('/api/github/*', (req, res) => {
   var query = req.originalUrl.replace('/api/github/','');
@@ -42,7 +53,7 @@ app.get('/api/medium/*', (req, res) => {
 app.get('/api/twitter/*', (req, res) => {
   var query = req.originalUrl.replace('/api/twitter/','');
 
-  new Twitter(keys.twitter).get(query,
+  new twitter(keys.twitter).get(query,
     {
       screen_name: keys.username
     }, function(error, tweets, response){
@@ -62,14 +73,6 @@ app.get('/api/vimeo/*', (req, res) => {
 })
 
 if (NODE_ENV === 'production') {
-  var config = require('./webpack.config.prod');
-  var keys = JSON.parse(process.env.VCAP_SERVICES)['user-provided'][0].credentials;
-
-  app.use(require('webpack-dev-middleware')(webpack(config), {
-    noInfo: true,
-    publicPath: config.output.publicPath
-  }));
-
   app.use('/dist', express.static('dist'));
 
   app.get('*', function (req, res) {
@@ -78,9 +81,8 @@ if (NODE_ENV === 'production') {
 } else {
   var portDev = process.env.VCAP_APP_PORT + 1 || 3000;
   var config = require('./webpack.config.dev');
-  var keys = require('./.env');
 
-  new WebpackDevServer(webpack(config), {
+  new webpackDevServer(webpack(config), {
     publicPath: config.output.publicPath,
     hot: true,
     stats: {

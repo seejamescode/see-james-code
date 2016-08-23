@@ -27,7 +27,8 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
         warnings: false
-      }
+      },
+      minimize: true,
     }),
     new ExtractTextPlugin('app.css', {
       allChunks: true

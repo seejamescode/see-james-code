@@ -17,6 +17,22 @@
   text-align: center;
 }
 
+.link {
+  color: black;
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+}
+
+.link:after {
+  background: #F090C0;
+  content: '';
+  display: block;
+  height: 2px;
+  transform: translateY(-3px);
+  width: 100%;
+}
+
 .skills {
   composes: half;
   display: flex;
