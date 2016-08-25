@@ -20,6 +20,11 @@
   composes: p from '../../typography.css';
 }
 
+.descriptionVideo {
+  composes: description;
+  margin-bottom: 0;
+}
+
 .date {
   background: #18D8F0;
   composes: p from '../../typography.css';

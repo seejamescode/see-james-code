@@ -7,13 +7,6 @@ import Video from './Post/Video';
 
 export class Post extends Component {
 
-  static defaultProps = {
-    date: 1,
-    dateContext: '...',
-    description: '...',
-    title: 'Tweet',
-  };
-
   static propTypes = {
     code: PropTypes.string,
     date: PropTypes.number.isRequired,
@@ -47,13 +40,17 @@ export class Post extends Component {
           {this.props.title}
         </h4>
         <p
-          className={styles.description}
+          className={this.props.embed ? styles.descriptionVideo : styles.description}
           dangerouslySetInnerHTML={{ __html: this.props.description }}
         />
-        <Actions
-          homepage={this.props.homepage}
-          code={this.props.code}
-        />
+        {
+          !this.props.embed ? (
+            <Actions
+              homepage={this.props.homepage}
+              code={this.props.code}
+            />
+          ) : ''
+        }
       </div>
     );
   }

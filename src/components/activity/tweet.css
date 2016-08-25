@@ -8,3 +8,9 @@
 .tweet:hover, .tweet:focus {
   box-shadow: 8px 8px 20px rgba(0,0,0,0.25);
 }
+
+.logo {
+  float: left;
+  height: 1rem;
+  margin: .85rem .25rem 0 0;
+}
