@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import Actions from './Post/Actions';
 import moment from 'moment';
 import styles from './post.css';
+import Video from './Post/Video';
 
 export class Post extends Component {
 
@@ -18,6 +19,7 @@ export class Post extends Component {
     date: PropTypes.number.isRequired,
     dateContext: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
+    embed: PropTypes.object,
     homepage: PropTypes.string,
     title: PropTypes.string.isRequired,
   };
@@ -32,6 +34,13 @@ export class Post extends Component {
         >
           <small>{this.props.dateContext} {moment(this.props.date).fromNow()}</small>
         </p>
+        {
+          this.props.embed ? (
+            <Video
+              html={this.props.embed.html}
+            />
+          ) : ''
+        }
         <h4
           className={styles.title}
         >
