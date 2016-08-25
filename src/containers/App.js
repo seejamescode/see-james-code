@@ -2,9 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as Actions from '../Actions';
-import About from '../components/About';
 import Activity from '../components/Activity';
-import Logo from '../components/Logo';
+import Intro from '../components/Intro';
+import Skills from '../components/Skills';
 import styles from './app.css';
 
 class App extends Component {
@@ -40,8 +40,8 @@ class App extends Component {
         <div
           className={styles.content}
         >
-          <Logo />
-          <About />
+          <Intro />
+          <Skills />
           <Activity
             posts={this.props.posts}
             repos={this.props.repos}

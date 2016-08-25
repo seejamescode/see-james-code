@@ -36,12 +36,12 @@
 }
 
 .skills {
-  composes: half;
+  composes: p from '../typography.css';
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   list-style: none;
-  margin-top: 2rem;
+  margin: 2rem 0 0 0;
   padding: 0;
   text-align: center;
   transform: translateX(-.75rem);
@@ -66,7 +66,6 @@
   50% {transform: rotate(-3deg);}
   100% {transform: rotate(3deg);}
 }
-
 
 @media (min-width: 888px) {
   .skills {

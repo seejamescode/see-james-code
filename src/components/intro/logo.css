@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   height: 12.25rem;
-  width: 100%;
 }
 
 .logo {
@@ -21,18 +20,16 @@
   position: absolute;
   text-overflow: clip;
   top: 5%;
-  transition: all 0.25s ease-in;
   width: 100%;
 }
 
 .text {
-  composes: h1 from '../typography.css';
+  composes: h1 from '../../typography.css';
   color: #F090C0;
   margin: 0;
   padding: 0 5%;
   text-align: center;
   text-shadow: 2px 2px 5px black;
-  transition: all 0.25s ease-in;
   white-space: nowrap;
   width: 90%;
 }
@@ -45,4 +42,33 @@
   font-size: 3.25rem;
   line-height: 3.23rem;
   margin-top: -.1rem;
+}
+
+@media (min-width: 720px) {
+  .container {
+    height: 17rem;
+  }
+
+  .logo {
+    margin: 6rem 3rem 3rem 0;
+  }
+
+  .text {
+    font-size: 4rem;
+    line-height: 4rem;
+  }
+
+  .oval, .text {
+    transition: all 0.1s ease-in;
+  }
+
+  .logo:hover .oval, .logo:focus .oval {
+    box-shadow: 8px 8px 20px rgba(0,0,0,0.25);
+  }
+
+  .logo:hover .text, .logo:focus .text {
+    font-size: 4.25rem;
+    line-height: 4.23rem;
+    margin-top: -.2rem;
+  }
 }

@@ -1,21 +1,13 @@
 import React, { Component } from 'react';
-import styles from './about.css';
+import styles from './skills.css';
 
-export class About extends Component {
+export class Skills extends Component {
 
   render() {
     return (
       <div
         className={styles.about}
       >
-        <p
-          className={styles.introduction}
-        >
-          ATX Designer working for IBM Design.
-          I love coding, researching, and trying my best for God.
-          <br />
-          Reach me by <a className={styles.link} href="mailto:james@seejamescode.com">email</a> or <a className={styles.link} href="https://twitter.com/seejamescode">Twitter</a>.
-        </p>
         <ul
           className={styles.skills}
         >
@@ -59,4 +51,4 @@ export class About extends Component {
     );
   }
 }
-export default About;
+export default Skills;
