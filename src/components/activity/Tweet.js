@@ -15,6 +15,7 @@ export class Tweet extends Component {
     dateContext: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     homepage: PropTypes.string,
+    image: PropTypes.string,
   };
 
   render() {
@@ -24,6 +25,15 @@ export class Tweet extends Component {
         href={this.props.homepage}
         target="_blank"
       >
+        {
+          this.props.image ? (
+            <img
+              alt="tweet media"
+              className={styles.image}
+              src={this.props.image}
+            />
+          ) : ''
+        }
         <svg
           className={styles.logo}
           version="1.1"

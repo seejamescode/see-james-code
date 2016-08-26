@@ -14,3 +14,9 @@
   height: 1rem;
   margin: .85rem .25rem 0 0;
 }
+
+.image {
+  margin-bottom: -5px;
+  transform: translateX(calc(-1rem + 2px));
+  width: calc(100% + 2rem - 4px);
+}

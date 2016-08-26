@@ -64,6 +64,9 @@ export default function reducer(state = initialState, action) {
         formattedTweet.date = moment(new Date(item.created_at)).valueOf();
         formattedTweet.dateContext = 'Tweeted';
         formattedTweet.description = item.text;
+        if (item.entities.media) {
+          formattedTweet.image = item.entities.media[0].media_url;
+        }
         formattedTweet.popularity = item.retweet_count * 2 + item.favorite_count;
         formattedTweet.source = 'twitter';
         formattedTweet.homepage = `https://twitter.com/seejamescode/status/${item.id_str}`;
