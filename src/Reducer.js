@@ -1,10 +1,13 @@
 const moment = require('moment');
+const roles = require('./Roles.json');
 
 const initialState = {
   posts: [],
   postsStatus: '',
   repos: [],
   reposStatus: '',
+  roles: [],
+  rolesStatus: '',
   tweets: [],
   tweetsStatus: '',
   videos: [],
@@ -37,6 +40,23 @@ export default function reducer(state = initialState, action) {
         ...state,
         reposStatus: 'searching',
       };
+    case 'GET_LOCAL_ROLES': {
+      const formattedRoles = roles.map((item) => {
+        const formattedRole = { ...item };
+        if (item.date) {
+          formattedRole.date = Number(moment(item.date, 'DD-MM-YYYY'));
+        }
+        formattedRole.dateContext = 'Worked';
+        formattedRole.id = roles.indexOf(item);
+        formattedRole.source = 'resume';
+        return formattedRole;
+      });
+      return {
+        ...state,
+        roles: formattedRoles,
+        rolesStatus: 'done',
+      };
+    }
     case 'GET_MEDIUM_POSTS_DONE': {
       const posts = action.posts.map((item) => {
         const formattedPost = { ...item };

@@ -13,6 +13,7 @@ class App extends Component {
     actions: {},
     posts: [],
     repos: [],
+    roles: [],
     tweets: [],
     videos: [],
   };
@@ -21,12 +22,14 @@ class App extends Component {
     actions: PropTypes.object.isRequired,
     posts: PropTypes.array,
     repos: PropTypes.array,
+    roles: PropTypes.array,
     tweets: PropTypes.array,
     videos: PropTypes.array,
   };
 
   componentDidMount() {
     this.props.actions.getGithubRepos();
+    this.props.actions.getLocalRoles();
     this.props.actions.getMediumPosts();
     this.props.actions.getTwitterTweets();
     this.props.actions.getVimeoVideos();
@@ -45,6 +48,7 @@ class App extends Component {
           <Activity
             posts={this.props.posts}
             repos={this.props.repos}
+            roles={this.props.roles}
             tweets={this.props.tweets}
             videos={this.props.videos}
           />

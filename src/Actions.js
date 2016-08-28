@@ -15,6 +15,14 @@ export function getGithubRepos() {
   };
 }
 
+export function getLocalRoles() {
+  return (dispatch) => {
+    dispatch({
+      type: 'GET_LOCAL_ROLES',
+    });
+  };
+}
+
 export function getMediumPosts() {
   return (dispatch) => {
     dispatch({

@@ -9,8 +9,21 @@
   width: calc(100% - 5rem);
 }
 
+.image {
+  margin-bottom: -5px;
+  transform: translateX(calc(-1rem + 2px));
+  width: calc(100% + 2rem - 4px);
+}
+
 .title {
   composes: h4 from '../../typography.css';
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  text-transform: capitalize;
+}
+
+.subtitle {
+  composes: p from '../../typography.css';
   overflow-x: hidden;
   text-overflow: ellipsis;
   text-transform: capitalize;
@@ -42,7 +55,7 @@
   }
 }
 
-@media (min-width: 720px) {
+@media (min-width: 850px) {
   .post {
     width: calc(33.33% - 5rem);
   }

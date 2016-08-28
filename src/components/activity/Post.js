@@ -9,11 +9,12 @@ export class Post extends Component {
 
   static propTypes = {
     code: PropTypes.string,
-    date: PropTypes.number.isRequired,
+    date: PropTypes.number,
     dateContext: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     embed: PropTypes.object,
     homepage: PropTypes.string,
+    position: PropTypes.string,
     title: PropTypes.string.isRequired,
   };
 
@@ -25,7 +26,13 @@ export class Post extends Component {
         <p
           className={styles.date}
         >
-          <small>{this.props.dateContext} {moment(this.props.date).fromNow()}</small>
+          <small>
+            {
+              this.props.date ? (
+                <span>{this.props.dateContext} {moment(this.props.date).fromNow()}</span>
+              ) : 'Currently...'
+            }
+          </small>
         </p>
         {
           this.props.embed ? (
@@ -38,6 +45,14 @@ export class Post extends Component {
           className={styles.title}
         >
           {this.props.title}
+          <br />
+          <span
+            className={styles.subtitle}
+          >
+          {
+            this.props.position ? this.props.position : ''
+          }
+          </span>
         </h4>
         <p
           className={this.props.embed ? styles.descriptionVideo : styles.description}

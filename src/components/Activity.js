@@ -9,6 +9,7 @@ export class Activity extends Component {
   static defaultProps = {
     posts: [],
     repos: [],
+    roles: [],
     tweets: [],
     videos: [],
   };
@@ -16,6 +17,7 @@ export class Activity extends Component {
   static propTypes = {
     posts: PropTypes.array.isRequired,
     repos: PropTypes.array.isRequired,
+    roles: PropTypes.array.isRequired,
     tweets: PropTypes.array.isRequired,
     videos: PropTypes.array.isRequired,
   };
@@ -30,6 +32,7 @@ export class Activity extends Component {
     let data = [
       ...this.props.posts,
       ...this.props.repos,
+      ...this.props.roles,
       ...this.props.tweets,
       ...this.props.videos]
       .sort((a, b) => b.date - a.date)
