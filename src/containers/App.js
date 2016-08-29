@@ -1,11 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Helmet from 'react-helmet';
 import * as Actions from '../Actions';
 import Activity from '../components/Activity';
 import Intro from '../components/Intro';
 import Skills from '../components/Skills';
 import styles from './app.css';
+
+const JamesYRauhut = require('../images/JamesYRauhut.png');
 
 class App extends Component {
 
@@ -40,6 +43,20 @@ class App extends Component {
       <div
         className={styles.container}
       >
+        <Helmet
+          title="James Y Rauhut"
+          meta={[
+            {
+              name: 'description',
+              content: 'ATX Designer working for IBM Design.' +
+              ' I love coding, researching, and trying my best for God.',
+            },
+            {
+              property: 'og:image',
+              content: JamesYRauhut,
+            },
+          ]}
+        />
         <div
           className={styles.content}
         >
