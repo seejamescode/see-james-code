@@ -23,6 +23,7 @@ export class Activity extends Component {
   };
 
   render() {
+    console.log(this.props.tweets);
     // I am given an array of info on
     // Github repos, Medium posts, Twitter tweets, and a Vimeo video.
 
@@ -68,7 +69,6 @@ export class Activity extends Component {
         ? <Tweet {...item} key={item.source + item.id} />
         : <Post {...item} key={item.source + item.id} />
       );
-
     return (
       <Masonry
         className={styles.activity}

@@ -29,11 +29,11 @@ export class Tweet extends Component {
         {
           this.props.image && !this.props.video ? (
             <div
-              className={styles.imageContainer}
+              className={styles.mediaContainer}
             >
               <img
                 alt="tweet media"
-                className={styles.image}
+                className={styles.media}
                 src={this.props.image}
               />
             </div>
@@ -42,11 +42,11 @@ export class Tweet extends Component {
         {
           this.props.video ? (
             <div
-              className={styles.imageContainer}
+              className={styles.mediaContainer}
             >
               <video
                 autoPlay
-                className={styles.image}
+                className={styles.media}
                 loop
                 muted
                 src={this.props.video}
