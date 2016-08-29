@@ -9,12 +9,6 @@
   width: calc(100% - 5rem);
 }
 
-.image {
-  margin-bottom: -5px;
-  transform: translateX(calc(-1rem + 2px));
-  width: calc(100% + 2rem - 4px);
-}
-
 .title {
   composes: h4 from '../../typography.css';
   overflow-x: hidden;

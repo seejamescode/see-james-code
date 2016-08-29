@@ -15,8 +15,14 @@
   margin: .85rem .25rem 0 0;
 }
 
-.image {
-  margin-bottom: -5px;
+.imageContainer {
+  max-height: 150px;
+  overflow: hidden;
   transform: translateX(calc(-1rem + 2px));
   width: calc(100% + 2rem - 4px);
+}
+
+.image {
+  margin-bottom: -5px;
+  width: 100%;
 }

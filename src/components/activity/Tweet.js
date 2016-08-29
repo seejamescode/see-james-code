@@ -16,6 +16,7 @@ export class Tweet extends Component {
     description: PropTypes.string.isRequired,
     homepage: PropTypes.string,
     image: PropTypes.string,
+    video: PropTypes.string,
   };
 
   render() {
@@ -26,12 +27,31 @@ export class Tweet extends Component {
         target="_blank"
       >
         {
-          this.props.image ? (
-            <img
-              alt="tweet media"
-              className={styles.image}
-              src={this.props.image}
-            />
+          this.props.image && !this.props.video ? (
+            <div
+              className={styles.imageContainer}
+            >
+              <img
+                alt="tweet media"
+                className={styles.image}
+                src={this.props.image}
+              />
+            </div>
+          ) : ''
+        }
+        {
+          this.props.video ? (
+            <div
+              className={styles.imageContainer}
+            >
+              <video
+                autoPlay
+                className={styles.image}
+                loop
+                muted
+                src={this.props.video}
+              />
+            </div>
           ) : ''
         }
         <svg
