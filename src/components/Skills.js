@@ -8,6 +8,11 @@ export class Skills extends Component {
       <div
         className={styles.about}
       >
+        <h3
+          className={styles.header}
+        >
+          Favorite Tools
+        </h3>
         <ul
           className={styles.skills}
         >

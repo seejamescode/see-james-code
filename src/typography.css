@@ -29,6 +29,14 @@
   line-height: 1.8rem;
   margin: 0 0 1.333rem;
 }
+.h5 {
+  border-bottom: 1px #bdbdbd solid;
+  composes: body-font;
+  font-size: 1.25rem;
+  line-height: 1.6rem;
+  margin: 0 0 1.25rem;
+  padding-bottom: .5rem;
+}
 .p {
   composes: body-font;
   font-size: 1rem;

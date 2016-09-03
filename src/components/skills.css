@@ -1,22 +1,12 @@
 .about {
-  border-bottom: 1px #bdbdbd solid;
   display: flex;
   flex-direction: column;
-  padding-bottom: 3rem;
+  padding-bottom: 4rem;
   transform: translateY(-1rem);
 }
 
-.half {
-  composes: p from '../typography.css';
-  margin-bottom: 0;
-}
-
-.introduction {
-  align-self: center;
-  composes: half;
-  margin-top: 1rem;
-  max-width: 24rem;
-  text-align: center;
+.header {
+  composes: h5 from '../typography.css';
 }
 
 .link {
@@ -41,7 +31,7 @@
   flex-wrap: wrap;
   justify-content: center;
   list-style: none;
-  margin: 2rem 0 0 0;
+  margin: 0;
   padding: 0;
   text-align: center;
   transform: translateX(-.75rem);
@@ -50,7 +40,7 @@
 
 .skill {
   composes: small from '../typography.css';
-  background: #ff9900;
+  background: #18D8F0;
   border-top: 6px dashed #ececec;
   display: inline-block;
   margin: 1rem .75rem 0 .75rem;

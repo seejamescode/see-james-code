@@ -69,11 +69,20 @@ export class Activity extends Component {
         : <Post {...item} key={item.source + item.id} />
       );
     return (
-      <Masonry
-        className={styles.activity}
+      <div
+        className={styles.container}
       >
-        {data}
-      </Masonry>
+        <h3
+          className={styles.header}
+        >
+          Latest Stuff
+        </h3>
+        <Masonry
+          className={styles.activity}
+        >
+          {data}
+        </Masonry>
+      </div>
     );
   }
 }
