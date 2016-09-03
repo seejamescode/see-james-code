@@ -60,6 +60,7 @@ export default function reducer(state = initialState, action) {
     case 'GET_MEDIUM_POSTS_DONE': {
       const posts = action.posts.map((item) => {
         const formattedPost = { ...item };
+        formattedPost.buttonContext = 'Read';
         formattedPost.date = item.firstPublishedAt;
         formattedPost.dateContext = 'Blogged';
         formattedPost.description = item.virtuals.snippet;

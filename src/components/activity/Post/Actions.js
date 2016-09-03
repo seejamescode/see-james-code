@@ -4,16 +4,25 @@ import styles from './actions.css';
 export class Actions extends Component {
 
   static defaultProps = {
-    code: '',
     homepage: '',
   };
 
   static propTypes = {
+    buttonContext: PropTypes.string,
     code: PropTypes.string,
     homepage: PropTypes.string.isRequired,
   };
 
   render() {
+    let buttonContext;
+    if (this.props.buttonContext) {
+      buttonContext = this.props.buttonContext;
+    } else if (this.props.homepage) {
+      buttonContext = 'View';
+    } else {
+      buttonContext = 'Code';
+    }
+
     return (
       <div
         className={styles.actions}
@@ -39,7 +48,7 @@ export class Actions extends Component {
           }}
           target="_blank"
         >
-          {this.props.homepage ? 'View' : 'Code'}
+          {buttonContext}
         </a>
       </div>
     );

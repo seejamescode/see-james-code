@@ -9,6 +9,7 @@ export class Post extends Component {
 
   static propTypes = {
     code: PropTypes.string,
+    buttonContext: PropTypes.string,
     date: PropTypes.number,
     dateContext: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
@@ -61,8 +62,9 @@ export class Post extends Component {
         {
           !this.props.embed ? (
             <Actions
-              homepage={this.props.homepage}
+              buttonContext={this.props.buttonContext}
               code={this.props.code}
+              homepage={this.props.homepage}
             />
           ) : ''
         }
