@@ -1,7 +1,7 @@
 .about {
   display: flex;
   flex-direction: column;
-  padding-bottom: 4rem;
+  padding-bottom: 2rem;
   transform: translateY(-1rem);
 }
 
@@ -34,7 +34,7 @@
   margin: 0;
   padding: 0;
   text-align: center;
-  transform: translateX(-.75rem);
+  transform: translate(-.75rem, -1rem);
   width: calc(100% + 1.5rem);
 }
 

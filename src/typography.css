@@ -34,7 +34,7 @@
   composes: body-font;
   font-size: 1.25rem;
   line-height: 1.6rem;
-  margin: 0 0 1.25rem;
+  margin: 0 0 2rem;
   padding-bottom: .5rem;
 }
 .p {
