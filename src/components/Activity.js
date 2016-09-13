@@ -40,34 +40,41 @@ export class Activity extends Component {
 
     // Group tweets that are sorted together
     // and filter the two most popular for each series
-    let arrayTweetGroupings = data.filter(item => item.source !== 'twitter')
+    const firstTweetGrouping = data
+      .slice(0, data.indexOf(data.filter(item => item.source !== 'twitter')[0]));
+
+    let tweetGroupings = data.filter(item => item.source !== 'twitter')
       .map((item) => item.index)
       .map((item, index, array) => [item + 1, array[index + 1]])
       .filter((item) => item[1] !== undefined)
       .map((array) => data.slice(array[0], array[1]))
-      .filter((array) => array.length > 0)
-      .map((array) => {
-        // filter the tweet arrays here
-        let filteredTweets = array;
-        const maxTweetsInARow = 2;
-        if (array.length > maxTweetsInARow) {
-          filteredTweets = filteredTweets.sort((a, b) => b.popularity - a.popularity)
-            .slice(0, maxTweetsInARow);
-        }
-        return filteredTweets;
-      });
+      .filter((array) => array.length > 0);
+
+    tweetGroupings = [firstTweetGrouping].concat(tweetGroupings);
+
+    tweetGroupings = tweetGroupings.map((array) => {
+      // filter the tweet arrays here
+      let filteredTweets = array;
+      const maxTweetsInARow = 2;
+      if (array.length > maxTweetsInARow) {
+        filteredTweets = filteredTweets.sort((a, b) => b.popularity - a.popularity)
+          .slice(0, maxTweetsInARow);
+      }
+      return filteredTweets;
+    });
 
     // Flatten the arrays of tweets together
-    arrayTweetGroupings = [].concat(...arrayTweetGroupings);
+    tweetGroupings = [].concat(...tweetGroupings);
 
     // Remove the tweets and add the filtered ones
     data = data.filter((item) => item.source !== 'twitter');
-    data = [...data, ...arrayTweetGroupings]
+    data = [...data, ...tweetGroupings]
       .sort((a, b) => b.date - a.date)
       .map((item) => item.source === 'twitter' // eslint-disable-line no-confusing-arrow
         ? <Tweet {...item} key={item.source + item.id} />
         : <Post {...item} key={item.source + item.id} />
       );
+
     return (
       <div
         className={styles.container}

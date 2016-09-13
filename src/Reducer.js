@@ -64,6 +64,7 @@ export default function reducer(state = initialState, action) {
         formattedPost.date = item.firstPublishedAt;
         formattedPost.dateContext = 'Blogged';
         formattedPost.description = item.virtuals.snippet;
+        formattedPost.image = `https://cdn-images-1.medium.com/fit/t/1600/480/${item.virtuals.previewImage.imageId}`;
         formattedPost.source = 'medium';
         formattedPost.homepage = `https://medium.com/@pnowelldesign/${item.uniqueSlug}`;
         return formattedPost;

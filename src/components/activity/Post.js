@@ -14,6 +14,7 @@ export class Post extends Component {
     dateContext: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     embed: PropTypes.object,
+    image: PropTypes.string,
     homepage: PropTypes.string,
     position: PropTypes.string,
     title: PropTypes.string.isRequired,
@@ -39,6 +40,15 @@ export class Post extends Component {
           this.props.embed ? (
             <Video
               html={this.props.embed.html}
+            />
+          ) : ''
+        }
+        {
+          this.props.image ? (
+            <img
+              alt="project preview"
+              className={styles.image}
+              src={this.props.image}
             />
           ) : ''
         }

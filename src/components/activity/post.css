@@ -9,6 +9,11 @@
   width: calc(100% - 5rem);
 }
 
+.image {
+  transform: translate(-1rem, -1rem);
+  width: calc(100% + 2rem);
+}
+
 .title {
   composes: h4 from '../../typography.css';
   overflow-x: hidden;
@@ -43,9 +48,8 @@
 }
 
 .date:before {
-  background-image: url("../../images/pattern.png");
-  background-size: 45px;
-  background-repeat: repeat;
+  background: url("../../images/pattern.png") repeat;
+  background-size: 50px;
   content: '';
   display: block;
   height: 100%;
