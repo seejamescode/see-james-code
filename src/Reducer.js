@@ -85,7 +85,12 @@ export default function reducer(state = initialState, action) {
         const formattedTweet = { ...item };
         formattedTweet.date = moment(new Date(item.created_at)).valueOf();
         formattedTweet.dateContext = 'Tweeted';
-        formattedTweet.description = item.text;
+        const urlLocation = item.text.indexOf('https://t.co');
+        if (urlLocation === -1) {
+          formattedTweet.description = item.text;
+        } else {
+          formattedTweet.description = item.text.substring(0, item.text.indexOf('https://t.co'));
+        }
         if (item.entities.media) {
           formattedTweet.image = item.entities.media[0].media_url;
         } else if (item.quoted_status && item.quoted_status.entities.media) {

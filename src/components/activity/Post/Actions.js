@@ -10,7 +10,7 @@ export class Actions extends Component {
   static propTypes = {
     buttonContext: PropTypes.string,
     code: PropTypes.string,
-    homepage: PropTypes.string.isRequired,
+    homepage: PropTypes.string,
   };
 
   render() {
