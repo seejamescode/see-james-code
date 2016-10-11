@@ -55,7 +55,7 @@ export class Activity extends Component {
     tweetGroupings = tweetGroupings.map((array) => {
       // filter the tweet arrays here
       let filteredTweets = array;
-      const maxTweetsInARow = 2;
+      const maxTweetsInARow = 1;
       if (array.length > maxTweetsInARow) {
         filteredTweets = filteredTweets.sort((a, b) => b.popularity - a.popularity)
           .slice(0, maxTweetsInARow);
