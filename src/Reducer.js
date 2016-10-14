@@ -64,9 +64,11 @@ export default function reducer(state = initialState, action) {
         formattedPost.date = item.firstPublishedAt;
         formattedPost.dateContext = 'Blogged';
         formattedPost.description = item.virtuals.snippet;
-        formattedPost.image = `https://cdn-images-1.medium.com/fit/t/500/200/${item.virtuals.previewImage.imageId}`;
-        formattedPost.source = 'medium';
         formattedPost.homepage = `https://medium.com/@pnowelldesign/${item.uniqueSlug}`;
+        formattedPost.image = `https://cdn-images-1.medium.com/fit/t/500/200/${item.virtuals.previewImage.imageId}`;
+        formattedPost.likes = item.virtuals.recommends;
+        formattedPost.likesContext = 'Recommendations';
+        formattedPost.source = 'medium';
         return formattedPost;
       });
       return {
@@ -91,6 +93,7 @@ export default function reducer(state = initialState, action) {
         } else {
           formattedTweet.description = item.text.substring(0, item.text.indexOf('https://t.co'));
         }
+        formattedTweet.homepage = `https://twitter.com/seejamescode/status/${item.id_str}`;
         if (item.entities.media) {
           formattedTweet.image = item.entities.media[0].media_url;
         } else if (item.quoted_status && item.quoted_status.entities.media) {
@@ -107,7 +110,6 @@ export default function reducer(state = initialState, action) {
         }
         formattedTweet.popularity = item.retweet_count * 2 + item.favorite_count;
         formattedTweet.source = 'twitter';
-        formattedTweet.homepage = `https://twitter.com/seejamescode/status/${item.id_str}`;
         return formattedTweet;
       }).filter((tweet) => !tweet.retweeted);
       return {

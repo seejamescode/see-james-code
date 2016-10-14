@@ -15,6 +15,8 @@ export class Post extends Component {
     description: PropTypes.string.isRequired,
     embed: PropTypes.object,
     image: PropTypes.string,
+    likes: PropTypes.number,
+    likesContext: PropTypes.string,
     homepage: PropTypes.string,
     position: PropTypes.string,
     title: PropTypes.string.isRequired,
@@ -65,6 +67,15 @@ export class Post extends Component {
           }
           </span>
         </h4>
+        {
+          this.props.likes && this.props.likes > 0 && this.props.likesContext ? (
+            <p
+              className={styles.likes}
+            >
+              {this.props.likes} {this.props.likesContext}
+            </p>
+          ) : ''
+        }
         <p
           className={this.props.embed ? styles.descriptionVideo : styles.description}
           dangerouslySetInnerHTML={{ __html: this.props.description }}

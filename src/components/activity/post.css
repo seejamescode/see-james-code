@@ -28,6 +28,14 @@
   text-transform: capitalize;
 }
 
+.likes {
+  composes: small from '../../typography.css';
+  margin-top: -1rem;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  text-transform: capitalize;
+}
+
 .description {
   composes: p from '../../typography.css';
 }

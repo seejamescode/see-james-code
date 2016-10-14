@@ -86,6 +86,9 @@ export class Activity extends Component {
         </h3>
         <Masonry
           className={styles.activity}
+          options={{
+            transitionDuration: 0,
+          }}
         >
           {data}
         </Masonry>
