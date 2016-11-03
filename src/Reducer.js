@@ -101,7 +101,9 @@ export default function reducer(state = initialState, action) {
         }
         if (item.extended_entities && item.extended_entities.media &&
           item.extended_entities.media[0].type === 'video') {
-          formattedTweet.video = item.extended_entities.media[0].video_info.variants[0].url;
+          const tweetVideos = item.extended_entities.media[0].video_info.variants
+            .filter((video) => video.content_type === 'video/mp4');
+          formattedTweet.video = tweetVideos[0].url;
         } else if (item.quoted_status && item.quoted_status.extended_entities.media &&
           item.quoted_status.extended_entities.media &&
           item.quoted_status.extended_entities.media[0].type === 'video') {
