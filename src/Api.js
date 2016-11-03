@@ -1,5 +1,5 @@
 export function githubPersonalRepos(callback) {
-  fetch('/api/github/repos', {
+  fetch('/api/github', {
     credentials: 'same-origin',
   })
   .then(response => response.json())
