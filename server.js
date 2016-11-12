@@ -74,18 +74,21 @@ app.get('/api/vimeo/*', (req, res) => {
 app.use('/JamesYRauhut.png', express.static('/JamesYRauhut.png'));
 
 if (NODE_ENV === 'production') {
+  console.log('no')
   app.use('/dist', express.static('dist'));
 
   app.get('*', function (req, res) {
     res.sendFile(path.join(__dirname, 'index.html'));
   });
 } else {
+  console.log('webpack dev server')
   var portDev = process.env.VCAP_APP_PORT + 1 || 3000;
   var config = require('./webpack.config.dev');
 
   new webpackDevServer(webpack(config), {
     publicPath: config.output.publicPath,
     hot: true,
+    quiet: true,
     stats: {
       colors: true
     },

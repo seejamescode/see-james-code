@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var DashboardPlugin = require('webpack-dashboard/plugin');
 
 module.exports = {
   devtool: 'eval',
@@ -20,7 +21,8 @@ module.exports = {
       'Promise': 'exports?global.Promise!es6-promise',
       'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch',
       'window.fetch': 'exports?self.fetch!whatwg-fetch'
-    })
+    }),
+    new DashboardPlugin()
   ],
   module: {
     loaders: [

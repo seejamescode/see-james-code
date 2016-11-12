@@ -1,4 +1,3 @@
-const moment = require('moment');
 const roles = require('./Roles.json');
 
 const initialState = {
@@ -19,7 +18,7 @@ export default function reducer(state = initialState, action) {
     case 'GET_GITHUB_REPOS_DONE': {
       const repos = action.repos.map((item) => {
         const formattedRepo = { ...item };
-        formattedRepo.date = moment(item.pushed_at).valueOf();
+        formattedRepo.date = Date.parse(item.pushed_at);
         formattedRepo.dateContext = 'Code updated';
         formattedRepo.source = 'github';
         formattedRepo.title = item.name.replace(/-/g, ' ');
@@ -44,7 +43,7 @@ export default function reducer(state = initialState, action) {
       const formattedRoles = roles.map((item) => {
         const formattedRole = { ...item };
         if (item.date) {
-          formattedRole.date = Number(moment(item.date, 'DD-MM-YYYY'));
+          formattedRole.date = Date.parse(item.date);
         }
         formattedRole.dateContext = 'Worked';
         formattedRole.id = roles.indexOf(item);
@@ -85,7 +84,7 @@ export default function reducer(state = initialState, action) {
     case 'GET_TWITTER_TWEETS_DONE': {
       const tweets = action.tweets.map((item) => {
         const formattedTweet = { ...item };
-        formattedTweet.date = moment(new Date(item.created_at)).valueOf();
+        formattedTweet.date = Date.parse(item.created_at);
         formattedTweet.dateContext = 'Tweeted';
         const urlLocation = item.text.indexOf('https://t.co');
         if (urlLocation === -1) {
@@ -129,7 +128,7 @@ export default function reducer(state = initialState, action) {
       let videos = action.videos.data.map((item) => {
         let formattedVideo = {};
         formattedVideo = { ...item };
-        formattedVideo.date = moment(new Date(item.created_time)).valueOf();
+        formattedVideo.date = Date.parse(item.created_time);
         formattedVideo.dateContext = 'Video posted';
         if (!formattedVideo.description) {
           formattedVideo.description = '';

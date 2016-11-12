@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
 import Actions from './Post/Actions';
-import moment from 'moment';
 import styles from './post.css';
 import Video from './Post/Video';
 
@@ -22,6 +21,29 @@ export class Post extends Component {
     title: PropTypes.string.isRequired,
   };
 
+  timeSince(previous) {
+    const current = new Date();
+    const msPerMinute = 60 * 1000;
+    const msPerHour = msPerMinute * 60;
+    const msPerDay = msPerHour * 24;
+    const msPerMonth = msPerDay * 30;
+    const msPerYear = msPerDay * 365;
+
+    const elapsed = current - previous;
+    if (elapsed < msPerMinute) {
+      return `${Math.round(elapsed / 1000)} seconds ago`;
+    } else if (elapsed < msPerHour) {
+      return `${Math.round(elapsed / msPerMinute)} minutes ago`;
+    } else if (elapsed < msPerDay) {
+      return `${Math.round(elapsed / msPerHour)}  hours ago`;
+    } else if (elapsed < msPerMonth) {
+      return `${Math.round(elapsed / msPerDay)}  days ago`;
+    } else if (elapsed < msPerYear) {
+      return `${Math.round(elapsed / msPerMonth)}  months ago`;
+    }
+    return `${Math.round(elapsed / msPerYear)}  years ago`;
+  }
+
   render() {
     return (
       <div
@@ -33,7 +55,7 @@ export class Post extends Component {
           <small>
             {
               this.props.date ? (
-                <span>{this.props.dateContext} {moment(this.props.date).fromNow()}</span>
+                <span>{this.props.dateContext} {this.timeSince(this.props.date)}</span>
               ) : 'Currently...'
             }
           </small>
