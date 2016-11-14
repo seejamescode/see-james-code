@@ -71,6 +71,8 @@ app.get('/api/vimeo/*', (req, res) => {
   });
 })
 
+app.use('/public', express.static('public'));
+
 if (NODE_ENV === 'production') {
   console.log('no')
   app.use('/dist', express.static('dist'));
