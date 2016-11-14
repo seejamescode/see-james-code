@@ -71,8 +71,6 @@ app.get('/api/vimeo/*', (req, res) => {
   });
 })
 
-app.use('/JamesYRauhut.png', express.static('/JamesYRauhut.png'));
-
 if (NODE_ENV === 'production') {
   console.log('no')
   app.use('/dist', express.static('dist'));

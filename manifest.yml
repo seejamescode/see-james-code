@@ -3,11 +3,9 @@ applications:
 - name: seejamescode
   domain: seejamescode.com
   hosts:
-    - seejamescode
     - www
   command: npm run prod
   instances: 1
   memory: 512MB
   services:
    - seejamescode_env
-  
