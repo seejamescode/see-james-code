@@ -1,9 +1,9 @@
 {
   "lang": "en-US",
   "background_color": "#ececec",
-  "theme-color": "#f090c0",
+  "theme_color": "#f090c0",
   "name": "James Y Rauhut",
-  "short_name": "James Y Rauhut",
+  "short_name": "Seejamescode",
   "display": "standalone",
   "icons": [
     {

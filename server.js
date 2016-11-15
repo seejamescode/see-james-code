@@ -22,6 +22,10 @@ if (fileExists('./.env')) {
   keys = JSON.parse(process.env.VCAP_SERVICES)['user-provided'][0].credentials;
 };
 
+app.get("*", function (req, res, next) {
+  res.redirect("https://" + req.headers.host + "/" + req.path);
+});
+
 app.get('/api/github', (req, res) => {
   request({
       url: `https://api.github.com/user/repos?affiliation=owner,collaborator&access_token=${keys.github}`,
