@@ -3,6 +3,13 @@
   "background_color": "#ececec",
   "theme-color": "#f090c0",
   "name": "James Y Rauhut",
-  "short_name": "Seejamescode",
+  "short_name": "James Y Rauhut",
   "display": "standalone",
+  "icons": [
+    {
+      "src": "/public/icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
 }
