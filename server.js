@@ -22,6 +22,16 @@ if (fileExists('./.env')) {
   keys = JSON.parse(process.env.VCAP_SERVICES)['user-provided'][0].credentials;
 };
 
+// Redirect http to https
+app.enable('trust proxy');
+app.use (function (req, res, next) {
+  if (req.secure) {
+    next();
+  } else {
+    res.redirect('https://' + req.headers.host + req.url);
+  }
+});
+
 app.get('/api/github', (req, res) => {
   request({
       url: `https://api.github.com/user/repos?affiliation=owner,collaborator&access_token=${keys.github}`,
@@ -98,18 +108,9 @@ if (NODE_ENV === 'production') {
       console.log(err);
     }
 
-    console.log('Dev server listening at localhost:' + portDev);
+    console.log('Dev server listening at http://localhost:' + portDev);
   });
 };
-
-function requireHTTPS(req, res, next) {
-  if (!req.secure) {
-    return res.redirect('https://' + req.get('host') + req.url);
-  }
-  next();
-}
-
-app.use(requireHTTPS);
 
 app.listen(port, function(err) {
   if (err) {
