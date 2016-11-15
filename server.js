@@ -22,10 +22,6 @@ if (fileExists('./.env')) {
   keys = JSON.parse(process.env.VCAP_SERVICES)['user-provided'][0].credentials;
 };
 
-app.get("*", function (req, res, next) {
-  res.redirect("https://" + req.headers.host + "/" + req.path);
-});
-
 app.get('/api/github', (req, res) => {
   request({
       url: `https://api.github.com/user/repos?affiliation=owner,collaborator&access_token=${keys.github}`,
@@ -78,14 +74,12 @@ app.get('/api/vimeo/*', (req, res) => {
 app.use('/public', express.static('public'));
 
 if (NODE_ENV === 'production') {
-  console.log('no')
   app.use('/dist', express.static('dist'));
 
   app.get('*', function (req, res) {
     res.sendFile(path.join(__dirname, 'index.html'));
   });
 } else {
-  console.log('webpack dev server')
   var portDev = process.env.VCAP_APP_PORT + 1 || 3000;
   var config = require('./webpack.config.dev');
 
@@ -107,6 +101,15 @@ if (NODE_ENV === 'production') {
     console.log('Dev server listening at localhost:' + portDev);
   });
 };
+
+function requireHTTPS(req, res, next) {
+  if (!req.secure) {
+    return res.redirect('https://' + req.get('host') + req.url);
+  }
+  next();
+}
+
+app.use(requireHTTPS);
 
 app.listen(port, function(err) {
   if (err) {
