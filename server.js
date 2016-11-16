@@ -74,7 +74,7 @@ app.get('/api/vimeo/*', (req, res) => {
 app.use('/public', express.static('public'));
 
 if (NODE_ENV === 'production') {
-  Redirect http to https
+  // Redirect http to https
   app.enable('trust proxy');
   app.use (function (req, res, next) {
     if (req.secure) {
