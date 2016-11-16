@@ -22,16 +22,6 @@ if (fileExists('./.env')) {
   keys = JSON.parse(process.env.VCAP_SERVICES)['user-provided'][0].credentials;
 };
 
-// Redirect http to https
-app.enable('trust proxy');
-app.use (function (req, res, next) {
-  if (req.secure) {
-    next();
-  } else {
-    res.redirect('https://' + req.headers.host + req.url);
-  }
-});
-
 app.get('/api/github', (req, res) => {
   request({
       url: `https://api.github.com/user/repos?affiliation=owner,collaborator&access_token=${keys.github}`,
@@ -84,6 +74,16 @@ app.get('/api/vimeo/*', (req, res) => {
 app.use('/public', express.static('public'));
 
 if (NODE_ENV === 'production') {
+  // Redirect http to https
+  app.enable('trust proxy');
+  app.use (function (req, res, next) {
+    if (req.secure) {
+      next();
+    } else {
+      res.redirect('https://' + req.headers.host + req.url);
+    }
+  });
+
   app.use('/dist', express.static('dist'));
 
   app.get('*', function (req, res) {

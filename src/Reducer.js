@@ -83,6 +83,7 @@ export default function reducer(state = initialState, action) {
       };
     case 'GET_TWITTER_TWEETS_DONE': {
       const tweets = action.tweets.map((item) => {
+        console.log(item);
         const formattedTweet = { ...item };
         formattedTweet.date = Date.parse(item.created_at);
         formattedTweet.dateContext = 'Tweeted';
@@ -94,16 +95,23 @@ export default function reducer(state = initialState, action) {
         }
         formattedTweet.homepage = `https://twitter.com/seejamescode/status/${item.id_str}`;
         if (item.entities.media) {
+          console.log('here');
           formattedTweet.image = item.entities.media[0].media_url;
-        } else if (item.quoted_status && item.quoted_status.entities.media) {
+        } else if (item.quoted_status &&
+          item.quoted_status.entities &&
+          item.quoted_status.entities.media) {
+          console.log('here2');
           formattedTweet.image = item.quoted_status.entities.media[0].media_url;
         }
-        if (item.extended_entities && item.extended_entities.media &&
+        if (item.extended_entities &&
+          item.extended_entities.media &&
           item.extended_entities.media[0].type === 'video') {
+          console.log('here3');
           const tweetVideos = item.extended_entities.media[0].video_info.variants
             .filter((video) => video.content_type === 'video/mp4');
           formattedTweet.video = tweetVideos[0].url;
-        } else if (item.quoted_status && item.quoted_status.extended_entities.media &&
+        } else if (item.quoted_status &&
+          item.quoted_status.extended_entities &&
           item.quoted_status.extended_entities.media &&
           item.quoted_status.extended_entities.media[0].type === 'video') {
           formattedTweet.video =
