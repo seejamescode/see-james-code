@@ -11,18 +11,6 @@
   font-family: 'Permanent Marker', cursive;
   margin: 0 0 3.157rem;
 }
-.h2 {
-  composes: body-font;
-  font-size: 2.369rem;
-  line-height: 2.369rem;
-  margin: 0 0 2.369rem;
-}
-.h3 {
-  composes: body-font;
-  font-size: 1.777rem;
-  line-height: 1.777rem;
-  margin: 0 0 1.777rem;
-}
 .h4 {
   composes: body-font;
   font-size: 1.333rem;

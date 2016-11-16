@@ -74,7 +74,7 @@ app.get('/api/vimeo/*', (req, res) => {
 app.use('/public', express.static('public'));
 
 if (NODE_ENV === 'production') {
-  // Redirect http to https
+  Redirect http to https
   app.enable('trust proxy');
   app.use (function (req, res, next) {
     if (req.secure) {
@@ -83,6 +83,18 @@ if (NODE_ENV === 'production') {
       res.redirect('https://' + req.headers.host + req.url);
     }
   });
+
+
+  app.get('/dist/bundle.js', (req, res) => {
+    res.sendFile(
+      path.join(__dirname, 'dist/bundle.js.gz'),
+      {
+        headers: {
+          'Content-Encoding': 'gzip'
+        }
+      }
+    );
+  })
 
   app.use('/dist', express.static('dist'));
 

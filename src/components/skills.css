@@ -9,22 +9,6 @@
   composes: h5 from '../typography.css';
 }
 
-.link {
-  composes: body-font from '../typography.css';
-  display: inline-block;
-  position: relative;
-  text-decoration: none;
-}
-
-.link:after {
-  background: #F090C0;
-  content: '';
-  display: block;
-  height: 2px;
-  transform: translateY(-3px);
-  width: 100%;
-}
-
 .skills {
   composes: p from '../typography.css';
   display: flex;
