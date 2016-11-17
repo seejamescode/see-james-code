@@ -94,11 +94,11 @@ export default function reducer(state = initialState, action) {
         }
         formattedTweet.homepage = `https://twitter.com/seejamescode/status/${item.id_str}`;
         if (item.entities.media) {
-          formattedTweet.image = item.entities.media[0].media_url;
+          formattedTweet.image = item.entities.media[0].media_url_https;
         } else if (item.quoted_status &&
           item.quoted_status.entities &&
           item.quoted_status.entities.media) {
-          formattedTweet.image = item.quoted_status.entities.media[0].media_url;
+          formattedTweet.image = item.quoted_status.entities.media[0].media_url_https;
         }
         if (item.extended_entities &&
           item.extended_entities.media &&
