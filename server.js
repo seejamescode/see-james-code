@@ -1,4 +1,5 @@
 var fileExists = require('file-exists');
+var compression = require('compression');
 var express = require('express');
 var path = require('path');
 var proxy = require('http-proxy-middleware');
@@ -11,6 +12,7 @@ var webpackDevServer = require('webpack-dev-server');
 var port = process.env.VCAP_APP_PORT || 3001;
 var NODE_ENV = process.env.NODE_ENV || 'development';
 var app = express();
+app.use(compression());
 
 console.log('Checking for keys in a .env file...');
 if (fileExists('./.env')) {
@@ -105,17 +107,6 @@ if (NODE_ENV === 'production') {
     console.log('Dev server listening at http://localhost:' + portDev);
   });
 };
-
-app.get('/dist/bundle.js', (req, res) => {
-  res.sendFile(
-    path.join(__dirname, 'dist/bundle.js.gz'),
-    {
-      headers: {
-        'Content-Encoding': 'gzip'
-      }
-    }
-  );
-})
 
 app.use('/dist', express.static('dist'));
 
