@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
-var CompressionPlugin = require("compression-webpack-plugin");
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
@@ -11,9 +12,27 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/dist/'
   },
   plugins: [
+    new InterpolateHtmlPlugin({
+      PUBLIC_URL: '.'
+    }),
+    new HtmlWebpackPlugin({
+      inject: true,
+      template: 'index.html',
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true
+      }
+    }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.ProvidePlugin({
       'Promise': 'exports?global.Promise!es6-promise',
@@ -34,13 +53,6 @@ module.exports = {
     new ExtractTextPlugin('app.css', {
       allChunks: true
     }),
-    new CompressionPlugin({
-      asset: "[path].gz[query]",
-      algorithm: "gzip",
-      test: /\.js$|\.html$/,
-      threshold: 10240,
-      minRatio: 0.8
-    })
   ],
   module: {
     loaders: [

@@ -88,9 +88,9 @@ if (NODE_ENV === 'production') {
 } else if (NODE_ENV !== 'local') {
   var portDev = process.env.VCAP_APP_PORT + 1 || 3000;
   var config = require('./webpack.config.dev');
-
   new webpackDevServer(webpack(config), {
-    publicPath: config.output.publicPath,
+    contentBase: 'dist/',
+    publicPath: '',
     hot: true,
     quiet: true,
     stats: {
@@ -108,11 +108,7 @@ if (NODE_ENV === 'production') {
   });
 };
 
-app.use('/dist', express.static('dist'));
-
-app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
+app.use('/', express.static('dist'));
 
 app.listen(port, function(err) {
   if (err) {

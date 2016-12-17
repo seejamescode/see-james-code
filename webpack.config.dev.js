@@ -1,5 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 var DashboardPlugin = require('webpack-dashboard/plugin');
 
 module.exports = {
@@ -13,7 +15,6 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/dist/'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -21,6 +22,12 @@ module.exports = {
       'Promise': 'exports?global.Promise!es6-promise',
       'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch',
       'window.fetch': 'exports?self.fetch!whatwg-fetch'
+    }),
+    new InterpolateHtmlPlugin({
+      PUBLIC_URL: '.'
+    }),
+    new HtmlWebpackPlugin({
+      template: 'index.html',
     }),
     new DashboardPlugin()
   ],

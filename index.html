@@ -5,18 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>James Y Rauhut</title>
     <meta name="theme-color" content="#f090c0">
-    <link rel="manifest" href="/public/manifest.json">
+    <link rel="manifest" href="./public/manifest.json">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Permanent+Marker" rel="stylesheet">
   </head>
 
   <body style='background: #ececec; margin: 0'>
     <div id='root'>
     </div>
-    <script src="/dist/bundle.js"></script>
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
-          navigator.serviceWorker.register('/dist/service-worker.js');
+          navigator.serviceWorker.register('/service-worker.js');
         });
       }
     </script>
