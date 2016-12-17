@@ -83,25 +83,7 @@ if (NODE_ENV === 'production') {
       res.redirect('https://' + req.headers.host + req.url);
     }
   });
-
-
-  app.get('/dist/bundle.js', (req, res) => {
-    res.sendFile(
-      path.join(__dirname, 'dist/bundle.js.gz'),
-      {
-        headers: {
-          'Content-Encoding': 'gzip'
-        }
-      }
-    );
-  })
-
-  app.use('/dist', express.static('dist'));
-
-  app.get('*', function (req, res) {
-    res.sendFile(path.join(__dirname, 'index.html'));
-  });
-} else {
+} else if (NODE_ENV !== 'local') {
   var portDev = process.env.VCAP_APP_PORT + 1 || 3000;
   var config = require('./webpack.config.dev');
 
@@ -123,6 +105,23 @@ if (NODE_ENV === 'production') {
     console.log('Dev server listening at http://localhost:' + portDev);
   });
 };
+
+app.get('/dist/bundle.js', (req, res) => {
+  res.sendFile(
+    path.join(__dirname, 'dist/bundle.js.gz'),
+    {
+      headers: {
+        'Content-Encoding': 'gzip'
+      }
+    }
+  );
+})
+
+app.use('/dist', express.static('dist'));
+
+app.get('*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 app.listen(port, function(err) {
   if (err) {

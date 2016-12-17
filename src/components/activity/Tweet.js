@@ -24,6 +24,7 @@ export class Tweet extends Component {
       <a
         className={styles.tweet}
         href={this.props.homepage}
+        rel="noopener"
         target="_blank"
       >
         {

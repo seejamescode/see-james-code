@@ -33,6 +33,7 @@ export class Actions extends Component {
           style={{
             display: !this.props.code || (this.props.code && !this.props.homepage) ? 'none' : '',
           }}
+          rel="noopener"
           target="_blank"
         >
           <div
@@ -46,6 +47,7 @@ export class Actions extends Component {
           style={{
             display: !this.props.homepage && !this.props.code ? 'none' : '',
           }}
+          rel="noopener"
           target="_blank"
         >
           {buttonContext}

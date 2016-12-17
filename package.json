@@ -8,7 +8,9 @@
   "description": "James Y Rauhut portfolio app.",
   "scripts": {
     "api": "node serverAPI.js",
-    "prod": "NODE_ENV=production webpack --config webpack.config.prod.js && NODE_ENV=production node server.js",
+    "build": "NODE_ENV=production webpack --config webpack.config.prod.js && sw-precache --config=sw-precache-config.js",
+    "local": "npm run build && NODE_ENV=local node server.js",
+    "prod": "npm run build && NODE_ENV=production node server.js",
     "start": "webpack-dashboard -- node server.js",
     "lint": "eslint src"
   },
@@ -63,6 +65,7 @@
     "redux-thunk": "1.0.3",
     "request": "2.72.0",
     "style-loader": "0.13.0",
+    "sw-precache": "^4.2.3",
     "twitter": "1.3.0",
     "url-loader": "0.5.7",
     "webpack": "1.12.9",
