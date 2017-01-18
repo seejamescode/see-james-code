@@ -85,6 +85,12 @@ if (NODE_ENV === 'production') {
       res.redirect('https://' + req.headers.host + req.url);
     }
   });
+
+  app.get('/.well-known/acme-challenge/'+process.env.LETS_ENCRYPT_ROUTE,
+    function(req, res){
+      res.send(process.env.LETS_ENCRYPT_VERIFICATION);
+    }
+  );
 } else if (NODE_ENV !== 'local') {
   var portDev = process.env.VCAP_APP_PORT + 1 || 3000;
   var config = require('./webpack.config.dev');
