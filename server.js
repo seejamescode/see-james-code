@@ -9,7 +9,7 @@ var twitter = require('twitter');
 var webpack = require('webpack');
 var webpackDevServer = require('webpack-dev-server');
 
-var port = process.env.VCAP_APP_PORT || 3001;
+var port = 8080;
 var NODE_ENV = process.env.NODE_ENV || 'development';
 var app = express();
 app.use(compression());
@@ -92,7 +92,7 @@ if (NODE_ENV === 'production') {
     }
   );
 } else if (NODE_ENV !== 'local') {
-  var portDev = process.env.VCAP_APP_PORT + 1 || 3000;
+  var portDev = 8080 + 1;
   var config = require('./webpack.config.dev');
   new webpackDevServer(webpack(config), {
     contentBase: 'dist/',
