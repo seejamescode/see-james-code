@@ -76,22 +76,22 @@ app.get('/api/vimeo/*', (req, res) => {
 app.use('/public', express.static('public'));
 
 if (NODE_ENV === 'production') {
-  // app.get('/.well-known/acme-challenge/' + process.env.LETS_ENCRYPT_ROUTE,
-  //   function(req, res){
-  //     console.log('send back');
-  //     res.send(process.env.LETS_ENCRYPT_VERIFICATION);
-  //   }
-  // );
-  //
-  // // Redirect http to https
-  // app.enable('trust proxy');
-  // app.use (function (req, res, next) {
-  //   if (req.secure) {
-  //     next();
-  //   } else {
-  //     res.redirect('https://' + req.headers.host + req.url);
-  //   }
-  // });
+  app.get('/.well-known/acme-challenge/' + process.env.LETS_ENCRYPT_ROUTE,
+    function(req, res){
+      console.log('send back');
+      res.send(process.env.LETS_ENCRYPT_VERIFICATION);
+    }
+  );
+
+  // Redirect http to https
+  app.enable('trust proxy');
+  app.use (function (req, res, next) {
+    if (req.secure) {
+      next();
+    } else {
+      res.redirect('https://' + req.headers.host + req.url);
+    }
+  });
 } else if (NODE_ENV !== 'local') {
   var portDev = 8080 + 1;
   var config = require('./webpack.config.dev');
