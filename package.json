@@ -28,6 +28,7 @@
     "react-dom": "^15.4.2",
     "react-helmet": "^4.0.0",
     "react-masonry-component": "^5.0.3",
+    "react-scripts": "^0.9.2",
     "request": "^2.79.0",
     "styled-components": "^1.4.3",
     "sw-precache": "^5.0.0",
