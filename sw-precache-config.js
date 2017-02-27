@@ -1,11 +1,12 @@
 module.exports = {
-  stripPrefix: 'dist/',
+  stripPrefix: 'build/',
   staticFileGlobs: [
-    'dist/*.html',
-    'dist/**/!(*map*)',
-    'public/manifest.json',
-    'public/icon.png'
+    'build/*.html',
+    'build/*.ico',
+    'build/manifest.json',
+    'build/*.png',
+    'build/static/**/!(*map*)'
   ],
   dontCacheBustUrlsMatching: /\.\w{8}\./,
-  swFilePath: 'dist/service-worker.js'
+  swFilePath: 'build/service-worker.js'
 };

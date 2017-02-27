@@ -1,59 +1,40 @@
-import React, { Component } from 'react';
-import styles from './skills.css';
+import React from 'react';
+import styled from 'styled-components';
+import Skill from './skills/Skill';
 
-export class Skills extends Component {
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: -1rem;
+  transform: translateX(-.75rem);
+`;
 
-  render() {
-    return (
-      <div
-        className={styles.about}
-      >
-        <h3
-          className={styles.header}
-        >
-          Favorite Tools
-        </h3>
-        <ul
-          className={styles.skills}
-        >
-          <li
-            className={styles.skill}
-          >
-            HTML5 & CSS3
-          </li>
-          <li
-            className={styles.skill}
-          >
-            Design Thinking
-          </li>
-          <li
-            className={styles.skill}
-          >
-            Javascript
-          </li>
-          <li
-            className={styles.skill}
-          >
-            ReactJS
-          </li>
-          <li
-            className={styles.skill}
-          >
-            Redux
-          </li>
-          <li
-            className={styles.skill}
-          >
-            Node.js
-          </li>
-          <li
-            className={styles.skill}
-          >
-            User Research
-          </li>
-        </ul>
-      </div>
-    );
+const Content = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  width: calc(100% + 1.5rem);
+  @media (min-width: 888px) {
+    justify-content: space-between;
   }
-}
+`;
+
+const Skills = () => (
+  <Container>
+    <Content>
+      <Skill text={'HTML5 & CSS3'} />
+      <Skill text={'Design Thinking'} />
+      <Skill text={'Javascript'} />
+      <Skill text={'ReactJS'} />
+      <Skill text={'Redux'} />
+      <Skill text={'Node.js'} />
+      <Skill text={'User Research'} />
+    </Content>
+  </Container>
+);
+
 export default Skills;

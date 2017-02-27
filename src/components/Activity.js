@@ -1,10 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import Masonry from 'react-masonry-component';
 import Post from './activity/Post';
-import styles from './activity.css';
 import Tweet from './activity/Tweet';
 
-export class Activity extends Component {
+export default class Activity extends Component {
 
   static defaultProps = {
     posts: [],
@@ -14,6 +13,7 @@ export class Activity extends Component {
     videos: [],
   };
 
+  /* eslint-disable react/forbid-prop-types */
   static propTypes = {
     posts: PropTypes.array.isRequired,
     repos: PropTypes.array.isRequired,
@@ -21,6 +21,7 @@ export class Activity extends Component {
     tweets: PropTypes.array.isRequired,
     videos: PropTypes.array.isRequired,
   };
+  /* eslint-enable react/forbid-prop-types */
 
   render() {
     // I am given an array of info on
@@ -44,11 +45,11 @@ export class Activity extends Component {
       .slice(0, data.indexOf(data.filter(item => item.source !== 'twitter')[0]));
 
     let tweetGroupings = data.filter(item => item.source !== 'twitter')
-      .map((item) => item.index)
+      .map(item => item.index)
       .map((item, index, array) => [item + 1, array[index + 1]])
-      .filter((item) => item[1] !== undefined)
-      .map((array) => data.slice(array[0], array[1]))
-      .filter((array) => array.length > 0);
+      .filter(item => item[1] !== undefined)
+      .map(array => data.slice(array[0], array[1]))
+      .filter(array => array.length > 0);
 
     tweetGroupings = [firstTweetGrouping].concat(tweetGroupings);
 
@@ -57,7 +58,8 @@ export class Activity extends Component {
       let filteredTweets = array;
       const maxTweetsInARow = 1;
       if (array.length > maxTweetsInARow) {
-        filteredTweets = filteredTweets.sort((a, b) => b.popularity - a.popularity)
+        filteredTweets = filteredTweets
+          .sort((a, b) => b.popularity - a.popularity)
           .slice(0, maxTweetsInARow);
       }
       return filteredTweets;
@@ -67,33 +69,26 @@ export class Activity extends Component {
     tweetGroupings = [].concat(...tweetGroupings);
 
     // Remove the tweets and add the filtered ones
-    data = data.filter((item) => item.source !== 'twitter');
+    data = data.filter(item => item.source !== 'twitter');
     data = [...data, ...tweetGroupings]
       .sort((a, b) => b.date - a.date)
-      .map((item) => item.source === 'twitter' // eslint-disable-line no-confusing-arrow
+      .map(item => item.source === 'twitter' // eslint-disable-line no-confusing-arrow
         ? <Tweet {...item} key={item.source + item.id} />
-        : <Post {...item} key={item.source + item.id} />
+        : <Post {...item} key={item.source + item.id} />,
       );
 
     return (
-      <div
-        className={styles.container}
+      <Masonry
+        options={{
+          transitionDuration: 0,
+        }}
+        style={{
+          transform: 'translateX(-1.5rem)',
+          width: 'calc(100% + 3rem)',
+        }}
       >
-        <h3
-          className={styles.header}
-        >
-          Latest Stuff
-        </h3>
-        <Masonry
-          className={styles.activity}
-          options={{
-            transitionDuration: 0,
-          }}
-        >
-          {data}
-        </Masonry>
-      </div>
+        {data}
+      </Masonry>
     );
   }
 }
-export default Activity;

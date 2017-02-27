@@ -1,23 +1,38 @@
-import React, { Component, PropTypes } from 'react';
-import styles from './video.css';
+import React, { PropTypes } from 'react';
+import styled from 'styled-components';
 
-export class Video extends Component {
+const Container = styled.div`
+  transform: translate(-1rem, -1rem);
+  width: calc(100% + 2rem);
+`;
 
-  static propTypes = {
-    html: PropTypes.string.isRequired,
-  };
-
-  render() {
-    return (
-      <div
-        className={styles.container}
-      >
-        <div
-          className={styles.video}
-          dangerouslySetInnerHTML={{ __html: this.props.html }}
-        />
-      </div>
-    );
+const Content = styled.div`
+  height: 0;
+  max-width: 100%;
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  > iframe {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
   }
-}
+`;
+
+
+const Video = props => (
+  <Container>
+    <Content
+      // eslint-disable-next-line react/no-danger
+      dangerouslySetInnerHTML={{ __html: props.html }}
+    />
+  </Container>
+);
+
+Video.propTypes = {
+  html: PropTypes.string.isRequired,
+};
+
 export default Video;

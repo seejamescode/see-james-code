@@ -1,5 +1,5 @@
 .DS_Store
-.env
-dist
+keys.json
+src
 node_modules
 npm-debug.log

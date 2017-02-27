@@ -1,18 +1,70 @@
 import React, { Component, PropTypes } from 'react';
+import styled from 'styled-components';
 
-import styles from './tweet.css';
+const Container = styled.a`
+  background: white;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.25);
+  color: initial;
+  margin: 0 1.5rem 1.5em;
+  text-decoration: none;
+  transition: box-shadow 0.1s ease-in;
+  width: calc(100% - 5rem);
+  border: 2px solid #F090C0;
+  padding: 0 calc(1rem - 2px);
+  &:hover, &:focus {
+    box-shadow: 8px 8px 20px rgba(0,0,0,0.25);
+  }
+  @media (min-width: 540px) {
+    margin: 0 1.5rem 3em;
+    width: calc(50% - 5rem);
+  }
+  @media (min-width: 850px) {
+    width: calc(33.33% - 5rem);
+  }
+`;
 
-export class Tweet extends Component {
+const Logo = styled.svg`
+  float: left;
+  height: 1rem;
+  margin: 1rem .25rem 0 0;
+`;
+
+const MediaContainer = styled.div`
+  align-items: center;
+  display: flex;
+  max-height: 150px;
+  overflow: hidden;
+  transform: translateX(calc(-1rem + 2px));
+  width: calc(100% + 2rem - 4px);
+`;
+
+const media = `
+  margin-bottom: -5px;
+  width: 100%;
+`;
+
+const Image = styled.img`
+  ${media}
+`;
+
+const Video = styled.video`
+  ${media}
+`;
+
+const Content = styled.div`
+  padding: calc(.75rem - 2px) 0 1rem 0;
+`;
+
+export default class Tweet extends Component {
 
   static defaultProps = {
-    date: 1,
-    dateContext: '...',
     description: '...',
+    homepage: '',
+    image: undefined,
+    video: undefined,
   };
 
   static propTypes = {
-    date: PropTypes.number.isRequired,
-    dateContext: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     homepage: PropTypes.string,
     image: PropTypes.string,
@@ -21,42 +73,34 @@ export class Tweet extends Component {
 
   render() {
     return (
-      <a
-        className={styles.tweet}
+      <Container
         href={this.props.homepage}
-        rel="noopener"
+        rel="noopener noreferrer"
         target="_blank"
       >
         {
           this.props.image && !this.props.video ? (
-            <div
-              className={styles.mediaContainer}
-            >
-              <img
+            <MediaContainer>
+              <Image
                 alt="tweet media"
-                className={styles.media}
                 src={this.props.image}
               />
-            </div>
+            </MediaContainer>
           ) : ''
         }
         {
           this.props.video ? (
-            <div
-              className={styles.mediaContainer}
-            >
-              <video
+            <MediaContainer>
+              <Video
                 autoPlay
-                className={styles.media}
                 loop
                 muted
                 src={this.props.video}
               />
-            </div>
+            </MediaContainer>
           ) : ''
         }
-        <svg
-          className={styles.logo}
+        <Logo
           version="1.1"
           viewBox="0 0 375 304.7"
           x="0px"
@@ -80,12 +124,14 @@ export class Tweet extends Component {
                 C85.2,245.5,112.2,254,141.1,254"
             />
           </g>
-        </svg>
-        <p
-          dangerouslySetInnerHTML={{ __html: this.props.description }}
-        />
-      </a>
+        </Logo>
+        <Content>
+          <small
+            // eslint-disable-next-line react/no-danger
+            dangerouslySetInnerHTML={{ __html: this.props.description }}
+          />
+        </Content>
+      </Container>
     );
   }
 }
-export default Tweet;

@@ -1,13 +1,7 @@
 {
   "parser": "babel-eslint",
-  "env": {
-      "browser": true,
-      "node": true
-  },
   "extends": "airbnb",
   "rules": {
-    "import/no-unresolved": 0,
-    "no-console": "off",
-    "react/prefer-stateless-function": "off"
+    "no-console": ["error", { "allow": ["warn", "error"] }]
   }
 }
