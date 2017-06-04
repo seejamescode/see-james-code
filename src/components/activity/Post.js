@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Actions from './Post/Actions';
 import Video from './Post/Video';
