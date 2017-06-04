@@ -74,8 +74,8 @@ export default class Activity extends Component {
     data = [...data, ...tweetGroupings]
       .sort((a, b) => b.date - a.date)
       .map(item => item.source === 'twitter' // eslint-disable-line no-confusing-arrow
-        ? <Item><Tweet {...item} key={item.source + item.id} /></Item>
-        : <Item><Post {...item} key={item.source + item.id} /></Item>,
+        ? <Item key={item.source + item.id}><Tweet {...item} /></Item>
+        : <Item key={item.source + item.id}><Post {...item} /></Item>,
       );
 
     return (
