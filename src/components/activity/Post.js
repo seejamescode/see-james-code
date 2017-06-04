@@ -4,21 +4,9 @@ import Actions from './Post/Actions';
 import Video from './Post/Video';
 
 const Container = styled.div`
-  background: white;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.25);
-  color: initial;
-  margin: 0 1.5rem 1.5em;
   padding: 1rem;
-  text-decoration: none;
   transition: box-shadow 0.1s ease-in;
-  width: calc(100% - 5rem);
-  @media (min-width: 540px) {
-    margin: 0 1.5rem 3em;
-    width: calc(50% - 5rem);
-  }
-  @media (min-width: 850px) {
-    width: calc(33.33% - 5rem);
-  }
+  width: 100%;
 `;
 
 const Image = styled.img`

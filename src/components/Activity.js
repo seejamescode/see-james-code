@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Masonry from 'react-masonry-component';
+import Item from './activity/Item';
 import Post from './activity/Post';
 import Tweet from './activity/Tweet';
 
@@ -73,8 +74,8 @@ export default class Activity extends Component {
     data = [...data, ...tweetGroupings]
       .sort((a, b) => b.date - a.date)
       .map(item => item.source === 'twitter' // eslint-disable-line no-confusing-arrow
-        ? <Tweet {...item} key={item.source + item.id} />
-        : <Post {...item} key={item.source + item.id} />,
+        ? <Item><Tweet {...item} key={item.source + item.id} /></Item>
+        : <Item><Post {...item} key={item.source + item.id} /></Item>,
       );
 
     return (
