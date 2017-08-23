@@ -1,6 +1,7 @@
 import compression from 'compression';
 import express from 'express';
 import fs from 'fs';
+import path from 'path';
 import request from 'request';
 import Twitter from 'twitter';
 
@@ -9,14 +10,14 @@ const port = process.env.PORT || 8080;
 app.use(compression());
 app.enable('trust proxy');
 
-/* eslint-disable global-require, import/no-unresolved */
 let keys;
-if (fs.existsSync('./keys.json')) {
-  keys = require('./keys.json');
+if (fs.existsSync(path.join(__dirname, '/keys.json'))) {
+  keys = require(path.join(__dirname, '/keys.json'));
+} else if (fs.existsSync(path.join(__dirname, '../keys.json'))) {
+  keys = require(path.join(__dirname, '../keys.json'));
 } else {
   keys = JSON.parse(process.env.VCAP_SERVICES)['user-provided'][0].credentials;
 }
-/* eslint-disable global-require, import/no-unresolved */
 
 app.get('/api/github', (req, res) => {
   request({
@@ -87,8 +88,8 @@ app.use(express.static('./build'));
 
 app.listen(port, (err) => {
   if (err) {
-    console.log(err); // eslint-disable-line no-console
+    console.log(err); 
     return;
   }
-  console.log(`App and API is live at http://localhost:${port}`); // eslint-disable-line no-console
+  console.log(`App and API is live at http://localhost:${port}`);
 });

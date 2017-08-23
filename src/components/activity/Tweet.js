@@ -3,12 +3,24 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Container = styled.a`
+  background: white;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.25);
+  color: initial;
+  margin: 0 1.5rem 1.5em;
   text-decoration: none;
+  transition: box-shadow 0.1s ease-in;
+  width: calc(100% - 5rem);
   border: 2px solid #F090C0;
   padding: 0 calc(1rem - 2px);
-  width: 100%;
   &:hover, &:focus {
     box-shadow: 8px 8px 20px rgba(0,0,0,0.25);
+  }
+  @media (min-width: 540px) {
+    margin: 0 1.5rem 3em;
+    width: calc(50% - 5rem);
+  }
+  @media (min-width: 850px) {
+    width: calc(33.33% - 5rem);
   }
 `;
 
