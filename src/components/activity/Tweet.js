@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import LazyLoad from 'react-lazyload';
 import styled from 'styled-components';
 
 const Container = styled.a`
@@ -32,6 +33,7 @@ const Logo = styled.svg`
 
 const MediaContainer = styled.div`
   align-items: center;
+  background: #939393;
   display: flex;
   max-height: 150px;
   overflow: hidden;
@@ -82,22 +84,26 @@ export default class Tweet extends Component {
         {
           this.props.image && !this.props.video ? (
             <MediaContainer>
-              <Image
-                alt="tweet media"
-                src={this.props.image}
-              />
+              <LazyLoad height={150} offset={100} once >
+                <Image
+                  alt="tweet media"
+                  src={this.props.image}
+                />
+              </LazyLoad>
             </MediaContainer>
           ) : ''
         }
         {
           this.props.video ? (
             <MediaContainer>
-              <Video
-                autoPlay
-                loop
-                muted
-                src={this.props.video}
-              />
+              <LazyLoad height={150} offset={100} once>
+                <Video
+                  autoPlay
+                  loop
+                  muted
+                  src={this.props.video}
+                />
+              </LazyLoad>
             </MediaContainer>
           ) : ''
         }

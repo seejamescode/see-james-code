@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import LazyLoad from 'react-lazyload';
 import styled from 'styled-components';
 import Actions from './Post/Actions';
 import Video from './Post/Video';
@@ -145,17 +146,21 @@ export default class Post extends Component {
         </Time>
         {
           this.props.html ? (
-            <Video
-              html={this.props.html}
-            />
+            <LazyLoad height={150} offset={100} once>
+              <Video
+                html={this.props.html}
+              />
+            </LazyLoad>
           ) : ''
         }
         {
           this.props.image ? (
-            <Image
-              alt="project preview"
-              src={this.props.image}
-            />
+            <LazyLoad height={150} offset={100} once>
+              <Image
+                alt="project preview"
+                src={this.props.image}
+              />
+            </LazyLoad>
           ) : ''
         }
         <HeaderText>
