@@ -80,7 +80,14 @@ export default class App extends Component {
     roles: [],
     title: 0,
     tweets: [],
-    videos: [],
+    videos: [{
+      date: 1497538496000,
+      dateContext: "Video posted",
+      description: "IBM Software Designer James Y. Rauhut shows what a normal work-day is like for FreeCodeCamp.",
+      html: "<iframe src='https://www.youtube.com/embed/FXfYSn8qaUE' frameborder='0' allowfullscreen></iframe>",
+      id: "FXfYSn8qaUE",
+      title: "A Day at IBM with Designer James Rauhut"
+    }],
   };
 
   componentDidMount() {
@@ -104,7 +111,7 @@ export default class App extends Component {
 
     api.vimeo((data) => {
       format.vimeo(data, (videos) => {
-        this.setState({ videos });
+        this.setState({ videos: [...this.state.videos, ...videos] });
       });
     });
 
