@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import Logo from './intro/Logo';
 
 const Container = styled.section`
+  align-items: center;
   display: flex;
   flex-direction: column;
-  @media (min-width: 720px) {
+  @media (min-width: 640px) {
     flex-direction: row;
     justify-content: center;
     padding-bottom: 0;
@@ -13,12 +14,8 @@ const Container = styled.section`
 `;
 
 const Description = styled.p`
-  align-self: center;
-  max-width: 24rem;
-  padding-top: 3rem;
-  text-align: center;
-  @media (min-width: 720px) {
-    text-align: left;
+  @media (min-width: 640px) {
+    max-width: 24rem;
   }
 `;
 
@@ -41,7 +38,7 @@ const Intro = () => (
     <Logo />
     <Description>
       ATX Designer working for IBM Design.
-      I love coding, researching, and trying my best for God.
+      I love to code, research, and try my best for God.
       Reach me by <Link href="mailto:james@seejamescode.com" rel="noopener" target="_blank">email</Link> or <span><Link href="https://twitter.com/seejamescode" rel="noopener" target="_blank">Twitter</Link>.</span>
     </Description>
   </Container>

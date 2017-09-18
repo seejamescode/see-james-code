@@ -5,7 +5,11 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   height: 8rem;
-  padding: 3rem 3rem 0;
+  padding: 0 0 3rem 0;
+
+  @media (min-width: 640px) {
+    padding: 0 3rem 0 0;
+  }
 `;
 
 const Content = styled.a`

@@ -34,45 +34,35 @@ const text = `
   text-transform: capitalize;
 `;
 
-const Likes = styled.small`
+const Likes = styled.p`
   ${text}
+  font-size: .75rem;
+  padding-top: .25rem;
 `;
 
 const HeaderText = styled.h3`
   ${text}
-  font-weight: 600;
+  font-weight: bold;
+  font-size: 1.333rem;
+  line-height: 1.75;
+  margin-top: -.5rem;
 `;
 
 const Description = styled.p`
-  padding: 1rem 0 2rem;
+  padding-top: 2rem;
+  line-height: 1.75;
   word-wrap: break-word;
-`;
-
-const DescriptionVideo = styled.p`
-  margin-bottom: 0;
-  padding-top: 1rem;
 `;
 
 const Time = styled.p`
   background: #18D8F0;
+  box-sizing: border-box;
+  font-size: .75rem;
   line-height: 1rem;
   margin: 0;
-  padding: .5rem 0 1rem 1rem;
+  padding: 1rem;
   transform: translate(-1rem, -1rem);
-  width: calc(100% + 1rem + .5px);
-  :before {
-    background: url("./pattern.png") repeat;
-    background-size: 50px;
-    content: '';
-    display: block;
-    height: 100%;
-    left: 0;
-    opacity: 0.1;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: -1;
-  }
+  width: calc(100% + 2rem);
 `;
 
 export default class Post extends Component {
@@ -107,46 +97,19 @@ export default class Post extends Component {
     title: PropTypes.string.isRequired,
   };
 
-  timeSince = (previous) => {
-    const current = new Date();
-    const msPerMinute = 60 * 1000;
-    const msPerHour = msPerMinute * 60;
-    const msPerDay = msPerHour * 24;
-    const msPerMonth = msPerDay * 30;
-    const msPerYear = msPerDay * 365;
-
-    const elapsed = current - previous;
-    if (elapsed < msPerMinute) {
-      return `${Math.round(elapsed / 1000)} seconds ago`;
-    } else if (elapsed < msPerHour) {
-      return `${Math.round(elapsed / msPerMinute)} minutes ago`;
-    } else if (elapsed < msPerDay) {
-      return `${Math.round(elapsed / msPerHour)} hours ago`;
-    } else if (elapsed < msPerMonth) {
-      return `${Math.round(elapsed / msPerDay)} days ago`;
-    } else if (elapsed < msPerYear) {
-      return `${Math.round(elapsed / msPerMonth)} months ago`;
-    }
-    return `${Math.round(elapsed / msPerYear)} years ago`;
-  }
-
   render() {
     return (
       <Container>
         <Time>
-          <small>
-            {
-              this.props.date ? (
-                <span>
-                  {this.props.dateContext} {this.timeSince(this.props.date)}
-                </span>
-              ) : 'Currently...'
-            }
-          </small>
+          {this.props.dateContext} {this.props.timeSince}
         </Time>
         {
           this.props.html ? (
-            <LazyLoad height={150} offset={100} once>
+            <LazyLoad
+              height={150}
+              offset={300}
+              once
+            >
               <Video
                 html={this.props.html}
               />
@@ -155,7 +118,11 @@ export default class Post extends Component {
         }
         {
           this.props.image ? (
-            <LazyLoad height={150} offset={100} once>
+            <LazyLoad
+              height={150}
+              offset={300}
+              once
+            >
               <Image
                 alt="project preview"
                 src={this.props.image}
@@ -178,19 +145,9 @@ export default class Post extends Component {
               </Likes>
             ) : ''
         }
-        {
-          this.props.html
-            ? (
-              <DescriptionVideo
-                dangerouslySetInnerHTML={{ __html: this.props.description }}
-              />
-            )
-            : (
-              <Description
-                dangerouslySetInnerHTML={{ __html: this.props.description }}
-              />
-            )
-        }
+        <Description
+          dangerouslySetInnerHTML={{ __html: this.props.description }}
+        />
         {
           !this.props.html ? (
             <Actions
@@ -198,7 +155,7 @@ export default class Post extends Component {
               code={this.props.code}
               homepage={this.props.homepage}
             />
-          ) : ''
+          ) : null
         }
       </Container>
     );

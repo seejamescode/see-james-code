@@ -1,12 +1,33 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import styled, { injectGlobal } from 'styled-components';
-import * as api from './Api';
-import * as format from './Format';
 import Activity from './components/Activity';
 import Intro from './components/Intro';
-import Section from './components/Section';
+import Post from './components/activity/Post';
 import Skills from './components/Skills';
+
+const TimeSince = function(previous) {
+  const current = new Date();
+  const msPerMinute = 60 * 1000;
+  const msPerHour = msPerMinute * 60;
+  const msPerDay = msPerHour * 24;
+  const msPerMonth = msPerDay * 30;
+  const msPerYear = msPerDay * 365;
+
+  const elapsed = current - previous;
+  if (elapsed < msPerMinute) {
+    return `${Math.round(elapsed / 1000)} seconds ago`;
+  } else if (elapsed < msPerHour) {
+    return `${Math.round(elapsed / msPerMinute)} minutes ago`;
+  } else if (elapsed < msPerDay) {
+    return `${Math.round(elapsed / msPerHour)} hours ago`;
+  } else if (elapsed < msPerMonth) {
+    return `${Math.round(elapsed / msPerDay)} days ago`;
+  } else if (elapsed < msPerYear) {
+    return `${Math.round(elapsed / msPerMonth)} months ago`;
+  }
+  return `${Math.round(elapsed / msPerYear)} years ago`;
+}
 
 injectGlobal([`
   a, small, li, p, h3 {
@@ -15,8 +36,6 @@ injectGlobal([`
     margin: 0;
   }
 
-  /* Golden Ratio */
-
   h2 {
     font-size: 3.375rem;
     font-family: 'Permanent Marker', cursive;
@@ -24,18 +43,9 @@ injectGlobal([`
     margin: 0;
   }
 
-  h3 {
-    font-size: 1.5rem;
-  }
-
   p {
     font-size: 16px;
     line-height: 1.5rem;
-  }
-
-  small, li {
-    font-size: .667rem;
-    line-height: .667rem;
   }
 `]);
 
@@ -43,6 +53,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   overflow-x: hidden;
+  padding-top: 3rem;
 `;
 
 const Content = styled.div`
@@ -50,10 +61,14 @@ const Content = styled.div`
   max-width: 960px;
   width: calc(100% - 2rem);
 
-  @media (min-width: 720px) {
+  @media (min-width: 640px) {
     margin: 0 3rem;
     width: calc(100% - 6rem);
   }
+`;
+
+const Section = styled.section`
+  padding: 2rem 0 4rem 0;
 `;
 
 const actions = [
@@ -74,61 +89,34 @@ const actions = [
 export default class App extends Component {
 
   state = {
-    favicon: 'eyes',
     posts: [],
-    repos: [],
     roles: [],
     title: 0,
-    tweets: [],
-    videos: [{
-      date: 1497538496000,
-      dateContext: "Video posted",
-      description: "IBM Software Designer James Y. Rauhut shows what a normal work-day is like for FreeCodeCamp.",
-      html: "<iframe src='https://www.youtube.com/embed/FXfYSn8qaUE' frameborder='0' allowfullscreen></iframe>",
-      id: "FXfYSn8qaUE",
-      title: "A Day at IBM with Designer James Rauhut"
-    }],
   };
 
   componentDidMount() {
-    api.github((data) => {
-      format.github(data, (repos) => {
-        this.setState({ repos });
+    fetch('/posts', {
+      credentials: 'same-origin',
+    })
+    .then(response => response.json())
+    .then((posts) => {
+      this.setState({
+        posts: posts.map(item => <Post {...item} key={item.source + item.id} timeSince={TimeSince(item.date)} />)
       });
-    });
-
-    api.medium((data) => {
-      format.medium(data, (posts) => {
-        this.setState({ posts });
-      });
-    });
-
-    api.twitter((data) => {
-      format.twitter(data, (tweets) => {
-        this.setState({ tweets });
-      });
-    });
-
-    api.vimeo((data) => {
-      format.vimeo(data, (videos) => {
-        this.setState({ videos: [...this.state.videos, ...videos] });
-      });
+    })
+    .catch((err) => {
+      console.error('Error ', err);
     });
 
     setInterval(this.changeTitle, 5000);
   }
 
   changeTitle = () => {
-    const favicon = this.state.favicon === 'eyes'
-      ? 'eyes-alt'
-      : 'eyes';
-
     const title = this.state.title + 1 === actions.length
       ? 0
       : this.state.title + 1;
 
     this.setState({
-      favicon,
       title,
     });
   }
@@ -138,24 +126,17 @@ export default class App extends Component {
       <Container>
         <Helmet
           title={`See James ${actions[this.state.title]}`}
-          link={[
-              { rel: 'shortcut icon', href: `./${this.state.favicon}.ico` },
-          ]}
         />
         <Content>
           <Section>
             <Intro />
           </Section>
-          <Section title={'Favorite Tools'}>
+          <Section>
             <Skills />
           </Section>
-          <Section title={'Latest Stuff'}>
+          <Section>
             <Activity
               posts={this.state.posts}
-              repos={this.state.repos}
-              roles={this.state.roles}
-              tweets={this.state.tweets}
-              videos={this.state.videos}
             />
           </Section>
         </Content>

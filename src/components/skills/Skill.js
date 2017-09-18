@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
 
 const wiggle = keyframes`
-  0% {transform: rotate(3deg);}
-  50% {transform: rotate(-3deg);}
-  100% {transform: rotate(3deg);}
+  0% {transform: translateX(5%);}
+  50% {transform: translateX(-5%);}
+  100% {transform: translateX(5%);}
 `;
 
 const Container = styled.li`
@@ -14,8 +14,8 @@ const Container = styled.li`
 
 const Content = styled.div`
   background: #18D8F0;
-  border-top: 6px dashed #ececec;
   display: inline-block;
+  font-size: 0.75rem;
   padding: 1rem;
   &:hover {
     animation: ${wiggle} .25s infinite;

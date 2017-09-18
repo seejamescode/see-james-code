@@ -5,6 +5,7 @@ import styled from 'styled-components';
 const Container = styled.div`
   display: flex;
   justify-content: flex-end;
+  padding-top: 2rem;
 `;
 
 const Link = styled.a`
@@ -12,8 +13,9 @@ const Link = styled.a`
   border-width: 2px;
   border-style: solid;
   border-color: #FFFFFF #808080 #808080 #FFFFFF;
+  font-size: .75rem;
   margin: 0 0 0 1rem;
-  padding: .1rem 1rem .35rem 1rem;
+  padding: .5rem 1rem;
   text-align: center;
   text-decoration: none;
   &:nth-child(odd) {
@@ -69,7 +71,7 @@ export default class Actions extends Component {
           rel="noopener noreferrer"
           target="_blank"
         >
-          <small>Code</small>
+          Code
         </Link>
         <Link
           href={this.props.homepage ? this.props.homepage : this.props.code}
@@ -79,7 +81,7 @@ export default class Actions extends Component {
           rel="noopener noreferrer"
           target="_blank"
         >
-          <small>{buttonContext}</small>
+          {buttonContext}
         </Link>
       </Container>
     );
