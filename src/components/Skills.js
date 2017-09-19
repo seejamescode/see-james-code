@@ -26,11 +26,11 @@ const Content = styled.ul`
 const Skills = () => (
   <Container>
     <Content>
+      <Skill text={'User Experience'} />
       <Skill text={'HTML5 & CSS3'} />
       <Skill text={'Design Thinking'} />
       <Skill text={'JavaScript'} />
       <Skill text={'React'} />
-      <Skill text={'Redux'} />
       <Skill text={'Node'} />
       <Skill text={'User Research'} />
     </Content>

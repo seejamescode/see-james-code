@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import LazyLoad from 'react-lazyload';
+import LazyLoad, { forceCheck } from 'react-lazyload';
 import styled from 'styled-components';
 import Actions from './Post/Actions';
 
@@ -137,6 +137,10 @@ export default class Post extends Component {
     position: PropTypes.string,
     title: PropTypes.string.isRequired,
   };
+  
+  componentDidMount() {
+    setTimeout(() => forceCheck(), 100);
+  }
 
   render() {
     return (
@@ -146,35 +150,35 @@ export default class Post extends Component {
         </Time>
         {
           this.props.html ? (
-            <LazyLoad
-              height={150}
-              offset={300}
-              once
-            >
-              <ImageContainer>
+            <ImageContainer>
+              <LazyLoad
+                height={'100%'}
+                offset={1000}
+                once
+              >
                 <Video
                   dangerouslySetInnerHTML={{ __html: this.props.html }}
                 />
-              </ImageContainer>
-            </LazyLoad>
+              </LazyLoad>
+            </ImageContainer>
           ) : ''
         }
         {
           this.props.image ? (
-            <LazyLoad
-              height={150}
-              offset={300}
-              once
-            >
-              <ImageContainer>
-                <ImageResponsiveness>
+            <ImageContainer>
+              <ImageResponsiveness>
+                <LazyLoad
+                  height={'100%'}
+                  offset={1000}
+                  once
+                >
                   <Image
                     alt="project preview"
                     src={this.props.image}
                   />
-                </ImageResponsiveness>
-              </ImageContainer>
-            </LazyLoad>
+                </LazyLoad>
+              </ImageResponsiveness>
+            </ImageContainer>
           ) : ''
         }
         <HeaderText>
