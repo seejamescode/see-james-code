@@ -20,11 +20,14 @@ if (fs.existsSync(path.join(__dirname, '/keys.json'))) {
 
 let originalPosts = [
   {
+    buttonContext: 'Watch',
     date: 1497538496000,
     dateContext: "Video posted",
     description: "IBM Software Designer James Y. Rauhut shows what a normal work-day is like for FreeCodeCamp.",
+    homepage: 'https://www.youtube.com/watch?v=FXfYSn8qaUE',
     html: "<iframe src='https://www.youtube.com/embed/FXfYSn8qaUE' frameborder='0' allowfullscreen></iframe>",
     id: "FXfYSn8qaUE",
+    likes: 270,
     source: 'vimeo',
     title: "A Day at IBM with Designer James Rauhut"
   }
@@ -51,6 +54,8 @@ const getPosts = () => {
           description: item.description,
           homepage: item.homepage,
           id: item.id,
+          likes: item.stargazers_count,
+          name: item.full_name,
           source: 'github',
           title: item.name.replace(/-/g, ' ').indexOf('js') > -1
             ? item.name.replace(/-/g, ' ').replace(' js', '.js')
@@ -59,6 +64,24 @@ const getPosts = () => {
       });
 
       newPosts = [...newPosts, ...repos];
+
+      // Add repo readme images
+      for (let i = 0; i < repos.length; i++) {
+        request({
+          url: `https://api.github.com/repos/${repos[i].name}/readme?access_token=${keys.github}`,
+          headers: {
+            'user-agent': 'node.js',
+          },
+        }, (err, response, body) => {
+          if (!err && response.statusCode === 200) {
+            let regex = /\]\(([^)]+)\?raw=true\)/;
+            let match = regex.exec(new Buffer(JSON.parse(body).content, 'base64'));
+            if (match !== null) {
+              newPosts[newPosts.findIndex((obj => obj.id == repos[i].id))].image = `https://github.com/${repos[i].name}/blob/master${match[1]}?raw=true`;
+            }
+          }
+        });
+      }
     }
   });
 
@@ -80,8 +103,7 @@ const getPosts = () => {
             description: item.virtuals.subtitle,
             homepage: `https://medium.com/@seejamescode/${item.uniqueSlug}`,
             image: `https://cdn-images-1.medium.com/fit/t/500/200/${item.virtuals.previewImage.imageId}`,
-            likes: item.virtuals.recommends,
-            likesContext: 'Recommendations',
+            likes: item.virtuals.totalClapCount,
             source: 'medium',
             title: item.title,
           };
@@ -97,15 +119,18 @@ const getPosts = () => {
       let videos = JSON.parse(body).data
         .map((item) => {
           return {
+            buttonContext: 'Watch',
             date: Date.parse(item.created_time),
             dateContext: 'Video posted',
             description: item.description
               ? item.description
               : '',
+            homepage: item.link,
             html: item.embed.html,
             id: item.uri.substring(item.uri.indexOf('videos/') + 7).match(/\D/) !== null
               ? Number(item.uri.substring(item.uri.indexOf('videos/') + 7).substring(0, item.uri.substring(item.uri.indexOf('videos/') + 7).match(/\D/).index))
               : Number(item.uri.substring(item.uri.indexOf('videos/') + 7)),
+            likes: item.metadata.connections.likes.total,
             privacy: item.privacy.view,
             source: 'vimeo',
             title: item.name,

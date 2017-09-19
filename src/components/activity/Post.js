@@ -23,13 +23,18 @@ const Container = styled.div`
   }
 `;
 
+const Footer = styled.div`
+  align-items: baseline;
+  display: flex;
+  justify-content: space-between;
+`
+
 const Image = styled.img`
   transform: translate(-1rem, -1rem);
   width: calc(100% + 2rem);
 `;
 
 const text = `
-  overflow-x: hidden;
   text-overflow: ellipsis;
   text-transform: capitalize;
 `;
@@ -137,26 +142,24 @@ export default class Post extends Component {
             this.props.position ? this.props.position : ''
           }
         </HeaderText>
-        {
-          this.props.likes && this.props.likes > 0 && this.props.likesContext
-            ? (
-              <Likes>
-                {this.props.likes} {this.props.likesContext}
-              </Likes>
-            ) : ''
-        }
         <Description
           dangerouslySetInnerHTML={{ __html: this.props.description }}
         />
-        {
-          !this.props.html ? (
-            <Actions
-              buttonContext={this.props.buttonContext}
-              code={this.props.code}
-              homepage={this.props.homepage}
-            />
-          ) : null
-        }
+        <Footer>
+          {
+            this.props.likes > 0
+              ? (
+                <Likes>
+                  {this.props.likes.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} Like{this.props.likes > 1 ? 's' : null}
+                </Likes>
+              ) : ''
+          }
+          <Actions
+            buttonContext={this.props.buttonContext}
+            code={this.props.code}
+            homepage={this.props.homepage}
+          />
+        </Footer>
       </Container>
     );
   }
