@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import LazyLoad from 'react-lazyload';
 import styled from 'styled-components';
 import Actions from './Post/Actions';
-import Video from './Post/Video';
 
 const Container = styled.div`
   background: white;
@@ -30,9 +29,31 @@ const Footer = styled.div`
 `
 
 const Image = styled.img`
+  background: #fff;
+  flex-shrink: 0;
+  max-width: 150%;
+  min-height: 100%;
+  min-width: 100%;
+  object-fit: cover;
+`;
+
+const ImageResponsiveness = styled.div`
+  align-items: flex-start;
+  display: flex;
+  height: 0;
+  justify-content: center;
+  max-width: 100%;
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+`
+
+const ImageContainer = styled.div`
+  background: #ececec;
   transform: translate(-1rem, -1rem);
   width: calc(100% + 2rem);
 `;
+
 
 const text = `
   text-overflow: ellipsis;
@@ -68,6 +89,21 @@ const Time = styled.p`
   padding: 1rem;
   transform: translate(-1rem, -1rem);
   width: calc(100% + 2rem);
+`;
+
+const Video = styled.div`
+  height: 0;
+  max-width: 100%;
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  > iframe {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
 `;
 
 export default class Post extends Component {
@@ -115,9 +151,11 @@ export default class Post extends Component {
               offset={300}
               once
             >
-              <Video
-                html={this.props.html}
-              />
+              <ImageContainer>
+                <Video
+                  dangerouslySetInnerHTML={{ __html: this.props.html }}
+                />
+              </ImageContainer>
             </LazyLoad>
           ) : ''
         }
@@ -128,10 +166,14 @@ export default class Post extends Component {
               offset={300}
               once
             >
-              <Image
-                alt="project preview"
-                src={this.props.image}
-              />
+              <ImageContainer>
+                <ImageResponsiveness>
+                  <Image
+                    alt="project preview"
+                    src={this.props.image}
+                  />
+                </ImageResponsiveness>
+              </ImageContainer>
             </LazyLoad>
           ) : ''
         }
