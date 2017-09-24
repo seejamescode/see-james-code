@@ -30,11 +30,11 @@ const Footer = styled.div`
 
 const Image = styled.img`
   background: #fff;
-  flex-shrink: 0;
-  max-width: 150%;
-  min-height: 100%;
+  height: 100%;
   min-width: 100%;
   object-fit: cover;
+  object-position: 50% 0%;
+  position: absolute;
 `;
 
 const ImageResponsiveness = styled.div`

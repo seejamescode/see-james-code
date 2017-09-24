@@ -28,12 +28,42 @@ let originalPosts = [
     html: "<iframe src='https://www.youtube.com/embed/FXfYSn8qaUE' frameborder='0' allowfullscreen></iframe>",
     id: "FXfYSn8qaUE",
     likes: 270,
-    source: 'vimeo',
     title: "A Day at IBM with Designer James Rauhut"
+  },
+  {
+    buttonContext: 'View',
+    date: 1400547845000,
+    dateContext: "Worked on",
+    description: "While an intern and contractor for BP3 Global, I designed the onboarding process for this process portal and developed the demo.",
+    homepage: 'http://brazos-portal.bp-3cloud.com/?signup=true#',
+    id: "1",
+    image: "/brazos-portal.png",
+    likes: 0,
+    title: "Brazos Portal"
+  },
+  {
+    buttonContext: 'Example',
+    date: 1440032645000,
+    dateContext: "Worked on",
+    description: "My first outcome at IBM was transforming the IBM Analytics Style Guide into reuseable vanilla JavaScript and React component libraries. The components are now used in more than twelve products.",
+    homepage: 'https://datascience.ibm.com/',
+    html: "<video src='/analytics-components.mp4' style='width: 100%' autoplay />",    
+    id: "2",
+    likes: 0,
+    title: "IBM Analytics Platform Component Library"
+  },
+  {
+    date: 1458435845000,
+    dateContext: "Worked on",
+    description: "This internal tool provided articles, videos, and podcasts about IBM Design Thinking. I pair-designed, coded, and stuck the team to a rigourous user testing process.",
+    id: "3",
+    image: "/ibm-design-stories.gif",
+    likes: 0,
+    title: "IBM Design Stories"
   }
 ]
 let newPosts = [];
-let posts = [];
+let posts = originalPosts;
 
 const getPosts = () => {
   newPosts = [...originalPosts];
@@ -104,7 +134,6 @@ const getPosts = () => {
             homepage: `https://medium.com/@seejamescode/${item.uniqueSlug}`,
             image: `https://cdn-images-1.medium.com/fit/t/500/200/${item.virtuals.previewImage.imageId}`,
             likes: item.virtuals.totalClapCount,
-            source: 'medium',
             title: item.title,
           };
         });
@@ -132,7 +161,6 @@ const getPosts = () => {
               : Number(item.uri.substring(item.uri.indexOf('videos/') + 7)),
             likes: item.metadata.connections.likes.total,
             privacy: item.privacy.view,
-            source: 'vimeo',
             title: item.name,
             homepage: item.link,
           };
