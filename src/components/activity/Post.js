@@ -31,6 +31,7 @@ const Footer = styled.div`
 const Image = styled.img`
   background: #fff;
   height: 100%;
+  left: 0;
   min-width: 100%;
   object-fit: cover;
   object-position: 50% 0%;
