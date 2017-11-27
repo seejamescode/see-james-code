@@ -20,17 +20,6 @@ if (fs.existsSync(path.join(__dirname, '/keys.json'))) {
 
 let originalPosts = [
   {
-    buttonContext: 'Watch',
-    date: 1497538496000,
-    dateContext: "Video posted",
-    description: "IBM Software Designer James Y. Rauhut shows what a normal work-day is like for FreeCodeCamp.",
-    homepage: 'https://www.youtube.com/watch?v=FXfYSn8qaUE',
-    html: "<iframe src='https://www.youtube.com/embed/FXfYSn8qaUE' frameborder='0' allowfullscreen></iframe>",
-    id: "FXfYSn8qaUE",
-    likes: 270,
-    title: "A Day at IBM with Designer James Rauhut"
-  },
-  {
     buttonContext: 'View',
     date: 1400547845000,
     dateContext: "Worked on",
@@ -39,6 +28,7 @@ let originalPosts = [
     id: "1",
     image: "/brazos-portal.png",
     likes: 0,
+    source: 'local',
     title: "Brazos Portal"
   },
   {
@@ -50,6 +40,7 @@ let originalPosts = [
     html: "<video src='/analytics-components.mp4' style='width: 100%' autoplay />",    
     id: "2",
     likes: 0,
+    source: 'local',
     title: "IBM Analytics Platform Component Library"
   },
   {
@@ -59,6 +50,7 @@ let originalPosts = [
     id: "3",
     image: "/ibm-design-stories.gif",
     likes: 0,
+    source: 'local',
     title: "IBM Design Stories"
   }
 ]
@@ -104,9 +96,9 @@ const getPosts = () => {
           },
         }, (err, response, body) => {
           if (!err && response.statusCode === 200) {
-            let regex = /\]\(([^)]+)\?raw=true\)/;
-            let match = regex.exec(new Buffer(JSON.parse(body).content, 'base64'));
-            if (match !== null) {
+            const regex = /\]\(([^)]+)\?raw=true\)/;
+            const match = regex.exec(new Buffer(JSON.parse(body).content, 'base64'));
+            if (match !== null && !match[1].includes('.gif')) {
               newPosts[newPosts.findIndex((obj => obj.id == repos[i].id))].image = `https://github.com/${repos[i].name}/blob/master${match[1]}?raw=true`;
             }
           }
@@ -132,8 +124,10 @@ const getPosts = () => {
             dateContext: 'Written',
             description: item.virtuals.subtitle,
             homepage: `https://medium.com/@seejamescode/${item.uniqueSlug}`,
+            id: item.id,
             image: `https://cdn-images-1.medium.com/fit/t/500/200/${item.virtuals.previewImage.imageId}`,
             likes: item.virtuals.totalClapCount,
+            source: 'medium',
             title: item.title,
           };
         });
@@ -161,13 +155,59 @@ const getPosts = () => {
               : Number(item.uri.substring(item.uri.indexOf('videos/') + 7)),
             likes: item.metadata.connections.likes.total,
             privacy: item.privacy.view,
+            source: 'vimeo',
             title: item.name,
-            homepage: item.link,
           };
         })
         .filter(item => item.privacy === 'anybody');
 
       newPosts = [...newPosts, ...videos];
+    }
+  });
+
+  // YouTube
+  request({
+    url: `https://www.googleapis.com/youtube/v3/playlistItems?part=ContentDetails&playlistId=PLM3sBK4_97xPyLTI4v6aIzapjsGfibUF9&key=${keys.youtube}`,
+    headers: {
+      'user-agent': 'node.js',
+    },
+  }, (err, response, body) => {
+    if (!err && response.statusCode === 200) {
+      let youtubes = JSON.parse(body).items.map((item) => item.contentDetails.videoId).join();
+
+      request({
+        url: `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${youtubes}&key=${keys.youtube}`,
+        headers: {
+          'user-agent': 'node.js',
+        },
+      }, (err, response, body) => {
+        if (!err && response.statusCode === 200) {
+          let youtubeVideos = JSON.parse(body).items.map((item) => {
+            let description = item.snippet.description.indexOf("---") > -1
+              ? item.snippet.description.substring(item.snippet.description.indexOf("---") + 3)
+              : item.snippet.description;
+
+            if (description.length > 140) {
+              description = description.substring(0, 137) + '...';
+            }
+
+            return {
+              buttonContext: 'Watch',
+              date: new Date(item.snippet.publishedAt).getTime(),
+              dateContext: "Video posted",
+              description,
+              homepage: `https://www.youtube.com/watch?v=${item.id}`,
+              image: item.snippet.thumbnails.high.url,
+              id: item.id,
+              likes: parseInt(item.statistics.likeCount),
+              source: 'youtube',
+              title: item.snippet.title,
+            }
+          });
+
+          newPosts = [...newPosts, ...youtubeVideos];
+        }
+      });
     }
   });
 };

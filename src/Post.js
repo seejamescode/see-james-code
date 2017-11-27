@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import LazyLoad, { forceCheck } from 'react-lazyload';
 import styled from 'styled-components';
-import Actions from './Post/Actions';
+import Actions from './Actions';
 
 const Container = styled.div`
   background: white;
@@ -34,7 +34,7 @@ const Image = styled.img`
   left: 0;
   min-width: 100%;
   object-fit: cover;
-  object-position: 50% 0%;
+  object-position: 50% 50%;
   position: absolute;
 `;
 
@@ -92,21 +92,6 @@ const Time = styled.p`
   width: calc(100% + 2rem);
 `;
 
-const Video = styled.div`
-  height: 0;
-  max-width: 100%;
-  overflow: hidden;
-  padding-bottom: 56.25%;
-  position: relative;
-  > iframe {
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-  }
-`;
-
 export default class Post extends Component {
 
   static defaultProps = {
@@ -149,21 +134,6 @@ export default class Post extends Component {
         <Time>
           {this.props.dateContext} {this.props.timeSince}
         </Time>
-        {
-          this.props.html ? (
-            <ImageContainer>
-              <LazyLoad
-                height={'100%'}
-                offset={1000}
-                once
-              >
-                <Video
-                  dangerouslySetInnerHTML={{ __html: this.props.html }}
-                />
-              </LazyLoad>
-            </ImageContainer>
-          ) : ''
-        }
         {
           this.props.image ? (
             <ImageContainer>
