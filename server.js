@@ -5,18 +5,10 @@ import path from 'path';
 import request from 'request';
 
 const app = express();
+const keys = require("./keys.json");
 const port = process.env.PORT || 8080;
 app.use(compression());
 app.enable('trust proxy');
-
-let keys;
-if (fs.existsSync(path.join(__dirname, '/keys.json'))) {
-  keys = require(path.join(__dirname, '/keys.json'));
-} else if (fs.existsSync(path.join(__dirname, '../keys.json'))) {
-  keys = require(path.join(__dirname, '../keys.json'));
-} else {
-  keys = JSON.parse(process.env.VCAP_SERVICES)['user-provided'][0].credentials;
-}
 
 let originalPosts = [
   {
@@ -149,10 +141,10 @@ const getPosts = () => {
               ? item.description
               : '',
             homepage: item.link,
-            html: item.embed.html,
             id: item.uri.substring(item.uri.indexOf('videos/') + 7).match(/\D/) !== null
               ? Number(item.uri.substring(item.uri.indexOf('videos/') + 7).substring(0, item.uri.substring(item.uri.indexOf('videos/') + 7).match(/\D/).index))
               : Number(item.uri.substring(item.uri.indexOf('videos/') + 7)),
+            image: item.pictures.sizes[3].link,
             likes: item.metadata.connections.likes.total,
             privacy: item.privacy.view,
             source: 'vimeo',
@@ -233,20 +225,13 @@ app.get('/posts', (req, res) => {
 app.use((req, res, next) => {
   if (
     req.secure ||
-    req.headers.host === `localhost:${port}` ||
-    req.url.includes('/.well-known/acme-challenge/')
+    req.headers.host === `localhost:${port}`
   ) {
     next();
   } else {
     res.redirect(`https://${req.headers.host}${req.url}`);
   }
 });
-
-app.get(`/.well-known/acme-challenge/${process.env.LETS_ENCRYPT_ROUTE}`,
-  (req, res) => {
-    res.send(process.env.LETS_ENCRYPT_VERIFICATION);
-  },
-);
 
 app.use(express.static('./build'));
 

@@ -9,9 +9,6 @@
 # production
 /build
 
-#keys
-keys.json
-
 # misc
 .DS_Store
 certbot.log
