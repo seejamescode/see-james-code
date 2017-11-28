@@ -5,10 +5,17 @@ import path from 'path';
 import request from 'request';
 
 const app = express();
-const keys = require("./keys.json");
 const port = process.env.PORT || 8080;
 app.use(compression());
 app.enable('trust proxy');
+
+let keys;
+if (process.env.NODE_ENV === 'production') {
+  keys = require("./keys.json");
+} else {
+  console.log('hello');
+  keys = require("./keys/keys.json");
+}
 
 let originalPosts = [
   {

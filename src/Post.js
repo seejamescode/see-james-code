@@ -31,11 +31,12 @@ const Footer = styled.div`
 const Image = styled.img`
   background: #fff;
   height: 100%;
-  left: 0;
+  left: 50%;
   min-width: 100%;
   object-fit: cover;
-  object-position: 50% 50%;
   position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 const ImageResponsiveness = styled.div`
