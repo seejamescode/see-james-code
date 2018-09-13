@@ -1,184 +1,281 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import LazyLoad, { forceCheck } from 'react-lazyload';
-import styled from 'styled-components';
-import Actions from './Actions';
+import React, { Component } from "react";
+import styled from "styled-components";
+import cursor from "./cursors/cursor.png";
+import select from "./cursors/select.png";
 
-const Container = styled.div`
-  background: white;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.25);
-  color: initial;
-  margin: 0 1.5rem 1.5em;
-  padding: 1rem;
-  text-decoration: none;
-  transition: box-shadow 0.1s ease-in;
-  width: calc(100% - 5rem);
-  @media (min-width: 540px) {
-    margin: 0 1.5rem 3em;
-    width: calc(50% - 5rem);
+const determineURL = function(url, supportsWebP) {
+  let result = `background-image: url(${url});`;
+
+  if (
+    supportsWebP &&
+    !url.includes("http") &&
+    (url.includes("jpg") || url.includes("jpeg") || url.includes("png"))
+  ) {
+    result = `${result} background-image: url("${url.split(".")[0]}.webp");`;
   }
-  @media (min-width: 850px) {
-    width: calc(33.33% - 5rem);
-  }
-`;
 
-const Footer = styled.div`
-  align-items: baseline;
-  display: flex;
-  justify-content: space-between;
-`
+  return result;
+};
 
-const Image = styled.img`
-  background: #fff;
+const Content = styled.div`
+  box-sizing: border-box;
   height: 100%;
-  left: 50%;
-  min-width: 100%;
-  object-fit: cover;
+  left: 0;
   position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  width: 100%;
 `;
 
-const ImageResponsiveness = styled.div`
-  align-items: flex-start;
-  display: flex;
-  height: 0;
-  justify-content: center;
-  max-width: 100%;
-  overflow: hidden;
-  padding-bottom: 56.25%;
+const GoButton = styled.a`
+  background: var(--highlight);
+  bottom: 0;
+  box-sizing: border-box;
+  color: white;
+  font-size: 1.125rem;
+  display: ${props => (props.selected || props.size === 2 ? "flex" : "none")};
+  margin: 0;
+  opacity: ${props =>
+    (props.selected && !props.transitioning) || props.size === 2 ? 1 : 0};
+  padding: calc(var(--padding) - 0.3rem) var(--padding);
+  position: absolute;
+  right: 0;
+  text-decoration: none;
+  transition: opacity 300ms var(--curve);
+  z-index: 2;
+
+  @media (min-width: 40rem) {
+    display: ${props => (props.selected ? "flex" : "none")};
+    opacity: ${props => (props.selected && !props.transitioning ? 1 : 0)};
+  }
+`;
+
+const GridItem = styled.div`
+  background: white;
+  ${props =>
+    props.backgroundDownloaded && props.supportsWebP !== undefined
+      ? determineURL(props.backgroundDownloaded, props.supportsWebP)
+      : "background: #ededed;"} background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  box-sizing: border-box;
+  grid-column: span ${props => (props.selected ? 2 : props.size)};
+  grid-row: span ${props => (props.selected ? 2 : props.size)};
+  margin: 0;
+  padding: 0;
   position: relative;
-`
 
-const ImageContainer = styled.div`
-  background: #ececec;
-  transform: translate(-1rem, -1rem);
-  width: calc(100% + 2rem);
-`;
+  :before {
+    ${props =>
+      props.background && props.supportsWebP !== undefined
+        ? determineURL(props.background, props.supportsWebP)
+        : "background: #ededed;"} background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    content: "";
+    display: block;
+    padding-top: 100%;
+  }
 
-
-const text = `
-  text-overflow: ellipsis;
-  text-transform: capitalize;
+  @media (min-width: 40rem) {
+    grid-column: span ${props => (props.selected ? 3 : props.size)};
+    grid-row: span ${props => (props.selected ? 3 : props.size)};
+  }
 `;
 
 const Likes = styled.p`
-  ${text}
-  font-size: .75rem;
-  padding-top: .25rem;
-`;
-
-const HeaderText = styled.h3`
-  ${text}
-  font-weight: bold;
-  font-size: 1.333rem;
-  line-height: 1.75;
-  margin-top: -.5rem;
-`;
-
-const Description = styled.p`
-  padding-top: 2rem;
-  line-height: 1.75;
-  word-wrap: break-word;
-`;
-
-const Time = styled.p`
-  background: #18D8F0;
+  background: var(--black);
+  bottom: 0;
   box-sizing: border-box;
-  font-size: .75rem;
-  line-height: 1rem;
+  color: white;
+  font-size: ${props =>
+    props.selected || props.size === 2 ? "1.125rem" : ".75rem"};
+  display: ${props =>
+    props.likes > 1 && (!props.transitioning || !props.selected)
+      ? "initial"
+      : "none"};
+  left: 0;
   margin: 0;
-  padding: 1rem;
-  transform: translate(-1rem, -1rem);
-  width: calc(100% + 2rem);
+  opacity: ${props => (props.transitioning !== props.identification ? 1 : 0)};
+  padding: calc(var(--padding) - 0.3rem) var(--padding);
+  position: absolute;
+  text-decoration: none;
+  transition: ${props =>
+    props.selected ? "opacity 300ms var(--curve)" : "none"};
+  z-index: 1;
+
+  svg {
+    fill: white;
+    padding-right: 0.8rem;
+    width: 0.9rem;
+  }
+
+  @media (min-width: 40rem) {
+    font-size: ${props => (props.selected ? "1.125rem" : ".75rem")};
+    padding: ${props =>
+      props.selected
+        ? "calc(var(--padding) - 0.3rem) var(--padding)"
+        : "calc((var(--padding) - 0.3rem) * .25) calc(var(--padding) * .25)"};
+
+    svg {
+      padding-right: ${props => (props.selected ? ".8rem" : ".5rem")};
+      width: ${props => (props.selected ? ".9rem" : ".6rem")};
+    }
+  }
 `;
 
-export default class Post extends Component {
+const SelectButton = styled.button`
+  background: transparent;
+  border: none;
+  height: 100%;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  transition: outline 100ms var(--curve), outline-offset 100ms var(--curve);
+  width: 100%;
+  z-index: 1;
 
-  static defaultProps = {
-    buttonContext: '',
-    code: '',
-    date: '',
-    dateContext: '',
-    description: '',
-    html: '',
-    image: '',
-    likes: 0,
-    likesContext: '',
-    homepage: '',
-    position: '',
-    title: '',
+  :focus,
+  :hover {
+    cursor: ${props => (props.size === 2 ? `url(${cursor}) 6 0, auto` : null)};
+    outline: ${props =>
+      !props.selected && !props.transitioning && props.size !== 2
+        ? "0.35rem solid var(--highlight)"
+        : "none"};
+    outline-offset: -0.35rem;
+  }
+
+  @media (min-width: 40rem) {
+    :focus,
+    :hover {
+      cursor: url(${select}) 12 0, auto;
+      outline: ${props =>
+        !props.selected && !props.transitioning
+          ? "0.35rem solid var(--highlight)"
+          : "none"};
+    }
+  }
+`;
+
+const Title = styled.h2`
+  background: var(--black);
+  box-sizing: border-box;
+  color: white;
+  font-size: 1.125rem;
+  display: ${props => (props.selected || props.size === 2 ? "flex" : "none")};
+  opacity: ${props =>
+    (props.selected && !props.transitioning) || props.size === 2 ? 1 : 0};
+  margin: 0;
+  padding: calc(var(--padding) - 0.3rem) var(--padding);
+  position: relative;
+  transition: opacity 300ms var(--curve);
+  z-index: 1;
+
+  @media (min-width: 40rem) {
+    display: ${props => (props.selected ? "flex" : "none")};
+    opacity: ${props => (props.selected && !props.transitioning ? 1 : 0)};
+  }
+`;
+
+class Post extends Component {
+  state = {
+    background: undefined
   };
 
-  static propTypes = {
-    buttonContext: PropTypes.string,
-    code: PropTypes.string,
-    date: PropTypes.number,
-    dateContext: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    html: PropTypes.string,
-    image: PropTypes.string,
-    likes: PropTypes.number,
-    likesContext: PropTypes.string,
-    homepage: PropTypes.string,
-    position: PropTypes.string,
-    title: PropTypes.string.isRequired,
-  };
-  
   componentDidMount() {
-    setTimeout(() => forceCheck(), 100);
+    if (this.props.supportsWebP !== undefined) {
+      this.updateImage();
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.selected !== this.props.selected ||
+      prevProps.supportsWebP !== this.props.supportsWebP
+    ) {
+      this.updateImage();
+    }
+  }
+
+  onSelect = url => {
+    this.setState({ background: url }, () => {
+      this.props.onClick(this.props.id);
+    });
+  };
+
+  updateImage() {
+    console.log("updating");
+    const componentHeight = document.getElementById(this.props.id).clientHeight;
+    let matched = false;
+
+    for (let i = 0; i < this.props.images.length; i++) {
+      if (
+        !matched &&
+        (this.props.images[i].size > componentHeight ||
+          i === this.props.images.length - 1)
+      ) {
+        matched = true;
+
+        this.setState({
+          background: this.props.images[i].url
+        });
+      }
+    }
   }
 
   render() {
     return (
-      <Container>
-        <Time>
-          {this.props.dateContext} {this.props.timeSince}
-        </Time>
-        {
-          this.props.image ? (
-            <ImageContainer>
-              <ImageResponsiveness>
-                <LazyLoad
-                  height={'100%'}
-                  offset={1000}
-                  once
-                >
-                  <Image
-                    alt="project preview"
-                    src={this.props.image}
-                  />
-                </LazyLoad>
-              </ImageResponsiveness>
-            </ImageContainer>
-          ) : ''
-        }
-        <HeaderText>
-          {this.props.title}
-          <br />
-          {
-            this.props.position ? this.props.position : ''
-          }
-        </HeaderText>
-        <Description
-          dangerouslySetInnerHTML={{ __html: this.props.description }}
-        />
-        <Footer>
-          {
-            this.props.likes > 0
-              ? (
-                <Likes>
-                  {this.props.likes.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} Like{this.props.likes > 1 ? 's' : null}
-                </Likes>
-              ) : ''
-          }
-          <Actions
-            buttonContext={this.props.buttonContext}
-            code={this.props.code}
-            homepage={this.props.homepage}
+      <GridItem
+        background={this.state.background}
+        backgroundDownloaded={this.props.images[0].url}
+        id={this.props.id}
+        size={this.props.size}
+        selected={this.props.selected}
+        supportsWebP={this.props.supportsWebP}
+      >
+        <Content>
+          <Title
+            selected={this.props.selected}
+            size={this.props.size}
+            transitioning={this.props.transitioning}
+          >
+            {this.props.title}
+          </Title>
+          <Likes
+            identification={this.props.id}
+            likes={this.props.likes}
+            selected={this.props.selected}
+            size={this.props.size}
+            transitioning={this.props.transitioning}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8">
+              <path d="M2 1c-.55 0-1.046.224-1.406.594-.37.36-.594.856-.594 1.406 0 .55.224 1.046.594 1.406l3.406 3.438 3.406-3.438c.37-.37.594-.856.594-1.406 0-.55-.224-1.046-.594-1.406-.36-.37-.856-.594-1.406-.594-.55 0-1.046.224-1.406.594-.37.36-.594.856-.594 1.406 0-.55-.224-1.046-.594-1.406-.36-.37-.856-.594-1.406-.594z" />
+            </svg>
+            {this.props.likes}
+          </Likes>
+          <SelectButton
+            aria-label={this.props.title}
+            onClick={() => this.onSelect(this.props.images)}
+            selected={this.props.selected}
+            size={this.props.size}
+            transitioning={this.props.transitioning}
           />
-        </Footer>
-      </Container>
+          <GoButton
+            href={this.props.linkPrimary}
+            rel="noopener noreferrer"
+            selected={this.props.selected}
+            size={this.props.size}
+            target="_blank"
+            transitioning={this.props.transitioning}
+          >
+            {this.props.linkPrimaryText}
+          </GoButton>
+        </Content>
+      </GridItem>
     );
   }
 }
+
+export default Post;
