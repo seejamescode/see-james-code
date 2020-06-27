@@ -1,61 +1,35 @@
 {
   "name": "see-james-code",
-  "version": "0.1.0",
-  "private": true,
+  "version": "2.0.0",
   "scripts": {
-    "build": "yarn build:images && yarn build:code",
-    "build:client": "react-app-rewired build",
-    "build:code": "yarn build:client && yarn build:server",
-    "build:images": "IMAGESRC=./public/images/ IMAGEDEST=./public/images/rendered/ babel-node ./processImages.js && yarn build:images:webp",
-    "build:images:webp": "cd public/images/rendered && webpc -r cd ../../..",
-    "build:server": "NODE_ENV=production babel src/server -d build/server",
-    "deploy": "yarn build && yarn now",
-    "deploy:lean": "yarn build:code && yarn now",
-    "dev": "concurrently \"yarn dev:server\" \"yarn dev:client\"",
-    "dev:client": "react-scripts start",
-    "dev:server": "PORT=8081 babel-watch ./src/server/index.js",
-    "now": "now -e NODE_ENV=\"production\" && now alias && now scale seejamescode.now.sh 1 1 && now rm see-james-code -s -y",
-    "now-build": "true",
-    "now-start": "PORT=8081 NODE_ENV=production node build/server/index.js",
-    "start": "yarn dev"
-  },
-  "devDependencies": {
-    "@ibm/plex": "^1.0.2",
-    "animate-css-grid": "^0.4.5",
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-watch": "^2.0.7",
-    "concurrently": "^3.5.1",
-    "jimp": "^0.2.28",
-    "modernizr": "^3.6.0",
-    "react": "^16.3.1",
-    "react-app-rewired": "^1.5.2",
-    "react-dom": "^16.3.1",
-    "react-scripts": "^1.1.4",
-    "smoothscroll-polyfill": "^0.4.3",
-    "styled-components": "^3.2.5",
-    "webp-converter-cli": "^0.0.5"
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
   },
   "dependencies": {
-    "compression": "^1.7.2",
-    "express": "^4.16.3",
-    "now-env": "^3.0.4",
-    "request": "^2.85.0",
-    "request-promise": "^4.2.2"
+    "@carbon/icons-react": "^10.12.0",
+    "@contentful/rich-text-react-renderer": "^13.4.0",
+    "@contentful/rich-text-types": "^14.1.0",
+    "@ibm/plex": "^4.0.2",
+    "contentful": "^7.14.4",
+    "date-fns": "^2.14.0",
+    "framer-motion": "^1.11.0",
+    "highlight.js": "^10.1.1",
+    "mongoose": "^5.9.18",
+    "next": "^9.4.4",
+    "next-offline": "^5.0.2",
+    "next-seo": "^4.5.0",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0",
+    "react-highlight.js": "^1.0.7",
+    "react-player": "^2.1.1",
+    "react-share": "^4.2.0",
+    "react-use": "^15.1.1",
+    "reakit": "^1.0.4",
+    "styled-components": "^5.1.1"
   },
-  "proxy": {
-    "/": {
-      "target": "http://localhost:8081",
-      "pathRewrite": {
-        "^/proxy": ""
-      },
-      "changeOrigin": true
-    }
+  "devDependencies": {
+    "babel-plugin-styled-components": "^1.10.7"
   },
-  "babel": {
-    "presets": [
-      "env"
-    ]
-  }
+  "license": "PRIVATE"
 }

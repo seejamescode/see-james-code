@@ -1,26 +1,36 @@
 {
-  "lang": "en-US",
-  "background_color": "#f7faff",
-  "theme_color": "#E057FF",
+  "short_name": "James Y Rauhut",
   "name": "James Y Rauhut",
-  "short_name": "seejamescode",
-  "display": "standalone",
-  "start_url": "./?utm_source=web_app_manifest",
+  "description": "UX Designer and Engineer in Austin, Texas. See all of his blogs, projects, and talks here.",
   "icons": [
     {
-      "src": "./iconSmall.png",
+      "src": "/graphics/icon-57.png",
+      "sizes": "57x57",
+      "type": "image/png"
+    },
+    {
+      "src": "/graphics/icon-72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "/graphics/icon-114.png",
+      "sizes": "114x114",
+      "type": "image/png"
+    },
+    {
+      "src": "/graphics/icon-144.png",
       "sizes": "144x144",
       "type": "image/png"
     },
     {
-      "src": "./icon.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/images/iconLarge.png",
+      "src": "/graphics/icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
-  ]
+  ],
+  "start_url": "/",
+  "display": "fullscreen",
+  "theme_color": "#E366FF",
+  "background_color": "#f7faff"
 }
