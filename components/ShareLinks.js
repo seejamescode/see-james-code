@@ -32,7 +32,7 @@ const Shares = styled.div`
   }
 
   path {
-    fill: ${({ theme }) => theme.colors.black};
+    fill: ${({ theme }) => theme.colors.font};
   }
 
   rect {

@@ -25,12 +25,24 @@ const postVariants = {
 const Container = styled(motion.a)`
   border: none;
   border-radius: ${({ theme }) => theme.padding};
-  box-shadow: 10px 10px 30px #d2d5d9, -10px -10px 30px #ffffff;
+  box-shadow: ${({ theme }) => theme.colors.backgroundShadow};
   display: block;
   overflow: hidden;
   padding: 0;
   position: relative;
-  transition: transform 100ms ${({ theme }) => theme.animation.hover};
+  transition: box-shadow 100ms ${({ theme }) => theme.animation.hover},
+    transform 100ms ${({ theme }) => theme.animation.hover};
+
+  :after {
+    border-radius: ${({ theme }) => theme.padding};
+    content: "";
+    height: 100%;
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
 
   :before {
     content: "";
@@ -40,10 +52,23 @@ const Container = styled(motion.a)`
 
   :focus,
   :hover {
+    box-shadow: ${({ theme }) => theme.colors.backgroundShadowHover};
     transform: scale(1.02) !important;
   }
 
+  :focus {
+    box-shadow: ${({ theme }) =>
+      `inset 0px 0px 0px 3px ${theme.colors.focus}, ${theme.colors.backgroundShadow}`};
+    outline: none;
+
+    :after {
+      box-shadow: ${({ theme }) =>
+        `inset 0px 0px 0px 3px ${theme.colors.focus}`};
+    }
+  }
+
   :active {
+    box-shadow: none;
     transform: scale(0.98) !important;
   }
 
@@ -53,6 +78,12 @@ const Container = styled(motion.a)`
     );
     grid-column: span ${({ scale }) => scale} / auto;
     grid-row: span ${({ scale }) => scale} / auto;
+
+    :after {
+      border-radius: calc(
+        ${({ scale, theme }) => `${theme.padding} / 2 * ${scale}`}
+      );
+    }
   }
 `;
 
@@ -63,7 +94,7 @@ const PictureContainer = styled.div`
 const Text = styled.div`
   ${fullSize}
   background: ${({ theme }) => theme.colors.backdrop};
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.font};
   height: auto;
   padding: calc(${({ theme }) => theme.padding} / 2);
 

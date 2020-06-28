@@ -33,6 +33,10 @@ const Floater = styled(motion.div)`
   svg {
     fill: ${({ theme }) => theme.colors.link};
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    display: none;
+  }
 `;
 
 const HeartButton = styled.button`
@@ -41,13 +45,14 @@ const HeartButton = styled.button`
   display: flex;
   margin-right: 0.25rem;
   padding: 0;
+  path {
+    color: ${({ theme }) => theme.colors.link};
+  }
 
   :focus,
   :hover {
-    &:not(:disabled) {
-      path {
-        color: ${({ theme }) => theme.colors.link};
-      }
+    path {
+      color: ${({ theme }) => theme.colors.link};
     }
   }
 
@@ -59,6 +64,10 @@ const HeartButton = styled.button`
 
   :disabled {
     cursor: not-allowed !important;
+
+    path {
+      color: ${({ theme }) => theme.colors.font};
+    }
   }
 `;
 
@@ -69,10 +78,14 @@ const Skeleton = styled.div`
   width: 1rem;
 `;
 
+const TooltipArrowStyled = styled(TooltipArrow)`
+  fill: ${({ theme }) => theme.colors.font};
+`;
+
 const TooltipStyled = styled(TooltipReference)`
-  background: ${({ theme }) => theme.colors.black};
+  background: ${({ theme }) => theme.colors.font};
   border-radius: 0.5rem;
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.background};
   font-size: ${({ theme }) => theme.type.small.size};
   line-height: ${({ theme }) => theme.type.small.line};
   max-width: 15rem;
@@ -194,7 +207,7 @@ export default function Hearts({ slug }) {
       )}
       <Tooltip {...tooltip}>
         <TooltipStyled>
-          <TooltipArrow {...tooltip} size={24} />
+          <TooltipArrowStyled {...tooltip} size={24} />
           {count >= MAX_HEARTS
             ? "Okay, that's enough hearts for you."
             : "I appreciate hearts! Why not also share this with your friends?"}

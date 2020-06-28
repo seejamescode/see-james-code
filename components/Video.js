@@ -6,14 +6,21 @@ const ResponsivePlayer = styled.div`
   background: ${({ theme }) => theme.colors.backdrop};
   border: none;
   border-radius: calc(${({ theme }) => theme.padding} / 2);
-  box-shadow: 10px 10px 30px #d2d5d9, -10px -10px 30px #ffffff;
+  box-shadow: ${({ theme }) => theme.colors.backgroundShadow};
   overflow: hidden;
   position: relative;
   padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
   transition: transform 300ms ${({ theme }) => theme.animation.hover};
 
+  :focus,
   :hover {
-    transform: scale(1.03);
+    box-shadow: ${({ theme }) => theme.colors.backgroundShadowHover};
+    transform: scale(1.02);
+  }
+
+  :focus {
+    box-shadow: ${({ theme }) =>
+      `inset 0px 0px 0px 3px ${theme.colors.focus}, ${theme.colors.backgroundShadow}`};
   }
 
   .react-player {

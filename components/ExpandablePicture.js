@@ -40,7 +40,7 @@ const CloseButton = styled(Button)`
 
 const Modal = styled(Dialog)`
   align-items: center;
-  background: ${({ theme }) => theme.colors.white};
+  background: ${({ theme }) => theme.colors.background};
   border-radius: calc(${({ theme }) => theme.padding} / 2);
   display: flex;
   flex-direction: column;
@@ -70,17 +70,41 @@ const Modal = styled(Dialog)`
 const PictureButton = styled(DialogDisclosure)`
   border: none;
   border-radius: calc(${({ theme }) => theme.padding} / 2);
-  box-shadow: 10px 10px 30px #d2d5d9, -10px -10px 30px #ffffff;
+  box-shadow: ${({ theme }) => theme.colors.backgroundShadow};
   overflow: hidden;
   padding: 0;
   transition: transform 300ms ${({ theme }) => theme.animation.hover};
 
+  :after {
+    border-radius: calc(${({ theme }) => theme.padding} / 2);
+    content: "";
+    height: 100%;
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
   :focus,
   :hover {
-    transform: scale(1.03);
+    box-shadow: ${({ theme }) => theme.colors.backgroundShadowHover};
+    transform: scale(1.02);
+  }
+
+  :focus {
+    box-shadow: ${({ theme }) =>
+      `inset 0px 0px 0px 3px ${theme.colors.focus}, ${theme.colors.backgroundShadow}`};
+    outline: none;
+
+    :after {
+      box-shadow: ${({ theme }) =>
+        `inset 0px 0px 0px 3px ${theme.colors.focus}`};
+    }
   }
 
   :active {
+    box-shadow: none;
     transform: scale(0.98);
   }
 `;

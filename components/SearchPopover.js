@@ -16,6 +16,10 @@ const SearchButton = styled(PopoverDisclosure)`
   display: flex;
   padding: 0;
 
+  svg {
+    fill: ${({ theme }) => theme.colors.font};
+  }
+
   :focus,
   :hover {
     svg {
@@ -57,12 +61,7 @@ export default function SearchToggle() {
       <SearchPopover {...popover} aria-label="Search">
         <SearchArrow {...popover} size={20} />
         <SearchPopoverContent>
-          <Search
-            hideOuterBoxShadow
-            isRequired
-            onSubmit={popover.hide}
-            shouldClearOnSubmit
-          />
+          <Search isRequired onSubmit={popover.hide} shouldClearOnSubmit />
         </SearchPopoverContent>
       </SearchPopover>
     </>

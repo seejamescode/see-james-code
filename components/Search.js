@@ -33,7 +33,6 @@ const PLACEHOLDER_QUERIES = [
 ];
 
 export default function Search({
-  hideOuterBoxShadow,
   isRequired,
   onSubmit = () => {},
   shouldClearOnSubmit,
@@ -74,7 +73,7 @@ export default function Search({
         type="text"
         value={value}
       />
-      <SearchButton hideOuterBoxShadow={hideOuterBoxShadow} type="submit">
+      <SearchButton hideOuterBoxShadow type="submit">
         Search
       </SearchButton>
     </Form>

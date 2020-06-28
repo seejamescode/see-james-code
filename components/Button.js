@@ -1,11 +1,13 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const Button = styled.button`
   border-radius: ${({ theme }) => theme.borderRadius};
-  background: linear-gradient(145deg, #f36dff, #cc5ce6);
+  background: ${({ theme }) => theme.colors.linkBackground};
   border: none;
   border-radius: none;
-  color: inherit;
+  box-shadow: ${({ hideOuterBoxShadow, theme }) =>
+    !hideOuterBoxShadow && theme.colors.backgroundShadow};
+  color: ${({ theme }) => theme.colors.background};
   font-size: ${({ theme }) => theme.type.a.size};
   line-height: ${({ theme }) => theme.type.small.line};
   margin: 0%;
@@ -13,40 +15,29 @@ const Button = styled.button`
     calc(${({ theme }) => theme.padding} / 2);
   position: relative;
   text-decoration: none;
+  transition: background 100ms ${({ theme }) => theme.animation.hover},
+    box-shadow 100ms ${({ theme }) => theme.animation.hover};
 
-  :after {
-    border-radius: ${({ theme }) => theme.borderRadius};
-    content: "";
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    transition: box-shadow 200ms ${({ theme }) => theme.animation.hover};
-    width: 100%;
-
-    ${({ hideOuterBoxShadow }) =>
-      !hideOuterBoxShadow &&
-      css`
-        box-shadow: 5px 5px 15px #d2d5d9, -5px -5px 15px #ffffff;
-      `}
+  :focus,
+  :hover {
+    background: ${({ theme }) => theme.colors.linkBackgroundHover};
   }
-  ${({ hideOuterBoxShadow }) =>
-    !hideOuterBoxShadow &&
-    css`
-      :focus,
-      :hover {
-        :after {
-          box-shadow: 10px 10px 45px #d2d5d9, -10px -10px 45px #ffffff;
-        }
-      }
-    `}
+
+  :hover {
+    box-shadow: ${({ hideOuterBoxShadow, theme }) =>
+      !hideOuterBoxShadow && theme.colors.backgroundShadowHover};
+  }
+
+  :focus {
+    box-shadow: ${({ hideOuterBoxShadow, theme }) =>
+      `inset 0px 0px 0px 3px ${theme.colors.focus}${
+        !hideOuterBoxShadow ? `, ${theme.colors.backgroundShadowHover}` : ""
+      }`};
+    outline: none;
+  }
 
   :active {
-    background: ${({ theme }) => theme.colors.link};
-
-    :after {
-      box-shadow: inset 5px 5px 15px #c157d9, inset -5px -5px 15px #ff75ff;
-    }
+    box-shadow: ${({ theme }) => theme.colors.linkShadowActive};
   }
 `;
 

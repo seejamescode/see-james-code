@@ -11,7 +11,8 @@ const Anchor = styled.a`
   color: inherit;
   position: relative;
   text-decoration: none;
-  transition: background-position 100ms ${({ theme }) => theme.animation.hover};
+  transition: background-position 100ms ${({ theme }) => theme.animation.hover},
+    color 100ms ${({ theme }) => theme.animation.hover};
 
   :active {
     background-image: linear-gradient(
@@ -24,6 +25,11 @@ const Anchor = styled.a`
   :focus,
   :hover {
     background-position: 0 0%;
+    color: ${({ theme }) => theme.colors.background};
+
+    path {
+      fill: ${({ theme }) => theme.colors.background};
+    }
   }
 
   svg {
@@ -32,7 +38,8 @@ const Anchor = styled.a`
     transform: translateY(0.25rem);
 
     path {
-      fill: ${({ theme }) => theme.colors.black};
+      fill: ${({ theme }) => theme.colors.font};
+      transition: fill 100ms ${({ theme }) => theme.animation.hover};
     }
   }
 `;

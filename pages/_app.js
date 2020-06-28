@@ -2,7 +2,11 @@ import App from "next/app";
 import Link from "next/link";
 import { AnimatePresence } from "framer-motion";
 import { DefaultSeo } from "next-seo";
-import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
+import styled, {
+  createGlobalStyle,
+  keyframes,
+  ThemeProvider,
+} from "styled-components";
 import "highlight.js/styles/a11y-dark.css";
 import Font from "../components/Font";
 import SearchToggle from "../components/SearchPopover";
@@ -18,19 +22,31 @@ const theme = {
     max: "80rem",
   },
   colors: {
-    backdrop: "rgba(0, 0, 0, 0.75)",
-    black: "#180619",
-    blackShadow: "#7e667f",
+    accent: "#66FFE3",
+    accentShadow: "#5be5cc",
+    backdrop: "rgba(0, 0, 0, 0.5)",
+    background: "#180619",
+    backgroundShadow: "5px 5px 10px #0a020a, -5px -5px 10px #260a28",
+    backgroundShadowHover: "5px 5px 20px #200922, -5px -5px 20px #2c0c2e",
+    body: "#090209",
     brands: {
       facebook: "#1877f2",
       linkedin: "#007bb5",
       reddit: "#ff5700",
       twitter: "#1da1f2",
     },
+    font: "#f7faff",
+    fontBackground: "inset 5px 5px 10px #d2d5d9, inset -5px -5px 10px #ffffff",
+    fontBackgroundFocus:
+      "inset 10px 10px 20px #d2d5d9, inset -10px -10px 20px #ffffff",
+    focus: "#ffe366",
+    maxWidthShadow: "0px 0px 15px #000",
     link: "#E366FF",
     linkActive: "#ec99ff",
-    linkSuperActive: "#EFADFF",
-    white: "#f7faff",
+    linkBackground: "linear-gradient(145deg, #f36dff, #cc5ce6)",
+    linkBackgroundHover: "linear-gradient(100deg, #f36dff, #cc5ce6)",
+    linkShadowActive:
+      "inset 5px 5px 10px #c157d9, inset -5px -5px 10px #ff75ff",
   },
   maxWidth: "34rem",
   padding: "2rem",
@@ -74,7 +90,13 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
     font-family: "IBM Plex Serif", Menlo, "DejaVu Sans Mono", "Bitstream Vera Sans Mono", Courier, monospace;
+    outline-color: ${({ theme }) => theme.colors.focus};
     text-rendering: optimizeLegibility;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none !important;
+      transition: none !important;
+    }
   }
 
   blockquote {
@@ -91,8 +113,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   code {
-    box-shadow:  inset 20px 20px 60px #111111, 
-            inset -20px -20px 60px #454545;
+    box-shadow:  inset 10px 10px 60px #111111, 
+            inset -10px -10px 60px #454545;
     border-radius: calc(${({ theme }) => theme.padding} / 2);
     cursor: text;
     font-family: 'IBM Plex Mono', monospace;
@@ -128,8 +150,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-      background: ${({ theme }) => theme.colors.white};
-      color: ${({ theme }) => theme.colors.black};
+      background: ${({ theme }) => theme.colors.body};
+      color: ${({ theme }) => theme.colors.font};
       cursor: url(/cursors/cursor.png) 6 0, auto;
       min-height: 100%;
       margin: 0;
@@ -142,8 +164,8 @@ const Header = styled.header`
 `;
 
 const MaxSize = styled.div`
-  background: ${({ theme }) => theme.colors.white};
-  box-shadow: 20px 20px 60px #d2d5d9, -20px -20px 60px #ffffff;
+  background: ${({ theme }) => theme.colors.background};
+  box-shadow: ${({ theme }) => theme.colors.maxWidthShadow};
   margin: auto;
   max-width: ${({ theme }) => theme.breakpoints.max};
   min-height: 100vh;
@@ -155,17 +177,23 @@ const MaxSize = styled.div`
   }
 `;
 
+const flicker = keyframes`
+  0%, 2%, 4%, 50%, 52%, 54%, 100% {
+    opacity: 1;
+		
+	}
+	1%, 3%, 51%, 53% {
+		opacity: 0.5;
+	}
+`;
+
 const Name = styled.a`
-  color: inherit;
+  color: ${({ theme }) => theme.colors.accent};
   font-size: ${({ theme }) => theme.type.c.size};
   margin: 0;
   position: relative;
-  color: inherit;
   text-decoration: none;
-
-  :active {
-    outline-color: ${({ theme }) => theme.colors.linkActive};
-  }
+  text-shadow: 0px 0px 1rem ${({ theme }) => theme.colors.accentShadow};
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     transform: scale(${({ isHomepage }) => (isHomepage ? 1.615 : 1)});
@@ -176,6 +204,7 @@ const Name = styled.a`
   /* Media query disables easter egg for touch device clicks */
   @media (hover: hover) {
     :hover:after {
+      animation: ${flicker} 8s linear;
       content: "[raw-hoot]";
       font-size: ${({ theme }) => theme.type.a.size};
       font-weight: 200;

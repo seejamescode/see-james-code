@@ -227,7 +227,9 @@ export default function Subscribe() {
           type="email"
         />
         {!isSubmitting && !isSuccess && (
-          <SubscribeButton type="submit">Subscribe</SubscribeButton>
+          <SubscribeButton hideOuterBoxShadow type="submit">
+            Subscribe
+          </SubscribeButton>
         )}
         {isSubmitting && (
           <Loader>
