@@ -31,7 +31,6 @@ const Flex = styled.section`
 const Glow = styled.div`
   display: flex;
   flex: 1;
-  min-width: 25rem;
 
   img {
     animation: ${flicker} 15s linear 5s infinite;
@@ -39,10 +38,12 @@ const Glow = styled.div`
       0px 0px 1rem ${({ theme }) => theme.colors.accentShadow}
     );
     margin: calc(2 * ${({ theme }) => theme.padding}) auto 0 auto;
+    max-height: 50vh;
     width: 75%;
 
     @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
       margin-top: calc(3 * ${({ theme }) => theme.padding});
+      min-width: 25rem;
     }
 
     @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
@@ -122,7 +123,7 @@ export default function Home({ allPosts: { entries = [], page, totalPages } }) {
           </p>
         </div>
         <Glow>
-          <img src="/graphics/face-2.svg" />
+          <img alt="Head portrait of James in neon" src="/graphics/face.svg" />
         </Glow>
       </Flex>
       <PrimaryActions />
