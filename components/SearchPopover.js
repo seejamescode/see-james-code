@@ -61,7 +61,12 @@ export default function SearchToggle() {
       <SearchPopover {...popover} aria-label="Search">
         <SearchArrow {...popover} size={20} />
         <SearchPopoverContent>
-          <Search isRequired onSubmit={popover.hide} shouldClearOnSubmit />
+          <Search
+            hideBoxShadow
+            isRequired
+            onSubmit={popover.hide}
+            shouldClearOnSubmit
+          />
         </SearchPopoverContent>
       </SearchPopover>
     </>

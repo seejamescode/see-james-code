@@ -54,17 +54,7 @@ const Follow = styled.div`
 
 const Form = styled.form`
   display: flex;
-  flex-wrap: wrap;
   margin-bottom: ${({ theme }) => theme.padding};
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    flex-direction: column;
-    flex-wrap: nowrap;
-  }
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    flex-direction: row;
-  }
 `;
 
 const spin = keyframes`
@@ -118,6 +108,7 @@ const Portrait = styled.img`
 `;
 
 const SubscribeButton = styled(Button)`
+  flex: 0;
   width: 100%;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
@@ -126,10 +117,8 @@ const SubscribeButton = styled(Button)`
 `;
 
 const SubscribeInput = styled(Input)`
-  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    margin-right: -${({ theme }) => theme.borderRadius};
-    padding-right: ${({ theme }) => theme.borderRadius};
-  }
+  margin-right: -${({ theme }) => theme.borderRadius};
+  padding-right: ${({ theme }) => theme.borderRadius};
 `;
 
 const Success = styled.p`

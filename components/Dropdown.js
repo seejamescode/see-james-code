@@ -15,29 +15,17 @@ const Container = styled.div`
 `;
 
 const Icon = styled(ChevronDown20)`
+  fill: ${({ theme }) => theme.colors.link};
   pointer-events: none;
   position: absolute;
   right: 0;
   top: 0%;
-  transform: translate(-0.5rem, 0.5rem);
+  transform: translate(-0.5rem, 0.75rem);
 `;
 
 const Select = styled(Input)`
-  background: linear-gradient(145deg, #ffffff, #e6e6e6);
-  box-shadow: 5px 5px 15px #d9d9d9, -5px -5px 15px #ffffff;
-
   padding-right: 2rem;
   width: 100%;
-
-  :hover {
-    box-shadow: 10px 10px 30px #d9d9d9, -10px -10px 30px #ffffff;
-  }
-
-  :focus {
-    box-shadow: 0px 0px 0px 2px blue, 5px 5px 15px #d9d9d9,
-      -5px -5px 15px #ffffff;
-    outline: none;
-  }
 `;
 
 export default function Dropdown({ onChange, options = [], value }) {

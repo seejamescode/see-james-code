@@ -26,8 +26,8 @@ const theme = {
     accentShadow: "#5be5cc",
     backdrop: "rgba(0, 0, 0, 0.5)",
     background: "#180619",
-    backgroundShadow: "5px 5px 10px #0a020a, -5px -5px 10px #260a28",
-    backgroundShadowHover: "5px 5px 20px #200922, -5px -5px 20px #2c0c2e",
+    backgroundShadow: "5px 5px 10px #2e0c30, -5px -5px 10px #3e1042",
+    backgroundShadowHover: "5px 5px 20px #2e0c30, -5px -5px 20px #3e1042",
     body: "#090209",
     brands: {
       facebook: "#1877f2",
@@ -36,7 +36,7 @@ const theme = {
       twitter: "#1da1f2",
     },
     font: "#f7faff",
-    fontBackground: "inset 5px 5px 10px #d2d5d9, inset -5px -5px 10px #ffffff",
+    fontBackground: "linear-gradient(145deg, #dee1e6, #ffffff)",
     fontBackgroundFocus:
       "inset 10px 10px 20px #d2d5d9, inset -10px -10px 20px #ffffff",
     focus: "#ffe366",
@@ -161,6 +161,11 @@ const GlobalStyle = createGlobalStyle`
 const Header = styled.header`
   display: flex;
   justify-content: space-between;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    margin-bottom: ${({ isHomepage, theme }) =>
+      isHomepage ? `calc(3 * ${theme.padding})` : 0};
+  }
 `;
 
 const MaxSize = styled.div`
@@ -223,6 +228,7 @@ const TITLE = "James Y Rauhut";
 export default class MyApp extends App {
   render() {
     const { Component, pageProps, router } = this.props;
+    const isHomepage = router.route === "/";
 
     return (
       <ThemeProvider theme={theme}>
@@ -254,9 +260,9 @@ export default class MyApp extends App {
         />
         <GlobalStyle />
         <MaxSize>
-          <Header>
+          <Header isHomepage={isHomepage}>
             <Link href="/" passHref>
-              <Name isHomepage={router.route === "/"}>James Y Rauhut</Name>
+              <Name isHomepage={isHomepage}>James Y Rauhut</Name>
             </Link>
             <SearchToggle />
           </Header>

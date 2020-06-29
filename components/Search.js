@@ -6,23 +6,16 @@ import Input from "../components/Input";
 
 const Form = styled.form`
   display: flex;
-  flex-wrap: wrap;
   justify-content: flex-end;
   max-width: 20rem;
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    flex-wrap: nowrap;
-  }
 `;
 
 const SearchButton = styled(Button)`
   width: 100%;
 `;
 const SearchInput = styled(Input)`
-  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    margin-right: -${({ theme }) => theme.borderRadius};
-    padding-right: ${({ theme }) => theme.borderRadius};
-  }
+  margin-right: -${({ theme }) => theme.borderRadius};
+  padding-right: ${({ theme }) => theme.borderRadius};
 `;
 
 const PLACEHOLDER_QUERIES = [
@@ -33,6 +26,7 @@ const PLACEHOLDER_QUERIES = [
 ];
 
 export default function Search({
+  hideBoxShadow,
   isRequired,
   onSubmit = () => {},
   shouldClearOnSubmit,
@@ -66,6 +60,7 @@ export default function Search({
     >
       <SearchInput
         aria-label="Search Query"
+        hideBoxShadow={hideBoxShadow}
         name="query"
         onChange={(e) => setValue(e.target.value)}
         placeholder={placeholder}

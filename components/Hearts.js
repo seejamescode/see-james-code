@@ -46,19 +46,19 @@ const HeartButton = styled.button`
   margin-right: 0.25rem;
   padding: 0;
   path {
-    color: ${({ theme }) => theme.colors.link};
+    fill: ${({ theme }) => theme.colors.link};
   }
 
   :focus,
   :hover {
     path {
-      color: ${({ theme }) => theme.colors.link};
+      fill: ${({ theme }) => theme.colors.link};
     }
   }
 
   :active {
     path {
-      color: ${({ theme }) => theme.colors.linkActive};
+      fill: ${({ theme }) => theme.colors.linkActive};
     }
   }
 
@@ -66,7 +66,7 @@ const HeartButton = styled.button`
     cursor: not-allowed !important;
 
     path {
-      color: ${({ theme }) => theme.colors.font};
+      fill: ${({ theme }) => theme.colors.font};
     }
   }
 `;

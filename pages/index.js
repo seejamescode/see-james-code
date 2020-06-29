@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { NextSeo } from "next-seo";
+import { useHoverDirty } from "react-use";
 import styled, { keyframes } from "styled-components";
 import Anchor from "../components/Anchor";
 import Filter from "../components/Filter";
@@ -31,23 +32,27 @@ const Flex = styled.section`
 const Glow = styled.div`
   display: flex;
   flex: 1;
+  margin: ${({ theme }) => theme.padding} auto 0 auto;
+  max-height: 50vmin;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    margin: calc(2 * ${({ theme }) => theme.padding}) auto
+      ${({ theme }) => theme.padding} auto;
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    max-height: 25rem;
+    margin: auto;
+  }
 
   img {
     animation: ${flicker} 15s linear 5s infinite;
     filter: drop-shadow(
       0px 0px 1rem ${({ theme }) => theme.colors.accentShadow}
     );
-    margin: calc(2 * ${({ theme }) => theme.padding}) auto 0 auto;
-    max-height: 50vh;
-    width: 75%;
-
-    @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-      margin-top: calc(3 * ${({ theme }) => theme.padding});
-      min-width: 25rem;
-    }
+    width: 100%;
 
     @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-      margin: auto;
       /* Half of horziontal padding for optical centering with container */
       transform: translateX(${({ theme }) => theme.padding});
     }
@@ -60,17 +65,16 @@ const HoverCursor = styled.span`
   }
 `;
 
-const IntroP = styled.p`
-  margin-top: calc(2 * ${({ theme }) => theme.padding});
-`;
-
 export default function Home({ allPosts: { entries = [], page, totalPages } }) {
+  const glowRef = useRef(null);
+  const isHovering = useHoverDirty(glowRef);
+
   return (
     <motion.main initial="initial" animate="enter" exit="exit">
       <NextSeo title="Home" />
       <Flex>
         <div>
-          <IntroP>Hi there,</IntroP>
+          <p>Hi there,</p>
           <p>
             <strong>
               I’m a <HoverCursor cursor="pencil">UX Designer</HoverCursor> and{" "}
@@ -122,8 +126,11 @@ export default function Home({ allPosts: { entries = [], page, totalPages } }) {
             James
           </p>
         </div>
-        <Glow>
-          <img alt="Head portrait of James in neon" src="/graphics/face.svg" />
+        <Glow ref={glowRef}>
+          <img
+            alt="Head portrait of James in neon"
+            src={isHovering ? "/graphics/face-wink.svg" : "/graphics/face.svg"}
+          />
         </Glow>
       </Flex>
       <PrimaryActions />
