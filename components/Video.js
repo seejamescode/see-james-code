@@ -35,6 +35,7 @@ export default function Video({ url }) {
     <ResponsivePlayer>
       <ReactPlayer
         className="react-player"
+        controls
         height="100%"
         url={url}
         width="100%"

@@ -31,5 +31,9 @@
   "devDependencies": {
     "babel-plugin-styled-components": "^1.10.7"
   },
-  "license": "PRIVATE"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seejamescode/see-james-code.git"
+  },
+  "license": "UNLICENSED"
 }

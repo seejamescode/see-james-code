@@ -2,12 +2,17 @@ import styled from "styled-components";
 
 const Button = styled.button`
   border-radius: ${({ theme }) => theme.borderRadius};
-  background: ${({ theme }) => theme.colors.linkBackground};
-  border: none;
+  background: ${({ ghost, theme }) =>
+    ghost ? "none" : theme.colors.linkBackground};
+  border: ${({ ghost, theme }) =>
+    ghost ? `1px solid ${theme.colors.link}` : "none"};
   border-radius: none;
-  box-shadow: ${({ hideOuterBoxShadow, theme }) =>
-    !hideOuterBoxShadow && theme.colors.backgroundShadow};
-  color: ${({ theme }) => theme.colors.background};
+  box-shadow: ${({ ghost, hideOuterBoxShadow, theme }) =>
+    !hideOuterBoxShadow &&
+    (ghost
+      ? `${theme.colors.linkShadow}, inset ${theme.colors.linkShadow}`
+      : theme.colors.backgroundShadow)};
+  color: ${({ ghost, theme }) => (ghost ? "inherit" : theme.colors.background)};
   font-size: ${({ theme }) => theme.type.a.size};
   line-height: ${({ theme }) => theme.type.small.line};
   margin: 0%;
@@ -21,6 +26,7 @@ const Button = styled.button`
   :focus,
   :hover {
     background: ${({ theme }) => theme.colors.linkBackgroundHover};
+    color: ${({ theme }) => theme.colors.background};
   }
 
   :hover {

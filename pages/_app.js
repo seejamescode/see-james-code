@@ -45,6 +45,7 @@ const theme = {
     linkActive: "#ec99ff",
     linkBackground: "linear-gradient(145deg, #f36dff, #cc5ce6)",
     linkBackgroundHover: "linear-gradient(100deg, #f36dff, #cc5ce6)",
+    linkShadow: "0px 0px 8px #ec99ff",
     linkShadowActive:
       "inset 5px 5px 10px #c157d9, inset -5px -5px 10px #ff75ff",
   },
@@ -161,11 +162,6 @@ const GlobalStyle = createGlobalStyle`
 const Header = styled.header`
   display: flex;
   justify-content: space-between;
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    margin-bottom: ${({ isHomepage, theme }) =>
-      isHomepage ? `calc(3 * ${theme.padding})` : 0};
-  }
 `;
 
 const MaxSize = styled.div`

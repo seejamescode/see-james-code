@@ -45,6 +45,11 @@ const HeartButton = styled.button`
   display: flex;
   margin-right: 0.25rem;
   padding: 0;
+
+  svg {
+    filter: drop-shadow(0px 0px 0.25rem ${({ theme }) => theme.colors.link});
+  }
+
   path {
     fill: ${({ theme }) => theme.colors.link};
   }

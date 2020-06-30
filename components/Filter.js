@@ -24,7 +24,6 @@ const Desktop = styled.div`
 
 const Mobile = styled.div`
   display: flex;
-  justify-content: flex-end;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     display: none;
@@ -52,7 +51,9 @@ const FilterButton = ({ label, query: queryString, type, version }) => {
 
   return (
     <Link href={{ pathname: "/search", query }} passHref>
-      <Button as="a">{label}</Button>
+      <Button as="a" ghost>
+        {label}
+      </Button>
     </Link>
   );
 };

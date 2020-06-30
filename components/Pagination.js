@@ -76,7 +76,9 @@ const Pagination = ({ page, query, totalPages, url }) => {
       <Section align="flex-start">
         {hasPrevPage ? (
           <Link href={`${url}?page=${page - 1}${queryText}`} passHref>
-            <Button as="a">Previous</Button>
+            <Button as="a" ghost>
+              Previous
+            </Button>
           </Link>
         ) : (
           <span />
@@ -90,7 +92,9 @@ const Pagination = ({ page, query, totalPages, url }) => {
       <Section align="flex-end">
         {hasNextPage ? (
           <Link href={`${url}?page=${page + 1}${queryText}`} passHref>
-            <Button as="a">Next</Button>
+            <Button as="a" ghost>
+              Next
+            </Button>
           </Link>
         ) : (
           <span />

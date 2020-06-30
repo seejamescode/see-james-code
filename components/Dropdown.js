@@ -4,8 +4,10 @@ import ChevronDown20 from "@carbon/icons-react/lib/chevron--down/20";
 import Input from "./Input";
 
 const Container = styled.div`
-  max-width: 20rem;
+  margin: auto;
   position: relative;
+  /* Magic number is width of search bar */
+  width: 17.86rem;
 
   :hover {
     svg {

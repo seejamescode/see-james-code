@@ -20,6 +20,13 @@ const flicker = keyframes`
 	}
 `;
 
+const Border = styled.img`
+  animation: ${flicker} 21s linear 7s infinite;
+  filter: drop-shadow(0px 0px 1rem ${({ theme }) => theme.colors.accentShadow});
+  margin-bottom: calc(2 * ${({ theme }) => theme.padding});
+  width: 100%;
+`;
+
 const Flex = styled.section`
   display: flex;
   flex-direction: column-reverse;
@@ -32,7 +39,7 @@ const Flex = styled.section`
 const Glow = styled.div`
   display: flex;
   flex: 1;
-  margin: ${({ theme }) => theme.padding} auto 0 auto;
+  margin: ${({ theme }) => theme.padding} auto;
   max-height: 50vmin;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
@@ -46,7 +53,7 @@ const Glow = styled.div`
   }
 
   img {
-    animation: ${flicker} 15s linear 5s infinite;
+    animation: ${flicker} 15s linear infinite;
     filter: drop-shadow(
       0px 0px 1rem ${({ theme }) => theme.colors.accentShadow}
     );
@@ -65,6 +72,16 @@ const HoverCursor = styled.span`
   }
 `;
 
+const Title = styled.p`
+  font-size: ${({ theme }) => theme.type.b.size};
+  line-height: ${({ theme }) => theme.type.b.line};
+  margin-top: 0;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    margin-top: 1rem;
+  }
+`;
+
 export default function Home({ allPosts: { entries = [], page, totalPages } }) {
   const glowRef = useRef(null);
   const isHovering = useHoverDirty(glowRef);
@@ -72,16 +89,14 @@ export default function Home({ allPosts: { entries = [], page, totalPages } }) {
   return (
     <motion.main initial="initial" animate="enter" exit="exit">
       <NextSeo title="Home" />
+      <Title>
+        <HoverCursor cursor="pencil">UX Designer</HoverCursor> and{" "}
+        <HoverCursor cursor="computer">Engineer</HoverCursor> <br />
+        in <HoverCursor cursor="taco">Austin, Texas</HoverCursor>
+      </Title>
       <Flex>
         <div>
           <p>Hi there,</p>
-          <p>
-            <strong>
-              I’m a <HoverCursor cursor="pencil">UX Designer</HoverCursor> and{" "}
-              <HoverCursor cursor="computer">Engineer</HoverCursor> in{" "}
-              <HoverCursor cursor="taco">Austin, Texas.</HoverCursor>
-            </strong>
-          </p>
           <p>
             I enjoy doing user-centered research, workshop facilitation, UI
             design, and web development for the Growth Team at{" "}
@@ -134,6 +149,7 @@ export default function Home({ allPosts: { entries = [], page, totalPages } }) {
         </Glow>
       </Flex>
       <PrimaryActions />
+      <Border role="presentation" src="/graphics/border.svg" />
       <Filter />
       <Grid posts={entries} />
       <Pagination page={page} totalPages={totalPages} url="/search" />
