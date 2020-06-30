@@ -63,6 +63,7 @@ export default function Filter({ query, type }) {
     <Container>
       <Mobile>
         <Dropdown
+          label="Filter"
           onChange={(e) => {
             e.preventDefault();
             let query = {};
