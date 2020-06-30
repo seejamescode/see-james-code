@@ -98,8 +98,12 @@ export default function Home({ allPosts: { entries = [], page, totalPages } }) {
         <div>
           <p>Hi there,</p>
           <p>
-            I enjoy doing user-centered research, workshop facilitation, UI
-            design, and web development for the Growth Team at{" "}
+            I enjoy doing{" "}
+            <strong>
+              user research, workshop facilitation, UI design, and web
+              development
+            </strong>{" "}
+            for the Growth Team at{" "}
             <Anchor
               href="https://pingboard.com"
               rel="noopener noreferrer"
