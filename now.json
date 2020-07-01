@@ -5,7 +5,8 @@
       "CONTENTFUL_SPACE_ID": "@seejamescode-contentful-space-id",
       "CONTENTFUL_ACCESS_TOKEN": "@seejamescode-contentful-access-token",
       "CONTENTFUL_PREVIEW_ACCESS_TOKEN": "@seejamescode-contentful-preview-access-token",
-      "CONTENTFUL_PREVIEW_SECRET": "@seejamescode-contentful-preview-secret"
+      "CONTENTFUL_PREVIEW_SECRET": "@seejamescode-contentful-preview-secret",
+      "NEXT_PUBLIC_GA_TRACKING_ID": "@next_public_ga_tracking_id"
     }
   },
   "env": {
@@ -14,6 +15,7 @@
     "CONTENTFUL_PREVIEW_ACCESS_TOKEN": "@seejamescode-contentful-preview-access-token",
     "CONTENTFUL_PREVIEW_SECRET": "@seejamescode-contentful-preview-secret",
     "MONGO_URI": "@seejamescode-mongo-uri",
+    "NEXT_PUBLIC_GA_TRACKING_ID": "@next_public_ga_tracking_id",
     "SEND_IN_BLUE_API_KEY": "@seejamescode-send-in-blue-api-key"
   },
   "headers": [

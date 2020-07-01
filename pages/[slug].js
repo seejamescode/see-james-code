@@ -209,6 +209,37 @@ export default function Post(props) {
           />
         </Recommendations>
       </Layout>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `{
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://seejamescode.com/${props.post.slug}"
+            },
+            "headline": "${props.post.title}",
+            "image": [
+              "${props.post.thumbnail.fields.file.url}"
+             ],
+            "datePublished": "${props.post.createdRaw}",
+            "dateModified": "${props.post.createdRaw}",
+            "author": {
+              "@type": "Person",
+              "name": "James Y Rauhut"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "See James Code",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://seejamescode.com/graphics/publisher.png"
+              }
+            }
+          }`,
+        }}
+        type="application/ld+json"
+      />
     </motion.div>
   );
 }

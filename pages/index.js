@@ -211,11 +211,11 @@ export default function Home({ allPosts: { entries = [], page, totalPages } }) {
       >
         <g
           stroke="none"
-          stroke-width="1"
+          strokeWidth="1"
           fill="none"
-          fill-rule="evenodd"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          fillRule="evenodd"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         >
           <line
             x1="7"
@@ -223,7 +223,7 @@ export default function Home({ allPosts: { entries = [], page, totalPages } }) {
             x2="1607"
             y2="7.5"
             stroke={themeContext.colors.accent}
-            stroke-width="12"
+            strokeWidth="12"
           ></line>
           <line
             x1="107"
@@ -231,7 +231,7 @@ export default function Home({ allPosts: { entries = [], page, totalPages } }) {
             x2="1507"
             y2="38.5"
             stroke={themeContext.colors.accent}
-            stroke-width="8"
+            strokeWidth="8"
           ></line>
           <line
             x1="207"
@@ -239,13 +239,28 @@ export default function Home({ allPosts: { entries = [], page, totalPages } }) {
             x2="1407"
             y2="66.5"
             stroke={themeContext.colors.accent}
-            stroke-width="4"
+            strokeWidth="4"
           ></line>
         </g>
       </BorderSVG>
       <Filter />
       <Grid posts={entries} />
       <Pagination page={page} totalPages={totalPages} url="/search" />
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `{   
+                "@context": "http://schema.org",   
+                "@type": "WebSite",   
+                "url": "https://seejamescode.com/",   
+                "potentialAction": {     
+                  "@type": "SearchAction",     
+                  "target": "http://seejamescode.com/search?query={search_term_string}",
+                  "query-input": "required name=search_term_string"   
+                } 
+              }`,
+        }}
+        type="application/ld+json"
+      />
     </motion.main>
   );
 }
