@@ -152,6 +152,8 @@ const GlobalStyle = createGlobalStyle`
 
   body {
       background: ${({ theme }) => theme.colors.body};
+      background-image: url("/graphics/background.svg");
+      background-size: 300px 300px;
       color: ${({ theme }) => theme.colors.font};
       cursor: url(/cursors/cursor.png) 6 0, auto;
       min-height: 100%;

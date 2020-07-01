@@ -1,8 +1,8 @@
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import { motion } from "framer-motion";
 import { NextSeo } from "next-seo";
 import { useHoverDirty } from "react-use";
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes, ThemeContext } from "styled-components";
 import Anchor from "../components/Anchor";
 import Filter from "../components/Filter";
 import Grid from "../components/Grid";
@@ -11,20 +11,66 @@ import PrimaryActions from "../components/PrimaryActions";
 import { getAllPosts } from "../lib/contentful";
 
 const flicker = keyframes`
-  0%, 19.99%, 22%, 62.99%, 64.99%, 66%, 100% {
+  0%, 19%, 21%, 23%, 100% {
     opacity: 1;
 		
 	}
-	20%, 21.99%, 63%, 63.99%, 65.99% {
+	20%, 22% {
 		opacity: 0.5;
 	}
 `;
 
-const Border = styled.img`
-  animation: ${flicker} 21s linear 7s infinite;
+const line1 = keyframes`
+  10%, 12%, 100% {
+    opacity: 1;
+		
+	}
+	0%, 9%, 11% {
+		opacity: 0.5;
+	}
+`;
+
+const line2 = keyframes`
+  20%, 22%, 100% {
+    opacity: 1;
+		
+	}
+	0%, 19%, 21% {
+		opacity: 0.5;
+	}
+`;
+
+const line3 = keyframes`
+  30%, 32%, 100% {
+    opacity: 1;
+		
+	}
+	0%, 29%, 31% {
+		opacity: 0.5;
+	}
+`;
+
+const BorderSVG = styled.svg`
   filter: drop-shadow(0px 0px 1rem ${({ theme }) => theme.colors.accentShadow});
   margin-bottom: calc(2 * ${({ theme }) => theme.padding});
   width: 100%;
+
+  line:nth-of-type(1) {
+    animation: ${line1} 10s linear infinite;
+  }
+
+  line:nth-of-type(2) {
+    animation: ${line2} 10s linear infinite;
+  }
+
+  line:nth-of-type(3) {
+    animation: ${line3} 10s linear infinite;
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    margin-bottom: calc(4 * ${({ theme }) => theme.padding});
+    margin-top: calc(2 * ${({ theme }) => theme.padding});
+  }
 `;
 
 const Flex = styled.section`
@@ -33,6 +79,7 @@ const Flex = styled.section`
 
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     flex-direction: row;
+    margin-top: calc(2 * ${({ theme }) => theme.padding});
   }
 `;
 
@@ -83,6 +130,7 @@ const Title = styled.p`
 `;
 
 export default function Home({ allPosts: { entries = [], page, totalPages } }) {
+  const themeContext = useContext(ThemeContext);
   const glowRef = useRef(null);
   const isHovering = useHoverDirty(glowRef);
 
@@ -153,7 +201,48 @@ export default function Home({ allPosts: { entries = [], page, totalPages } }) {
         </Glow>
       </Flex>
       <PrimaryActions />
-      <Border role="presentation" src="/graphics/border.svg" />
+      <BorderSVG
+        width="1614px"
+        height="72px"
+        viewBox="0 0 1614 72"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlnsXlink="http://www.w3.org/1999/xlink"
+      >
+        <g
+          stroke="none"
+          stroke-width="1"
+          fill="none"
+          fill-rule="evenodd"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line
+            x1="7"
+            y1="7.5"
+            x2="1607"
+            y2="7.5"
+            stroke={themeContext.colors.accent}
+            stroke-width="12"
+          ></line>
+          <line
+            x1="107"
+            y1="38.5"
+            x2="1507"
+            y2="38.5"
+            stroke={themeContext.colors.accent}
+            stroke-width="8"
+          ></line>
+          <line
+            x1="207"
+            y1="66.5"
+            x2="1407"
+            y2="66.5"
+            stroke={themeContext.colors.accent}
+            stroke-width="4"
+          ></line>
+        </g>
+      </BorderSVG>
       <Filter />
       <Grid posts={entries} />
       <Pagination page={page} totalPages={totalPages} url="/search" />
