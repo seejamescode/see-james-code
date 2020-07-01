@@ -220,7 +220,7 @@ const Name = styled.a`
 `;
 
 const DESCRIPTION =
-  "UX Designer and Engineer in Austin, Texas. See all of his blogs, projects, and talks.";
+  "James is a UX Designer and Engineer in Austin, Texas. Check out all of the latest articles, projects, and talks on user research, workshop facilitation, UI design, and web development.";
 const TITLE = "James Y Rauhut";
 
 export default class MyApp extends App {
