@@ -47,7 +47,7 @@ const HeartButton = styled.button`
   padding: 0;
 
   svg {
-    filter: drop-shadow(0px 0px 0.25rem ${({ theme }) => theme.colors.link});
+    filter: drop-shadow(0px 0px 0.15rem ${({ theme }) => theme.colors.link});
   }
 
   path {

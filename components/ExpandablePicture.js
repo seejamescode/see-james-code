@@ -31,11 +31,13 @@ const Backdrop = styled(DialogBackdrop)`
 `;
 
 const CloseButton = styled(Button)`
+  height: calc(${({ theme }) => theme.padding} * 1.5);
   line-height: 1;
   padding: calc(${({ theme }) => theme.padding} / 4);
   position: absolute;
   right: calc(${({ theme }) => theme.padding} / 4);
   top: calc(${({ theme }) => theme.padding} / 4);
+  width: calc(${({ theme }) => theme.padding} * 1.5);
 `;
 
 const Modal = styled(Dialog)`

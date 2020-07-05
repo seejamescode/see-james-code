@@ -1,12 +1,11 @@
 import styled from "styled-components";
 
 const Button = styled.button`
-  border-radius: ${({ theme }) => theme.borderRadius};
   background: ${({ ghost, theme }) =>
     ghost ? "none" : theme.colors.linkBackground};
   border: ${({ ghost, theme }) =>
     ghost ? `1px solid ${theme.colors.link}` : "none"};
-  border-radius: none;
+  border-radius: ${({ theme }) => theme.borderRadius};
   box-shadow: ${({ ghost, hideOuterBoxShadow, theme }) =>
     !hideOuterBoxShadow &&
     (ghost

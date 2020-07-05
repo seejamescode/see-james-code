@@ -60,7 +60,6 @@ const CoverImage = styled.div`
 `;
 
 const Header = styled.div`
-  color: ${({ theme }) => theme.colors.background};
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -142,14 +141,14 @@ const RecommendationsTitle = styled.h2`
 `;
 
 const Tagline = styled.p`
-  color: ${({ theme }) => theme.colors.font};
+  color: ${({ theme }) => theme.colors.fontTitle};
   font-size: ${({ theme }) => theme.type.b.size};
   line-height: ${({ theme }) => theme.type.b.line};
   margin: 0;
 `;
 
 const Title = styled.h2`
-  color: ${({ theme }) => theme.colors.font};
+  color: ${({ theme }) => theme.colors.fontTitle};
   font-size: ${({ theme }) => theme.type.d.size};
   font-weight: 600;
   line-height: ${({ theme }) => theme.type.d.line};

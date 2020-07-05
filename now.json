@@ -1,4 +1,5 @@
 {
+  "version": 2,
   "alias": ["seejamescode", "seejamescode.com", "www.seejamescode.com"],
   "build": {
     "env": {

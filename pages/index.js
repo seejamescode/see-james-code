@@ -26,7 +26,7 @@ const line1 = keyframes`
 		
 	}
 	0%, 9%, 11% {
-		opacity: 0.5;
+		opacity: 0.25;
 	}
 `;
 
@@ -36,7 +36,7 @@ const line2 = keyframes`
 		
 	}
 	0%, 19%, 21% {
-		opacity: 0.5;
+		opacity: 0.25;
 	}
 `;
 
@@ -46,7 +46,7 @@ const line3 = keyframes`
 		
 	}
 	0%, 29%, 31% {
-		opacity: 0.5;
+		opacity: 0.25;
 	}
 `;
 
@@ -102,7 +102,7 @@ const Glow = styled.div`
   img {
     animation: ${flicker} 15s linear infinite;
     filter: drop-shadow(
-      0px 0px 1rem ${({ theme }) => theme.colors.accentShadow}
+      0px 0px 0.5rem ${({ theme }) => theme.colors.accentShadow}
     );
     width: 100%;
 
@@ -196,7 +196,9 @@ export default function Home({ allPosts: { entries = [], page, totalPages } }) {
         <Glow ref={glowRef}>
           <img
             alt="Head portrait of James in neon"
-            src={isHovering ? "/graphics/face-wink.svg" : "/graphics/face.svg"}
+            src={`/graphics/face${isHovering ? `-wink` : ``}-${
+              themeContext.name
+            }.svg`}
           />
         </Glow>
       </Flex>

@@ -53,6 +53,8 @@ const Follow = styled.div`
 `;
 
 const Form = styled.form`
+  border-radius: ${({ theme }) => theme.borderRadius};
+  box-shadow: ${({ theme }) => theme.colors.backgroundShadow};
   display: flex;
   margin-bottom: ${({ theme }) => theme.padding};
 `;

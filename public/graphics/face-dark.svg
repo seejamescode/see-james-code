@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="500px" height="500px" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>Artboard</title>
-    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+    <title>face-dark</title>
+    <g id="face-dark" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <rect id="Rectangle" stroke="#66FFE3" fill="#66FFE3" x="95" y="488" width="9" height="8" rx="4"></rect>
         <rect id="Rectangle" stroke="#66FFE3" fill="#66FFE3" x="139" y="476" width="9" height="8" rx="4"></rect>
         <path d="M123,248 C123,309 131.440025,352.036154 148.320075,377.108461 C173.64015,414.716923 178.769799,431 212.217001,431 C245.664203,431 268.429254,416.38024 295,387.538177 C301.622287,380.349805 319.230404,365.778183 328.242435,344.991256 C334.126901,331.418294 339.712756,303.421077 345,260.999605" id="Line-2" stroke="#66FFE3" stroke-width="3" stroke-linecap="round"></path>

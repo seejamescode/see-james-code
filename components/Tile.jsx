@@ -94,7 +94,7 @@ const PictureContainer = styled.div`
 const Text = styled.div`
   ${fullSize}
   background: ${({ theme }) => theme.colors.backdrop};
-  color: ${({ theme }) => theme.colors.font};
+  color: ${({ theme }) => theme.colors.fontTitle};
   height: auto;
   padding: calc(${({ theme }) => theme.padding} / 2);
 

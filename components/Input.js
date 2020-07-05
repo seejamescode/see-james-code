@@ -5,8 +5,6 @@ const Input = styled.input`
   background: ${({ theme }) => theme.colors.fontBackground};
   border: none;
   border-radius: ${({ theme }) => theme.borderRadius};
-  box-shadow: ${({ hideBoxShadow, theme }) =>
-    hideBoxShadow ? "none" : theme.colors.backgroundShadow};
   flex: 1;
   font-size: ${({ theme }) => theme.type.a.size};
   line-height: ${({ theme }) => theme.type.a.line};

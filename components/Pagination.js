@@ -18,11 +18,11 @@ const Flex = styled.div`
 
 const Range = styled.div`
   display: grid;
-  grid-gap: 0.125rem;
+  grid-gap: 0.75rem;
 
   > * {
     grid-row: 1;
-    padding: 0 0.125rem;
+    padding: 0 0.25rem;
   }
 `;
 

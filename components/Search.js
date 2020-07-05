@@ -5,6 +5,9 @@ import Button from "../components/Button";
 import Input from "../components/Input";
 
 const Form = styled.form`
+  border-radius: ${({ theme }) => theme.borderRadius};
+  box-shadow: ${({ hideBoxShadow, theme }) =>
+    hideBoxShadow ? "none" : theme.colors.backgroundShadow};
   display: flex;
   justify-content: flex-end;
   max-width: 20rem;
@@ -45,6 +48,7 @@ export default function Search({
 
   return (
     <Form
+      hideBoxShadow={hideBoxShadow}
       onSubmit={(e) => {
         e.preventDefault();
         onSubmit();
@@ -60,7 +64,6 @@ export default function Search({
     >
       <SearchInput
         aria-label="Search Query"
-        hideBoxShadow={hideBoxShadow}
         name="query"
         onChange={(e) => setValue(e.target.value)}
         placeholder={placeholder}
