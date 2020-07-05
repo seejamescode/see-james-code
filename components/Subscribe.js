@@ -121,6 +121,7 @@ const SubscribeButton = styled(Button)`
 const SubscribeInput = styled(Input)`
   margin-right: -${({ theme }) => theme.borderRadius};
   padding-right: ${({ theme }) => theme.borderRadius};
+  width: 100%;
 `;
 
 const Success = styled.p`
