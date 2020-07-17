@@ -17,13 +17,12 @@ const Backdrop = styled(DialogBackdrop)`
   height: 100%;
   justify-content: center;
   left: 0;
+  opacity: 0;
   position: fixed;
   top: 0;
+  transition: opacity 200ms ${({ theme }) => theme.animation.hover};
   width: 100%;
   z-index: 3;
-
-  transition: opacity 200ms ${({ theme }) => theme.animation.hover};
-  opacity: 0;
 
   &[data-enter] {
     opacity: 1;

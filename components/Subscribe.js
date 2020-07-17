@@ -16,10 +16,6 @@ const Bio = styled.div`
   grid-template-columns: calc(3 * ${({ theme }) => theme.padding}) 1fr;
   margin-bottom: 1rem;
 
-  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    grid-template-columns: 1fr;
-  }
-
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     grid-template-columns: calc(4 * ${({ theme }) => theme.padding}) 1fr;
   }
@@ -37,7 +33,7 @@ const Container = styled.section`
   margin: auto;
   max-width: 30rem;
 
-  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     grid-column: span 2;
     margin: calc(2 * ${({ theme }) => theme.padding}) auto;
   }
@@ -56,7 +52,8 @@ const Form = styled.form`
   border-radius: ${({ theme }) => theme.borderRadius};
   box-shadow: ${({ theme }) => theme.colors.backgroundShadow};
   display: flex;
-  margin-bottom: ${({ theme }) => theme.padding};
+  margin: 0 auto calc(${({ theme }) => theme.padding} / 2) auto;
+  max-width: 30rem;
 `;
 
 const spin = keyframes`

@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { NextSeo } from "next-seo";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Footer from "../components/Footer";
 import Grid from "../components/Grid";
 import Pagination from "../components/Pagination";
@@ -9,6 +9,16 @@ import RichText from "../components/RichText";
 import Sidebar from "../components/Sidebar";
 import Subscribe from "../components/Subscribe";
 import { getAllPosts, getAllPostSlugs, getPost } from "../lib/contentful";
+
+const gridLayout = css`
+  display: grid;
+  grid-gap: ${({ theme }) => theme.padding}
+    calc(${({ theme }) => theme.padding} * 2);
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    grid-template-columns: 1fr 10rem;
+  }
+`;
 
 const textVariants = {
   exit: {
@@ -60,18 +70,12 @@ const CoverImage = styled.div`
 `;
 
 const Header = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  ${gridLayout}
   padding: ${({ theme }) => theme.padding} 0;
   position: relative;
 
-  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    grid-column: 1 / -1;
-    min-height: 15rem;
-  }
-
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    grid-column: 1 / -1;
     min-height: 20rem;
   }
 
@@ -80,22 +84,26 @@ const Header = styled.div`
   }
 `;
 
+const HeaderText = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+`;
+
 const Layout = styled(motion.div)`
-  display: grid;
-  grid-gap: ${({ theme }) => theme.padding}
-    calc(${({ theme }) => theme.padding} * 2);
+  ${gridLayout}
   padding-top: ${({ theme }) => theme.padding};
   position: relative;
 
-  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     grid-template-rows: min-content min-content 1fr;
-    grid-template-columns: 2fr 1fr;
   }
 `;
 
 const Main = styled.main`
   /* Prevents grid blowout: https://css-tricks.com/preventing-a-grid-blowout/ */
   min-width: 0;
+  position: relative;
 
   /* Just covering alignment on first and last rich text */
   > *:first-child {
@@ -104,7 +112,11 @@ const Main = styled.main`
   > *:last-child {
     margin-bottom: 0;
   }
-  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+  > * {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     grid-row: span 2;
   }
 
@@ -129,7 +141,7 @@ const Main = styled.main`
 `;
 
 const Recommendations = styled.div`
-  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     grid-column: 1 / -1;
   }
 `;
@@ -187,8 +199,10 @@ export default function Post(props) {
       <Layout variants={textVariants}>
         <Header>
           <CoverImage thumbnail={props.post.thumbnail.fields.file.url} />
-          <Title>{props.post.title}</Title>
-          <Tagline>{props.post.tagline}</Tagline>
+          <HeaderText>
+            <Title>{props.post.title}</Title>
+            <Tagline>{props.post.tagline}</Tagline>
+          </HeaderText>
         </Header>
         <Sidebar created={props.post.created} links={props.post.links} />
         {props.post.description.nodeType && (

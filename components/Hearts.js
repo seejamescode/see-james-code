@@ -22,7 +22,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
 
-  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     margin-bottom: ${({ theme }) => theme.padding};
   }
 `;

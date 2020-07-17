@@ -1,5 +1,5 @@
 import React from "react";
-import Link20 from "@carbon/icons-react/lib/link/20";
+import LinkIcon from "@carbon/icons-react/lib/link/16";
 import { BLOCKS, INLINES, MARKS } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import styled from "styled-components";
@@ -8,13 +8,32 @@ import Anchor from "./Anchor";
 import ExpandablePicture from "./ExpandablePicture";
 import Video from "./Video";
 
+const CodeSandbox = styled.div`
+  border-radius: calc(${({ theme }) => theme.padding} / 2);
+  box-shadow: ${({ theme }) => theme.colors.backgroundShadow};
+  margin-bottom: ${({ theme }) => theme.padding};
+  margin-top: ${({ theme }) => theme.padding};
+  overflow: hidden;
+  padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
+  position: relative;
+  width: 100%;
+
+  iframe {
+    border: none;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+`;
+
 const QuickLinkContainer = styled.div`
-  display: inline-flex;
+  display: flex;
 `;
 
 const QuickLink = styled(Anchor)`
-  display: flex;
-  margin-left: calc(${({ theme }) => theme.padding} / 4);
+  display: inline-flex;
 
   svg {
     margin: 0;
@@ -28,58 +47,55 @@ const makeHeaderLink = (node) => {
     .map(({ value }) => value.toLowerCase().split(" ").join("-"))
     .join("-");
 
-  return (
-    <div id={link}>
-      {documentToReactComponents(
+  return documentToReactComponents(
+    {
+      ...node,
+      content: [
+        ...node.content,
         {
-          ...node,
-          content: [
-            ...node.content,
-            {
-              content: [],
-              data: {
-                target: {
-                  fields: {
-                    link,
-                  },
+          content: [],
+          data: {
+            target: {
+              fields: {
+                link,
+              },
+              sys: {
+                contentType: {
                   sys: {
-                    contentType: {
-                      sys: {
-                        id: "headerLink",
-                      },
-                    },
-                    type: "Entry",
+                    id: "headerLink",
                   },
                 },
+                type: "Entry",
               },
-              marks: [],
-              nodeType: "embedded-entry-block",
             },
-          ],
-        },
-        {
-          renderNode: {
-            [BLOCKS.EMBEDDED_ENTRY]: (node) => {
-              if (node.data.target.sys.contentType.sys.id === "headerLink") {
-                return (
-                  <QuickLinkContainer>
-                    <QuickLink
-                      aria-labelledby={node.data.target.fields.link}
-                      href={`#${node.data.target.fields.link}`}
-                    >
-                      <Link20 />
-                    </QuickLink>
-                  </QuickLinkContainer>
-                );
-              }
-
-              return null;
-            },
-            ...sharedBlocks,
           },
-        }
-      )}
-    </div>
+          marks: [],
+          nodeType: "embedded-entry-block",
+        },
+      ],
+    },
+    {
+      renderNode: {
+        [BLOCKS.EMBEDDED_ENTRY]: (node) => {
+          if (node.data.target.sys.contentType.sys.id === "headerLink") {
+            return (
+              <QuickLinkContainer>
+                <QuickLink
+                  aria-labelledby={node.data.target.fields.link}
+                  href={`#${node.data.target.fields.link}`}
+                  id={link}
+                >
+                  <LinkIcon />
+                </QuickLink>
+              </QuickLinkContainer>
+            );
+          }
+
+          return null;
+        },
+        ...sharedBlocks,
+      },
+    }
   );
 };
 
@@ -108,7 +124,21 @@ export default function RichText({ content }) {
             );
           },
           [BLOCKS.EMBEDDED_ENTRY]: (node) => {
-            if (node.data.target.sys.contentType.sys.id === "video") {
+            const entryType = node.data.target.sys.contentType.sys.id;
+
+            if (entryType === "codeSandbox") {
+              return (
+                <CodeSandbox>
+                  <iframe
+                    src={node.data.target.fields.url}
+                    sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+                    title={node.data.target.fields.title}
+                  />
+                </CodeSandbox>
+              );
+            }
+
+            if (entryType === "video") {
               return <Video url={node.data.target.fields.url} />;
             }
 

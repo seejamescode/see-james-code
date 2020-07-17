@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Anchor from "./Anchor";
 
 const Aside = styled.aside`
-  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     grid-column-end: -1;
     grid-row-start: 2;
   }
@@ -42,11 +42,7 @@ const P = styled.p`
 export default function Sidebar({ created, links }) {
   return (
     <Aside>
-      <P>
-        <small>
-          <strong>{created}</strong>
-        </small>
-      </P>
+      <P>{created}</P>
       {links && links.length ? (
         <>
           <ListTitle>

@@ -7,6 +7,8 @@ const ResponsivePlayer = styled.div`
   border: none;
   border-radius: calc(${({ theme }) => theme.padding} / 2);
   box-shadow: ${({ theme }) => theme.colors.backgroundShadow};
+  margin-bottom: ${({ theme }) => theme.padding};
+  margin-top: ${({ theme }) => theme.padding};
   overflow: hidden;
   position: relative;
   padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
