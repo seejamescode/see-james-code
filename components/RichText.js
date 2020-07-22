@@ -1,5 +1,6 @@
 import React from "react";
 import LinkIcon from "@carbon/icons-react/lib/link/16";
+import Link from "next/link";
 import { BLOCKS, INLINES, MARKS } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import styled from "styled-components";
@@ -100,6 +101,11 @@ const makeHeaderLink = (node) => {
 };
 
 const sharedBlocks = {
+  [INLINES.ENTRY_HYPERLINK]: (node) => (
+    <Link as={`/${node.data.target.fields.slug}`} href="/[slug]" passHref>
+      <Anchor>{node.content[0].value}</Anchor>
+    </Link>
+  ),
   [INLINES.HYPERLINK]: (node) => (
     <Anchor href={node.data.uri} rel="noopener noreferrer" target="_blank">
       {node.content[0].value}
