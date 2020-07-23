@@ -1,5 +1,5 @@
 import React from "react";
-import LinkIcon from "@carbon/icons-react/lib/link/16";
+import LinkIcon from "@carbon/icons-react/lib/link/24";
 import Link from "next/link";
 import { BLOCKS, INLINES, MARKS } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
@@ -31,10 +31,19 @@ const CodeSandbox = styled.div`
 
 const QuickLinkContainer = styled.div`
   display: flex;
+  position: relative;
 `;
 
 const QuickLink = styled(Anchor)`
   display: inline-flex;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    position: absolute;
+    transform: ${({ heading, theme }) =>
+      `translate(calc(-100% - ${theme.padding} / 2), ${
+        heading === "h1" ? ".9rem" : ".625rem"
+      })`};
+  }
 
   svg {
     margin: 0;
@@ -42,7 +51,7 @@ const QuickLink = styled(Anchor)`
   }
 `;
 
-const makeHeaderLink = (node) => {
+const makeHeaderLink = (node, heading = "h1") => {
   const link = node.content
     .filter(({ nodeType }) => nodeType === "text")
     .map(({ value }) => value.toLowerCase().split(" ").join("-"))
@@ -52,7 +61,6 @@ const makeHeaderLink = (node) => {
     {
       ...node,
       content: [
-        ...node.content,
         {
           content: [],
           data: {
@@ -73,6 +81,7 @@ const makeHeaderLink = (node) => {
           marks: [],
           nodeType: "embedded-entry-block",
         },
+        ...node.content,
       ],
     },
     {
@@ -83,6 +92,7 @@ const makeHeaderLink = (node) => {
               <QuickLinkContainer>
                 <QuickLink
                   aria-labelledby={node.data.target.fields.link}
+                  heading={heading}
                   href={`#${node.data.target.fields.link}`}
                   id={link}
                 >
@@ -106,11 +116,19 @@ const sharedBlocks = {
       <Anchor>{node.content[0].value}</Anchor>
     </Link>
   ),
-  [INLINES.HYPERLINK]: (node) => (
-    <Anchor href={node.data.uri} rel="noopener noreferrer" target="_blank">
-      {node.content[0].value}
-    </Anchor>
-  ),
+  [INLINES.HYPERLINK]: (node) => {
+    const isSectionLink = !node.data.uri.includes("http");
+
+    return (
+      <Anchor
+        href={node.data.uri}
+        rel={!isSectionLink && "noopener noreferrer"}
+        target={!isSectionLink && "_blank"}
+      >
+        {node.content[0].value}
+      </Anchor>
+    );
+  },
 };
 
 export default function RichText({ content }) {
@@ -150,8 +168,8 @@ export default function RichText({ content }) {
 
             return null;
           },
-          [BLOCKS.HEADING_1]: makeHeaderLink,
-          [BLOCKS.HEADING_2]: makeHeaderLink,
+          [BLOCKS.HEADING_1]: (node) => makeHeaderLink(node, "h1"),
+          [BLOCKS.HEADING_2]: (node) => makeHeaderLink(node, "h2"),
           ...sharedBlocks,
         },
         renderMark: {
