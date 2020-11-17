@@ -178,9 +178,10 @@ export default function Home({ allPosts: { entries = [], page, totalPages } }) {
             >
               Poster.Party
             </Anchor>{" "}
-            is my own start-up and passion project. It is a community and
-            marketplace for collectors of limited edition prints. My hope is
-            that the site helps others find the joy of collecting posters.
+            was my first personal start-up. It is a community and marketplace
+            for collectors of limited edition prints. I disabled the
+            marketplace-aspect to focus on a new idea, but left the
+            community-aspect operating.
           </p>
           <p>
             Enough about me! Below are a bunch of helpful resources I worked on
