@@ -14,7 +14,7 @@
     "contentful": "^7.14.4",
     "date-fns": "^2.14.0",
     "framer-motion": "^1.11.0",
-    "highlight.js": "^10.1.1",
+    "highlight.js": "^10.4.1",
     "mongoose": "^5.9.18",
     "next": "^9.4.4",
     "next-offline": "^5.0.2",
