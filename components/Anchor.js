@@ -1,18 +1,11 @@
+import React from "react";
 import styled from "styled-components";
 
-const Anchor = styled.a`
-  background-image: linear-gradient(
-    to top,
-    rgba(255, 255, 255, 0) 50%,
-    ${({ theme }) => theme.colors.link} 50%
-  );
-  background-position: 0 -95%;
-  background-size: auto 200%;
-  color: inherit;
+const Container = styled.a`
+  color: ${({ theme }) => theme.colors.font};
   position: relative;
   text-decoration: none;
-  transition: background-position 100ms ${({ theme }) => theme.animation.hover},
-    color 100ms ${({ theme }) => theme.animation.hover};
+  transition: color 100ms ${({ theme }) => theme.animation.hover};
 
   :active {
     background-image: linear-gradient(
@@ -24,12 +17,11 @@ const Anchor = styled.a`
 
   :focus,
   :hover {
-    background-position: 0 0%;
-    color: ${({ theme }) => theme.colors.background};
-
-    path {
-      fill: ${({ theme }) => theme.colors.background};
+    span {
+      background-position: 0 0%;
     }
+
+    color: ${({ theme }) => theme.colors.background};
   }
 
   svg {
@@ -39,9 +31,26 @@ const Anchor = styled.a`
 
     path {
       fill: ${({ theme }) => theme.colors.font};
-      transition: fill 100ms ${({ theme }) => theme.animation.hover};
     }
   }
 `;
+
+const Text = styled.span`
+  background-image: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 0) 50%,
+    ${({ theme }) => theme.colors.link} 50%
+  );
+  background-position: 0 -95%;
+  background-size: auto 200%;
+  transition: background-position 100ms ${({ theme }) => theme.animation.hover};
+`;
+
+const Anchor = React.forwardRef(({ children, icon, ...props }, ref) => (
+  <Container {...props} ref={ref}>
+    {icon}
+    <Text>{children}</Text>
+  </Container>
+));
 
 export default Anchor;

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="1614px" height="72px" viewBox="0 0 1614 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>border</title>
-    <g id="border" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="7" y1="7.5" x2="1607" y2="7.5" id="Line-2" stroke="#66FFE3" stroke-width="12"></line>
-        <line x1="107" y1="38.5" x2="1507" y2="38.5" id="Line-2" stroke="#66FFE3" stroke-width="8"></line>
-        <line x1="207" y1="66.5" x2="1407" y2="66.5" id="Line-2" stroke="#66FFE3" stroke-width="4"></line>
-    </g>
-</svg>

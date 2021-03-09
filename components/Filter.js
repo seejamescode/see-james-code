@@ -1,37 +1,28 @@
 import React from "react";
 import Link from "next/link";
-import Router from "next/router";
 import styled from "styled-components";
-import Button from "./Button";
-import Dropdown from "./Dropdown";
+import Button from "./button";
+import { FILTERS } from "../lib/constants";
 
 const Container = styled.div`
-  margin-bottom: ${({ theme }) => theme.padding};
-`;
-
-const Desktop = styled.div`
-  display: none;
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    align-items: center;
-    display: grid;
-    grid-auto-columns: max-content;
-    grid-auto-flow: column;
-    grid-gap: 1rem;
-    justify-content: center;
-  }
-`;
-
-const Mobile = styled.div`
   display: flex;
+  justify-content: space-between;
+  margin-bottom: ${({ theme }) => theme.padding.lg};
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    display: none;
+    justify-content: center;
+    margin-bottom: ${({ theme }) => theme.padding.xl};
   }
 `;
 
-const P = styled.p`
-  margin: 0;
+const ButtonStyled = styled(Button)`
+  font-size: ${({ theme }) => theme.type.small.size};
+  padding: ${({ theme }) => theme.padding.xs};
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    font-size: ${({ theme }) => theme.type.a.size};
+    padding: ${({ theme }) => `${theme.padding.xs} ${theme.padding.sm}`};
+  }
 `;
 
 const FilterButton = ({ label, query: queryString, type, version }) => {
@@ -45,15 +36,15 @@ const FilterButton = ({ label, query: queryString, type, version }) => {
     query.type = version;
   }
 
-  if (type === version || (!type && !version)) {
-    return <P>{label}</P>;
-  }
-
   return (
     <Link href={{ pathname: "/search", query }} passHref>
-      <Button as="a" ghost>
+      <ButtonStyled
+        as="a"
+        isSelected={type === version || (!type && !version)}
+        underline
+      >
         {label}
-      </Button>
+      </ButtonStyled>
     </Link>
   );
 };
@@ -61,51 +52,15 @@ const FilterButton = ({ label, query: queryString, type, version }) => {
 export default function Filter({ query, type }) {
   return (
     <Container>
-      <Mobile>
-        <Dropdown
-          label="Filter"
-          onChange={(e) => {
-            e.preventDefault();
-            let query = {};
-            if (e.target.value) {
-              query.type = e.target.value;
-            }
-
-            if (query) {
-              query.query = query;
-            }
-            Router.push({
-              pathname: "/search",
-              query,
-            });
-          }}
-          options={[
-            { label: "All", value: "" },
-            { label: "Blog", value: "blog" },
-            { label: "Open-Source", value: "open-source" },
-            { label: "Talk", value: "talk" },
-            { label: "Web App", value: "web-app" },
-          ]}
-          value={type}
-        />
-      </Mobile>
-      <Desktop>
-        <FilterButton label="All" query={query} type={type} />
-        <FilterButton label="Blog" query={query} type={type} version="blog" />
+      {Object.entries(FILTERS).map(([key, { isNoFiltering, label }]) => (
         <FilterButton
-          label="Open Source"
+          key={key}
+          label={label}
           query={query}
           type={type}
-          version="open-source"
+          version={!isNoFiltering && key}
         />
-        <FilterButton label="Talk" query={query} type={type} version="talk" />
-        <FilterButton
-          label="Web App"
-          query={query}
-          type={type}
-          version="web-app"
-        />
-      </Desktop>
+      ))}
     </Container>
   );
 }

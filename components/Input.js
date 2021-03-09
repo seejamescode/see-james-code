@@ -2,18 +2,17 @@ import styled from "styled-components";
 
 const Input = styled.input`
   appearance: none;
-  background: ${({ theme }) => theme.colors.fontBackground};
+  background: none;
   border: none;
-  border-radius: ${({ theme }) => theme.borderRadius};
   flex: 1;
-  font-size: ${({ theme }) => theme.type.a.size};
-  line-height: ${({ theme }) => theme.type.a.line};
+  font-size: ${({ theme }) => theme.type.small.size};
+  line-height: ${({ theme }) => theme.type.small.line};
   margin: 0;
-  padding: 0.5rem 1rem;
+  padding: ${({ theme }) => theme.padding.xs} ${({ theme }) => theme.padding.xs};
   transition: box-shadow 200ms ${({ theme }) => theme.animation.hover};
 
   :focus {
-    box-shadow: inset 0px 0px 0px 3px ${({ theme }) => theme.colors.focus};
+    box-shadow: inset 0px 0px 0px 2px ${({ theme }) => theme.colors.focus};
     outline: none;
   }
 `;

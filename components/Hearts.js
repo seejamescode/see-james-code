@@ -23,12 +23,13 @@ const Container = styled.div`
   justify-content: center;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    margin-bottom: ${({ theme }) => theme.padding};
+    margin-bottom: ${({ theme }) => theme.padding.md};
   }
 `;
 
 const Floater = styled(motion.div)`
   pointer-events: none;
+  position: absolute;
 
   svg {
     fill: ${({ theme }) => theme.colors.link};
@@ -48,6 +49,7 @@ const HeartButton = styled.button`
 
   svg {
     filter: drop-shadow(0px 0px 0.15rem ${({ theme }) => theme.colors.link});
+    transition: filter 200ms ${({ theme }) => theme.animation.hover};
   }
 
   path {
@@ -58,6 +60,10 @@ const HeartButton = styled.button`
   :hover {
     path {
       fill: ${({ theme }) => theme.colors.link};
+    }
+
+    svg {
+      filter: drop-shadow(0px 0px 0.25rem ${({ theme }) => theme.colors.link});
     }
   }
 
@@ -72,6 +78,7 @@ const HeartButton = styled.button`
 
     path {
       fill: ${({ theme }) => theme.colors.font};
+      filter: none;
     }
   }
 `;
@@ -173,10 +180,6 @@ export default function Hearts({ slug }) {
       setHearted(true);
       localStorage.setItem(key, true);
     }
-
-    setTimeout(() => {
-      setHearts((hearts) => hearts.slice(1));
-    }, 2000);
   };
 
   return (
@@ -190,16 +193,17 @@ export default function Hearts({ slug }) {
         {...tooltip}
       >
         {hearted ? <FavoriteFilled /> : <Favorite />}
-        {hearts.map(({ id, x }) => (
+        {hearts.map(({ id, x }, index) => (
           <Floater
+            initial={{ opacity: 1, scale: 1, x: "0%", y: "0%" }}
             animate={{
-              opacity: [1, 1, 1, 0.75, 0.5, 0],
+              opacity: 0,
               scale: [1, 1, 0.75, 0.5, 0.25, 0],
               x,
               y: ["0%", "-100%", "-200%", "-300%", "-400%", "-500%"],
             }}
-            key={id}
-            style={{ position: "absolute" }}
+            key={`heart-floater-${id}`}
+            positionTransition
           >
             <FavoriteFilled />
           </Floater>
@@ -210,14 +214,16 @@ export default function Hearts({ slug }) {
       ) : (
         <Skeleton />
       )}
-      <Tooltip {...tooltip}>
-        <TooltipStyled>
-          <TooltipArrowStyled {...tooltip} size={24} />
-          {count >= MAX_HEARTS
-            ? "Okay, that's enough hearts for you."
-            : "I appreciate hearts! Why not also share this with your friends?"}
-        </TooltipStyled>
-      </Tooltip>
+      {count >= MAX_HEARTS ? (
+        <Tooltip {...tooltip}>
+          <TooltipStyled>
+            <TooltipArrowStyled {...tooltip} size={24} />
+            Okay, that's enough hearts for you.
+          </TooltipStyled>
+        </Tooltip>
+      ) : (
+        ""
+      )}
     </Container>
   );
 }

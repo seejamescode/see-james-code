@@ -97,6 +97,27 @@ export default class MyDocument extends Document {
               media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
               rel="apple-touch-startup-image"
             />
+            <link
+              rel="preconnect"
+              href="https://fonts.gstatic.com"
+              crossOrigin="true"
+            />
+            <link
+              rel="preload"
+              as="style"
+              href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300&family=IBM+Plex+Serif:wght@300;600&display=swap"
+            />
+
+            <link
+              rel="stylesheet"
+              href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300&family=IBM+Plex+Serif:wght@300;600&display=swap"
+              media="print"
+              onLoad="this.media='all'"
+            />
+            <link
+              href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300&family=IBM+Plex+Serif:wght@300;600&display=swap"
+              rel="stylesheet"
+            />
             {initialProps.styles}
             {sheet.getStyleElement()}
           </>

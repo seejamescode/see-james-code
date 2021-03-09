@@ -1,14 +1,13 @@
 import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
-import Anchor from "./Anchor";
-import Button from "./Button";
+import Anchor from "./anchor";
+import Button from "./button";
 
 const Container = styled.nav`
   display: grid;
-  grid-gap: 0.75rem;
+  grid-gap: ${({ theme }) => theme.padding.sm};
   grid-template-columns: 1fr 1fr 1fr;
-  padding-top: ${({ theme }) => theme.padding};
 `;
 
 const Flex = styled.div`
@@ -18,11 +17,11 @@ const Flex = styled.div`
 
 const Range = styled.div`
   display: grid;
-  grid-gap: 0.75rem;
+  grid-gap: ${({ theme }) => theme.padding.sm};
 
   > * {
     grid-row: 1;
-    padding: 0 0.25rem;
+    padding: 0 ${({ theme }) => theme.padding.xxs};
   }
 `;
 
@@ -76,9 +75,7 @@ const Pagination = ({ page, query, totalPages, url }) => {
       <Section align="flex-start">
         {hasPrevPage ? (
           <Link href={`${url}?page=${page - 1}${queryText}`} passHref>
-            <Button as="a" ghost>
-              Previous
-            </Button>
+            <Button as="a">Previous</Button>
           </Link>
         ) : (
           <span />
@@ -92,9 +89,7 @@ const Pagination = ({ page, query, totalPages, url }) => {
       <Section align="flex-end">
         {hasNextPage ? (
           <Link href={`${url}?page=${page + 1}${queryText}`} passHref>
-            <Button as="a" ghost>
-              Next
-            </Button>
+            <Button as="a">Next</Button>
           </Link>
         ) : (
           <span />

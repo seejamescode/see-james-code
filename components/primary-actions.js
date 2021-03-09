@@ -3,11 +3,11 @@ import styled from "styled-components";
 import Document20 from "@carbon/icons-react/lib/document/20";
 import Email20 from "@carbon/icons-react/lib/email/20";
 import Twitter20 from "@carbon/icons-react/lib/logo--twitter/20";
-import Anchor from "./Anchor";
+import Anchor from "./anchor";
 
 const List = styled.ul`
   list-style: none;
-  margin: calc(2 * ${({ theme }) => theme.padding}) 0;
+  margin: ${({ theme }) => theme.padding.lg} 0;
   padding: 0;
 
   > li {
@@ -21,30 +21,30 @@ function PrimaryActions() {
       <li>
         <Anchor
           href="https://drive.google.com/file/d/1YtKEgIAPdBOm1fMSg5dpdLY65zTZFJLP/view?usp=sharing"
+          icon={<Document20 />}
           rel="noopener noreferrer"
           target="_blank"
         >
-          <Document20 />
           Review my life with a resume.
         </Anchor>
       </li>
       <li>
         <Anchor
           href="mailto:james@seejamescode.com"
+          icon={<Email20 />}
           rel="noopener noreferrer"
           target="_blank"
         >
-          <Email20 />
           Email me about opportunities.
         </Anchor>
       </li>
       <li>
         <Anchor
           href="https://twitter.com/seejamescode"
+          icon={<Twitter20 />}
           rel="noopener noreferrer"
           target="_blank"
         >
-          <Twitter20 />
           Follow me in a non-creepy way.
         </Anchor>
       </li>

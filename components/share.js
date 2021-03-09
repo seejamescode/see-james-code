@@ -15,13 +15,27 @@ import styled from "styled-components";
 
 const Container = styled.div`
   display: flex;
-  justify-content: space-between;
-  /* Negative margin accounts for svg padding of icons */
-  margin: 0 -0.5rem;
+  justify-content: flex-end;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    justify-content: center;
+  }
+
+  button {
+    margin: 0 ${({ theme }) => theme.padding.xs};
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 
   svg {
-    height: ${({ theme }) => theme.padding};
-    width: ${({ theme }) => theme.padding};
+    height: ${({ theme }) => theme.padding.md};
+    width: ${({ theme }) => theme.padding.md};
   }
 
   path {

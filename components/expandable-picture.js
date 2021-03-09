@@ -1,4 +1,5 @@
-import React, { useContext, useMemo } from "react";
+import React from "react";
+import Image from "next/image";
 import Close from "@carbon/icons-react/lib/close/32";
 import {
   useDialogState,
@@ -6,9 +7,8 @@ import {
   DialogDisclosure,
   DialogBackdrop,
 } from "reakit/Dialog";
-import styled, { css, ThemeContext } from "styled-components";
-import Button from "./Button";
-import PictureContentful from "./PictureContentful";
+import styled from "styled-components";
+import Button from "./button";
 
 const Backdrop = styled(DialogBackdrop)`
   align-items: center;
@@ -30,35 +30,49 @@ const Backdrop = styled(DialogBackdrop)`
 `;
 
 const CloseButton = styled(Button)`
-  height: calc(${({ theme }) => theme.padding} * 1.5);
+  background: none;
+  box-shadow: none;
+  height: ${({ theme }) => theme.padding.md};
   line-height: 1;
-  padding: calc(${({ theme }) => theme.padding} / 4);
+  padding: 0;
   position: absolute;
-  right: calc(${({ theme }) => theme.padding} / 4);
-  top: calc(${({ theme }) => theme.padding} / 4);
-  width: calc(${({ theme }) => theme.padding} * 1.5);
+  right: ${({ theme }) => theme.padding.xs};
+  top: ${({ theme }) => theme.padding.xs};
+  width: ${({ theme }) => theme.padding.md};
+  z-index: 1;
+
+  :focus,
+  :hover {
+    background: none;
+  }
+
+  :focus {
+    box-shadow: inset 0px 0px 0px 2px ${({ theme }) => theme.colors.focus};
+  }
 `;
 
 const Modal = styled(Dialog)`
   align-items: center;
   background: ${({ theme }) => theme.colors.background};
-  border-radius: calc(${({ theme }) => theme.padding} / 2);
+  border-radius: ${({ theme }) => theme.padding.sm};
   display: flex;
   flex-direction: column;
-  margin: auto calc(${({ theme }) => theme.padding} / 2);
+  margin: auto ${({ theme }) => theme.padding.sm};
   max-width: ${({ theme }) => theme.breakpoints.max};
   overflow: hidden;
   position: relative;
+  width: 100%;
 
   figure {
     margin: 0;
     max-width: 100%;
+    width: 100%;
   }
 
   figcaption {
     margin: auto;
     max-width: ${({ theme }) => theme.maxWidth};
-    padding: calc(${({ theme }) => theme.padding} / 2);
+    padding: ${({ theme }) => theme.padding.sm};
   }
 
   img {
@@ -70,14 +84,16 @@ const Modal = styled(Dialog)`
 
 const PictureButton = styled(DialogDisclosure)`
   border: none;
-  border-radius: calc(${({ theme }) => theme.padding} / 2);
+  border-radius: ${({ theme }) => theme.padding.sm};
   box-shadow: ${({ theme }) => theme.colors.backgroundShadow};
   overflow: hidden;
   padding: 0;
-  transition: transform 300ms ${({ theme }) => theme.animation.hover};
+  transition: box-shadow 300ms ${({ theme }) => theme.animation.hover},
+    transform 300ms ${({ theme }) => theme.animation.hover};
+  width: 100%;
 
   :after {
-    border-radius: calc(${({ theme }) => theme.padding} / 2);
+    border-radius: ${({ theme }) => theme.padding.sm};
     content: "";
     height: 100%;
     left: 0;
@@ -111,7 +127,7 @@ const PictureButton = styled(DialogDisclosure)`
 `;
 
 const PictureSection = styled.figure`
-  margin: ${({ theme }) => theme.padding} 0;
+  margin: ${({ theme }) => theme.padding.md} 0;
 `;
 
 export default function ExpandablePicture({
@@ -121,26 +137,18 @@ export default function ExpandablePicture({
   path,
   width,
 }) {
-  const themeContext = useContext(ThemeContext);
   const dialog = useDialogState({ animated: true });
-  const maxBreakpoint = useMemo(
-    () => parseFloat(themeContext.breakpoints.max.split("rem")[0]) * 16,
-    [themeContext.breakpoints.max]
-  );
-  const maxWidth = useMemo(
-    () =>
-      Math.ceil(parseFloat(themeContext.maxWidth.split("rem")[0]) * 16 * 1.5),
-    [themeContext.breakpoints.max]
-  );
 
   return (
     <>
       <PictureSection>
         <PictureButton aria-label="Expand image" {...dialog}>
-          <PictureContentful
+          <Image
+            layout="responsive"
             alt={alt}
-            path={path}
-            sizes={[{ screen: 1, size: maxWidth }]}
+            height={height}
+            src={path}
+            width={width}
           />
         </PictureButton>
         <figcaption>
@@ -153,17 +161,11 @@ export default function ExpandablePicture({
             <Close />
           </CloseButton>
           <figure>
-            <PictureContentful
+            <Image
+              layout="responsive"
               alt={alt}
               height={height}
-              path={path}
-              sizes={[{ screen: 1, size: maxBreakpoint }]}
-              style={{
-                height: "auto",
-                margin: "auto",
-                marginTop: "-1px",
-                width: "auto",
-              }}
+              src={path}
               width={width}
             />
             {caption ? <figcaption>{caption}</figcaption> : null}

@@ -1,69 +1,91 @@
-import React from "react";
-import Link from "next/link";
-import styled, { keyframes } from "styled-components";
-import SearchToggle from "../components/SearchPopover";
-import ThemeToggle from "../components/ThemeToggle";
+import { useEffect, useState, useRef } from "react";
+import {
+  motion,
+  useMotionValue,
+  useTransform,
+  useViewportScroll,
+} from "framer-motion";
+import Image from "next/image";
+import styled from "styled-components";
 
 const Container = styled.header`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const flicker = keyframes`
-  0%, 2%, 4%, 50%, 52%, 54%, 100% {
-    opacity: 1;
-		
-	}
-	1%, 3%, 51%, 53% {
-		opacity: 0.5;
-	}
-`;
-
-const Name = styled.a`
-  color: ${({ theme }) => theme.colors.link};
-  font-size: ${({ theme }) => theme.type.c.size};
-  margin: 0;
+  min-height: 50vh;
+  overflow: hidden;
+  margin-top: ${({ theme }) => theme.padding.md};
+  padding-bottom: ${({ theme }) => theme.padding.md};
   position: relative;
-  text-decoration: none;
-  text-shadow: ${({ theme }) => theme.colors.linkShadow};
+`;
 
-  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    transform: scale(${({ isHomepage }) => (isHomepage ? 1.615 : 1)});
-    transform-origin: top left;
-    transition: transform 100ms ${({ theme }) => theme.animation.hover};
+const ImageContainer = styled(motion.div)`
+  filter: blur(${({ theme }) => theme.padding.xs});
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+
+  && {
+    grid-column: none;
   }
 
-  /* Media query disables easter egg for touch device clicks */
-  @media (hover: hover) {
-    :hover:after {
-      animation: ${flicker} 8s linear;
-      content: "[raw-hoot]";
-      font-size: ${({ theme }) => theme.type.a.size};
-      font-weight: 200;
-      position: absolute;
-      top: 0;
-      transform: translate(0.75rem, 0.55rem);
-      width: 6rem;
-    }
+  :after {
+    background: ${({ theme }) => theme.colors.backdrop};
+    content: "";
+    left: 0;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    width: 100%;
   }
 `;
 
-const Toggles = styled.div`
-  display: grid;
-  grid-auto-flow: column;
-  grid-gap: 1rem;
+const Text = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 `;
 
-export default function Header({ isHomepage, toggleTheme }) {
+const Title = styled.h1`
+  font-size: ${({ theme }) => theme.type.c.size};
+  line-height: ${({ theme }) => theme.type.c.line};
+  margin: 0;
+  max-width: ${({ theme }) => theme.maxWidthHeader};
+
+  @media (min-height: ${({ theme }) => theme.breakpoints.md}) {
+    font-size: ${({ theme }) => theme.type.e.size};
+    line-height: ${({ theme }) => theme.type.e.line};
+  }
+`;
+
+export default function PostHeader({ title, coverImage, date }) {
+  const [elementTop, setElementTop] = useState(0);
+  const ref = useRef(null);
+  const scale = useMotionValue(1.25);
+  const { scrollY } = useViewportScroll();
+  const y = useTransform(scrollY, [elementTop, elementTop + 1], [0, -0.1], {
+    clamp: false,
+  });
+
+  useEffect(() => {
+    const element = ref.current;
+    setElementTop(element.offsetTop);
+  }, [ref]);
+
   return (
-    <Container isHomepage={isHomepage}>
-      <Link href="/" passHref>
-        <Name isHomepage={isHomepage}>James Y Rauhut</Name>
-      </Link>
-      <Toggles>
-        <ThemeToggle toggleTheme={toggleTheme} />
-        <SearchToggle />
-      </Toggles>
+    <Container className="full-bleed" ref={ref}>
+      <ImageContainer style={{ scale, y }}>
+        <Image
+          alt={coverImage.fields.description}
+          layout="fill"
+          objectFit="cover"
+          src={`https:${coverImage.fields.file.url}`}
+        />
+      </ImageContainer>
+      <Text>
+        <Title>{title}</Title>
+        <time>{date}</time>
+      </Text>
     </Container>
   );
 }

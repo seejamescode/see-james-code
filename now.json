@@ -1,43 +1,44 @@
 {
-  "version": 2,
-  "alias": ["seejamescode", "seejamescode.com", "www.seejamescode.com"],
-  "build": {
+    "version": 2,
+    "alias": ["seejamescode", "seejamescode.com", "www.seejamescode.com"],
+    "build": {
+      "env": {
+        "CONTENTFUL_SPACE_ID": "@seejamescode-contentful-space-id",
+        "CONTENTFUL_ACCESS_TOKEN": "@seejamescode-contentful-access-token",
+        "CONTENTFUL_PREVIEW_ACCESS_TOKEN": "@seejamescode-contentful-preview-access-token",
+        "CONTENTFUL_PREVIEW_SECRET": "@seejamescode-contentful-preview-secret",
+        "NEXT_PUBLIC_GA_TRACKING_ID": "@next_public_ga_tracking_id"
+      }
+    },
     "env": {
       "CONTENTFUL_SPACE_ID": "@seejamescode-contentful-space-id",
       "CONTENTFUL_ACCESS_TOKEN": "@seejamescode-contentful-access-token",
       "CONTENTFUL_PREVIEW_ACCESS_TOKEN": "@seejamescode-contentful-preview-access-token",
       "CONTENTFUL_PREVIEW_SECRET": "@seejamescode-contentful-preview-secret",
-      "NEXT_PUBLIC_GA_TRACKING_ID": "@next_public_ga_tracking_id"
-    }
-  },
-  "env": {
-    "CONTENTFUL_SPACE_ID": "@seejamescode-contentful-space-id",
-    "CONTENTFUL_ACCESS_TOKEN": "@seejamescode-contentful-access-token",
-    "CONTENTFUL_PREVIEW_ACCESS_TOKEN": "@seejamescode-contentful-preview-access-token",
-    "CONTENTFUL_PREVIEW_SECRET": "@seejamescode-contentful-preview-secret",
-    "MONGO_URI": "@seejamescode-mongo-uri",
-    "NEXT_PUBLIC_GA_TRACKING_ID": "@next_public_ga_tracking_id",
-    "SEND_IN_BLUE_API_KEY": "@seejamescode-send-in-blue-api-key"
-  },
-  "headers": [
-    {
-      "source": "/service-worker.js",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=43200, immutable"
-        },
-        {
-          "key": "Service-Worker-Allowed",
-          "value": "/"
-        }
-      ]
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/service-worker.js",
-      "destination": "/_next/static/service-worker.js"
-    }
-  ]
-}
+      "MONGO_URI": "@seejamescode-mongo-uri",
+      "NEXT_PUBLIC_GA_TRACKING_ID": "@next_public_ga_tracking_id",
+      "SEND_IN_BLUE_API_KEY": "@seejamescode-send-in-blue-api-key"
+    },
+    "rewrites": [
+      {
+        "source": "/service-worker.js",
+        "destination": "/_next/static/service-worker.js"
+      }
+    ],
+    "headers": [
+      {
+        "source": "/service-worker.js",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=43200, immutable"
+          },
+          {
+            "key": "Service-Worker-Allowed",
+            "value": "/"
+          }
+        ]
+      }
+    ]
+  }
+  

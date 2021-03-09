@@ -1,24 +1,18 @@
 import React, { useEffect, useState } from "react";
+import SeachIcon from "@carbon/icons-react/lib/search/20";
 import Router from "next/router";
 import styled from "styled-components";
-import Button from "../components/Button";
-import Input from "../components/Input";
+import ButtonToggle from "./button-toggle";
+import Input from "./input";
 
 const Form = styled.form`
-  border-radius: ${({ theme }) => theme.borderRadius};
+  background: ${({ theme }) => theme.colors.background};
+  border-radius: ${({ theme }) => theme.padding.xs};
   box-shadow: ${({ hideBoxShadow, theme }) =>
-    hideBoxShadow ? "none" : theme.colors.backgroundShadow};
+    hideBoxShadow ? "none" : theme.colors.backgroundShadowLarge};
   display: flex;
   justify-content: flex-end;
   max-width: 20rem;
-`;
-
-const SearchButton = styled(Button)`
-  width: 100%;
-`;
-const SearchInput = styled(Input)`
-  margin-right: -${({ theme }) => theme.borderRadius};
-  padding-right: ${({ theme }) => theme.borderRadius};
 `;
 
 const PLACEHOLDER_QUERIES = [
@@ -62,7 +56,7 @@ export default function Search({
         }
       }}
     >
-      <SearchInput
+      <Input
         aria-label="Search Query"
         name="query"
         onChange={(e) => setValue(e.target.value)}
@@ -71,9 +65,9 @@ export default function Search({
         type="text"
         value={value}
       />
-      <SearchButton hideOuterBoxShadow type="submit">
-        Search
-      </SearchButton>
+      <ButtonToggle aria-label="Submit Search" hideOuterBoxShadow type="submit">
+        <SeachIcon />
+      </ButtonToggle>
     </Form>
   );
 }

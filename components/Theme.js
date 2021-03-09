@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ThemeProvider } from "styled-components";
+import useDarkMode from "use-dark-mode";
 
 const baseTheme = {
   animation: {
@@ -9,40 +10,47 @@ const baseTheme = {
   breakpoints: {
     md: "40rem",
     lg: "60rem",
-    max: "80rem",
+    max: "70rem",
   },
   colors: {
-    backdrop: "rgba(0, 0, 0, 0.5)",
     brands: {
       facebook: "#1877f2",
       linkedin: "#007bb5",
       reddit: "#ff5700",
       twitter: "#1da1f2",
     },
-    fontTitle: "#f7faff",
   },
-  maxWidth: "34rem",
-  padding: "2rem",
+  maxWidth: "60ch",
+  maxWidthHeader: "25ch",
+  padding: {
+    xxs: ".25rem",
+    xs: ".5rem",
+    sm: "1rem",
+    md: "2rem",
+    lg: "4rem",
+    xl: "8rem",
+    xxl: "16rem",
+  },
   type: {
     small: {
-      line: "1.25rem",
-      size: "0.8125rem",
-    },
-    a: {
       line: "1.6875rem",
       size: "1rem",
     },
-    b: {
+    a: {
       line: "2.0625rem",
       size: "1.25rem",
     },
-    c: {
+    b: {
       line: "2.625rem",
       size: "1.625rem",
     },
-    d: {
+    c: {
       line: "3.25rem",
       size: "2.0625rem",
+    },
+    d: {
+      line: "4.0625rem",
+      size: "2.625rem",
     },
     e: {
       line: "4.0625rem",
@@ -58,9 +66,13 @@ const darkTheme = {
     ...baseTheme.colors,
     accent: "#66FFE3",
     accentShadow: "#5be5cc",
+    backdrop: "rgba(0, 0, 0, 0.6)",
     background: "#180619",
-    backgroundShadow: "5px 5px 10px #2e0c30, -5px -5px 10px #3e1042",
-    backgroundShadowHover: "5px 5px 20px #2e0c30, -5px -5px 20px #3e1042",
+    backgroundShadow: "5px 5px 5px #2e0c30, -5px -5px 5px #3e1042",
+    backgroundShadowLarge: "5px 5px 15px #2e0c30, -5px -5px 15px #3e1042",
+    backgroundShadowHover: "5px 5px 30px #2e0c30, -5px -5px 30px #3e1042",
+    backgroundShadowHoverSmall: "5px 5px 15px #2e0c30, -5px -5px 15px #3e1042",
+    dropShadow: "drop-shadow(5px 5px 5px rgba(46, 12, 48, .7))",
     body: "#090209",
     font: "#f7faff",
     fontBackground: "linear-gradient(145deg, #dee1e6, #ffffff)",
@@ -85,9 +97,13 @@ const lightTheme = {
     ...baseTheme.colors,
     accent: "#00a8d6",
     accentShadow: "#0097c0",
+    backdrop: "rgba(255, 255, 255, 0.6)",
     background: "#f7faff",
-    backgroundShadow: "5px 5px 10px #d2d5d9, -5px -5px 10px #ffffff",
-    backgroundShadowHover: "5px 5px 20px #d2d5d9, -5px -5px 20px #d2d5d9",
+    backgroundShadow: "5px 5px 5px #d2d5d9, -5px -5px 5px #ffffff",
+    backgroundShadowLarge: "5px 5px 15px #d2d5d9, -5px -5px 15px #ffffff",
+    backgroundShadowHover: "5px 5px 30px #d2d5d9, -5px -5px 30px #d2d5d9",
+    backgroundShadowHoverSm: "5px 5px 15px #d2d5d9, -5px -5px 15px #d2d5d9",
+    dropShadow: "drop-shadow(5px 5px 5px rgba(0, 0, 0, .7))",
     body: "#fff",
     font: "#090209",
     fontBackground: "linear-gradient(145deg, #ffffff, #dee1e6)",
@@ -104,40 +120,29 @@ const lightTheme = {
   },
 };
 
-const Themes = {
-  dark: darkTheme,
-  light: lightTheme,
-};
+const Theme = ({ children }) => {
+  const { toggle, value } = useDarkMode(false);
+  const [mounted, setMounted] = React.useState(false);
+  const theme = value ? darkTheme : lightTheme;
 
-export default function Theme({ children }) {
-  const [theme, setTheme] = useState("light");
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const mql = window.matchMedia("(prefers-color-scheme: dark)");
-      const systemPreference =
-        typeof mql.matches === "boolean" && mql.matches ? "dark" : "light";
-
-      const preferredTheme =
-        window.localStorage.getItem("seejamescode-theme") || systemPreference;
-
-      if (preferredTheme !== theme) {
-        setTheme(preferredTheme);
-      }
-    }
+  React.useEffect(() => {
+    setMounted(true);
   }, []);
 
-  useEffect(() => {
-    window.localStorage.setItem("seejamescode-theme", theme);
-  }, [theme]);
-
-  return (
-    <ThemeProvider theme={Themes[theme] || lightTheme}>
+  const body = (
+    <ThemeProvider theme={theme}>
       {children({
-        toggleTheme: () => {
-          setTheme(theme === "light" ? "dark" : "light");
-        },
+        toggleTheme: toggle,
       })}
     </ThemeProvider>
   );
-}
+
+  // Prevents SSR flash for mismatched dark mode
+  if (!mounted) {
+    return <div style={{ visibility: "hidden" }}>{body}</div>;
+  }
+
+  return body;
+};
+
+export default Theme;

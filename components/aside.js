@@ -1,15 +1,17 @@
 import React from "react";
 import styled from "styled-components";
-import Anchor from "./Anchor";
+import Anchor from "./anchor";
 
-const Aside = styled.aside`
+const Container = styled.aside`
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     grid-column-end: -1;
-    grid-row-start: 2;
+    grid-row-start: 1;
   }
 `;
 
 const List = styled.ul`
+  display: grid;
+  grid-gap: ${({ theme }) => theme.padding.xs};
   list-style: none;
   margin: 0;
   padding: 0;
@@ -18,10 +20,11 @@ const List = styled.ul`
 const ListItem = styled.li`
   display: flex;
   justify-content: center;
-  text-align: center;
+  padding: 0;
 
-  :last-child {
-    padding-bottom: 0;
+  * {
+    font-size: ${({ theme }) => theme.type.small.size};
+    line-height: ${({ theme }) => theme.type.small.line};
   }
 `;
 
@@ -30,19 +33,13 @@ const ListP = styled.p`
 `;
 
 const ListTitle = styled.p`
-  margin-bottom: 0;
-  text-align: center;
-`;
-
-const P = styled.p`
   margin: 0;
   text-align: center;
 `;
 
-export default function Sidebar({ created, links }) {
+export default function Sidebar({ links }) {
   return (
-    <Aside>
-      <P>{created}</P>
+    <Container>
       {links && links.length ? (
         <>
           <ListTitle>
@@ -63,6 +60,6 @@ export default function Sidebar({ created, links }) {
           </List>
         </>
       ) : null}
-    </Aside>
+    </Container>
   );
 }

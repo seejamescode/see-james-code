@@ -5,14 +5,15 @@ import styled from "styled-components";
 const ResponsivePlayer = styled.div`
   background: ${({ theme }) => theme.colors.backdrop};
   border: none;
-  border-radius: calc(${({ theme }) => theme.padding} / 2);
+  border-radius: ${({ theme }) => theme.padding.sm};
   box-shadow: ${({ theme }) => theme.colors.backgroundShadow};
-  margin-bottom: ${({ theme }) => theme.padding};
-  margin-top: ${({ theme }) => theme.padding};
+  margin-bottom: ${({ theme }) => theme.padding.md};
+  margin-top: ${({ theme }) => theme.padding.md};
   overflow: hidden;
   position: relative;
   padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
-  transition: transform 300ms ${({ theme }) => theme.animation.hover};
+  transition: box-shadow 100ms ${({ theme }) => theme.animation.hover},
+    transform 100ms ${({ theme }) => theme.animation.hover};
 
   :focus,
   :hover {
