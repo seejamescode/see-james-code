@@ -45,7 +45,7 @@ function PrimaryActions() {
           rel="noopener noreferrer"
           target="_blank"
         >
-          Follow me in a non-creepy way.
+          Follow in a non-creepy way.
         </Anchor>
       </li>
     </List>
