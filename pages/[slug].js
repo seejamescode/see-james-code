@@ -56,13 +56,13 @@ export default function Post({ post = {}, posts }) {
                   ? `https://${process.env.VERCEL_URL}`
                   : "http://localhost:3000"
               }/api/social/${encodeURIComponent(
-                `https:${post.thumbnail.fields.file.url}?fm=jpg&w=1200&h=630&fit=crop`
+                `https:${post?.thumbnail?.fields?.file?.url}?fm=jpg&w=1200&h=630&fit=crop`
               )}`}
             />
             <meta
               key="og:image:alt"
               property="og:image:alt"
-              content={post.thumbnail.fields.description}
+              content={post?.thumbnail?.fields?.description}
             />
             <meta
               key="og:image:width"

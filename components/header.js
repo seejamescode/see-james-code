@@ -76,10 +76,10 @@ export default function PostHeader({ title, coverImage, date }) {
     <Container className="full-bleed" ref={ref}>
       <ImageContainer style={{ scale, y }}>
         <Image
-          alt={coverImage.fields.description}
+          alt={coverImage?.fields?.description}
           layout="fill"
           objectFit="cover"
-          src={`https:${coverImage.fields.file.url}`}
+          src={`https:${coverImage?.fields?.file?.url}`}
         />
       </ImageContainer>
       <Text>
