@@ -1,34 +1,14 @@
-const withOffline = require("next-offline");
+const withPWA = require("next-pwa");
+const runtimeCaching = require("next-pwa/cache");
 
-const nextConfig = {
-  // Trying to set NODE_ENV=production when running yarn dev causes a build-time error so we
-  // turn on the SW in dev mode so that we can actually test it
-  generateInDevMode: true,
+module.exports = withPWA({
   images: {
     domains: ["images.ctfassets.net"],
   },
-  target: "serverless",
-  transformManifest: (manifest) => ["/"].concat(manifest), // add the homepage to the cache
-  workboxOpts: {
-    swDest: "static/service-worker.js",
-    runtimeCaching: [
-      {
-        urlPattern: /^https?.*/,
-        handler: "NetworkFirst",
-        options: {
-          cacheName: "https-calls",
-          networkTimeoutSeconds: 15,
-          expiration: {
-            maxEntries: 150,
-            maxAgeSeconds: 30 * 24 * 60 * 60, // 1 month
-          },
-          cacheableResponse: {
-            statuses: [0, 200],
-          },
-        },
-      },
-    ],
+  pwa: {
+    dest: "public",
+    disable: process.env.NODE_ENV === "development",
+    runtimeCaching,
   },
-};
-
-module.exports = withOffline(nextConfig);
+  reactStrictMode: true,
+});

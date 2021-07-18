@@ -33,6 +33,7 @@ const PopoverDisclosureContainer = styled.div`
 const PopoverStyled = styled(Popover)`
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     display: initial !important;
+    left: 0 !important;
     position: relative !important;
     transform: none !important;
   }
@@ -40,6 +41,7 @@ const PopoverStyled = styled(Popover)`
 
 export default function SearchToggle({}) {
   const popover = usePopoverState({
+    baseId: "search",
     unstable_offset: 16,
     unstable_fixed: true,
     unstable_preventOverflow: true,

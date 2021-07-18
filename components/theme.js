@@ -1,6 +1,6 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
-import useDarkMode from "use-dark-mode";
+import { useDarkMode } from "next-dark-mode";
 
 const baseTheme = {
   animation: {
@@ -121,9 +121,9 @@ const lightTheme = {
 };
 
 const Theme = ({ children }) => {
-  const { toggle, value } = useDarkMode(false);
+  const { darkModeActive, switchToDarkMode, switchToLightMode } = useDarkMode();
   const [mounted, setMounted] = React.useState(false);
-  const theme = value ? darkTheme : lightTheme;
+  const theme = darkModeActive ? darkTheme : lightTheme;
 
   React.useEffect(() => {
     setMounted(true);
@@ -132,7 +132,7 @@ const Theme = ({ children }) => {
   const body = (
     <ThemeProvider theme={theme}>
       {children({
-        toggleTheme: toggle,
+        toggleTheme: darkModeActive ? switchToLightMode : switchToDarkMode,
       })}
     </ThemeProvider>
   );

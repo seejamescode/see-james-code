@@ -137,7 +137,7 @@ export default function ExpandablePicture({
   path,
   width,
 }) {
-  const dialog = useDialogState({ animated: true });
+  const dialog = useDialogState({ animated: true, baseId: `image-${path}` });
 
   return (
     <>

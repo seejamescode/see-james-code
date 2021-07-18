@@ -1,4 +1,5 @@
 import Link from "next/link";
+import withDarkMode from "next-dark-mode";
 import styled, { createGlobalStyle } from "styled-components";
 import Anchor from "../components/anchor";
 import Layout from "../components/layout";
@@ -11,6 +12,7 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
     font-family: "IBM Plex Serif", Menlo, "DejaVu Sans Mono", "Bitstream Vera Sans Mono", Courier, monospace;
+    min-width: 0;
     outline-color: ${({ theme }) => theme.colors.focus};
     text-rendering: optimizeLegibility;
 
@@ -59,7 +61,7 @@ const Footer = styled.div`
   text-align: center;
 `;
 
-function MyApp({ Component, pageProps }) {
+function App({ Component, pageProps }) {
   return (
     <Theme>
       {({ toggleTheme }) => (
@@ -86,4 +88,4 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default MyApp;
+export default withDarkMode(App);

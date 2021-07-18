@@ -125,7 +125,7 @@ export default function Hearts({ slug }) {
   const [existingHearts, setExistingHearts] = useState(null);
   const tooltip = useTooltipState({
     animated: true,
-    baseId: "heart",
+    baseId: `heart-${slug}`,
     placement: "bottom",
   });
 
