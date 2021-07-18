@@ -88,7 +88,7 @@ export default function Post({ post = {}, posts }) {
             <Footer slug={post.slug} />
           </Article>
           <Bio />
-          <Posts posts={posts.entries} title="More Good Stuff" />
+          <Posts posts={posts.entries} title="More Stuff" />
         </>
       )}
     </>

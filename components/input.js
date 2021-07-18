@@ -9,7 +9,10 @@ const Input = styled.input`
   font-size: ${({ theme }) => theme.type.small.size};
   line-height: ${({ theme }) => theme.type.small.line};
   margin: 0;
-  padding: ${({ theme }) => theme.padding.xs} ${({ theme }) => theme.padding.xs};
+  padding: ${({ hasTrailingIcon, theme }) =>
+    `${theme.padding.xs} ${
+      hasTrailingIcon ? theme.padding.md : theme.padding.xs
+    } ${theme.padding.xs} ${theme.padding.xs}`};
   transition: box-shadow 200ms ${({ theme }) => theme.animation.hover};
 
   :focus {

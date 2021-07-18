@@ -5,22 +5,19 @@ const Button = styled.button`
     underline ? "none" : theme.colors.linkBackground};
   border: none;
   border-radius: ${({ theme }) => theme.borderRadius};
-  box-shadow: ${({ underline, hideOuterBoxShadow, theme }) =>
-    !hideOuterBoxShadow &&
-    (underline ? "none" : theme.colors.backgroundShadow)};
   color: ${({ underline, theme }) =>
     underline ? "inherit" : theme.colors.background};
   font-size: ${({ underline, theme }) =>
     underline ? theme.type.a.size : theme.type.small.size};
+  font-weight: 600;
   line-height: ${({ theme }) => theme.type.small.line};
   margin: 0%;
   padding: ${({ theme }) => `${theme.padding.xs} ${theme.padding.sm}`};
   position: relative;
   text-decoration: none;
-  transition: ${({ theme, underline }) => css`background 100ms ${
+  transition: ${({ theme, underline }) => css`background 300ms ${
     theme.animation.hover
   },
-    box-shadow 300ms ${theme.animation.hover}
     ${underline ? null : `, transform 100ms ${theme.animation.hover}`}`};
 
   :after {
@@ -40,15 +37,9 @@ const Button = styled.button`
       underline ? "none" : theme.colors.linkBackgroundHover};
     color: ${({ underline, theme }) =>
       underline ? "inherit" : theme.colors.background};
-    transform: translateY(${({ underline }) => (underline ? 0 : "-5%")});
   }
 
   :hover {
-    box-shadow: ${({ hideOuterBoxShadow, theme, underline }) =>
-      !hideOuterBoxShadow &&
-      !underline &&
-      theme.colors.backgroundShadowHoverSm};
-
     :after {
       background: ${({ theme, underline }) =>
         underline ? theme.colors.linkBackground : "none"};

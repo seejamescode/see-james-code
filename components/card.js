@@ -18,17 +18,23 @@ const Container = styled.a`
   :hover {
     .image-container {
       box-shadow: ${({ theme }) => theme.colors.backgroundShadowHover};
-      transform: translate3d(0, -${({ theme }) => theme.padding.xs}, 0);
     }
 
     .text-container {
       color: ${({ theme }) => theme.colors.link};
     }
+
+    .title {
+      span {
+        background-position: 0 0%;
+      }
+
+      color: ${({ theme }) => theme.colors.background};
+    }
   }
 
   :active .image-container {
     box-shadow: none;
-    transform: translate3d(0, 0, 0);
   }
 `;
 
@@ -110,7 +116,9 @@ export default function PostPreview({
         </div>
         <div>
           <Title>
-            <Anchor as="span">{title}</Anchor>
+            <Anchor as="span" className="title">
+              {title}
+            </Anchor>
           </Title>
           <Text>
             <small>{date}</small>

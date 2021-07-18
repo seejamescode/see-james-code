@@ -149,7 +149,9 @@ export default function PostBody({ content }) {
         },
         renderMark: {
           [MARKS.CODE]: (text) => (
-            <SyntaxHighlighter style={docco}>{text}</SyntaxHighlighter>
+            <SyntaxHighlighter language="javascript" style={docco}>
+              {text}
+            </SyntaxHighlighter>
           ),
         },
       })}

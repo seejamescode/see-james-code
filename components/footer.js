@@ -6,7 +6,8 @@ import ShareLinks from "./share";
 const Container = styled.footer`
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     grid-column-end: -1;
-    grid-row-start: 2;
+    grid-row-end: -1;
+    grid-row-start: 1;
   }
 `;
 

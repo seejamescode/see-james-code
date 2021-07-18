@@ -5,6 +5,13 @@ import styled from "styled-components";
 import ButtonToggle from "./button-toggle";
 import Input from "./input";
 
+const Absolute = styled.div`
+  display: flex;
+  height: 100%;
+  position: absolute;
+  right: 0;
+`;
+
 const Form = styled.form`
   background: ${({ theme }) => theme.colors.background};
   border-radius: ${({ theme }) => theme.padding.xs};
@@ -12,7 +19,12 @@ const Form = styled.form`
     hideBoxShadow ? "none" : theme.colors.backgroundShadowLarge};
   display: flex;
   justify-content: flex-end;
+  position: relative;
   max-width: 20rem;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    box-shadow: none;
+  }
 `;
 
 const PLACEHOLDER_QUERIES = [
@@ -58,6 +70,7 @@ export default function Search({
     >
       <Input
         aria-label="Search Query"
+        hasTrailingIcon
         name="query"
         onChange={(e) => setValue(e.target.value)}
         placeholder={placeholder}
@@ -65,9 +78,15 @@ export default function Search({
         type="text"
         value={value}
       />
-      <ButtonToggle aria-label="Submit Search" hideOuterBoxShadow type="submit">
-        <SeachIcon />
-      </ButtonToggle>
+      <Absolute>
+        <ButtonToggle
+          aria-label="Submit Search"
+          hideOuterBoxShadow
+          type="submit"
+        >
+          <SeachIcon />
+        </ButtonToggle>
+      </Absolute>
     </Form>
   );
 }
