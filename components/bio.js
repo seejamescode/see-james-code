@@ -9,6 +9,11 @@ const BioText = styled.p`
   font-size: ${({ theme }) => theme.type.small.size};
   line-height: ${({ theme }) => theme.type.small.line};
   margin: 0;
+  text-align: center;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    text-align: left;
+  }
 `;
 
 const Container = styled.section`
@@ -28,6 +33,7 @@ const Container = styled.section`
 const PortraitHover = styled.div`
   border-radius: 50%;
   margin: auto;
+  max-width: ${({ theme }) => theme.padding.xl};
   overflow: hidden;
   position: relative;
 
@@ -47,10 +53,6 @@ const PortraitHover = styled.div`
 
   :hover:after {
     opacity: 1;
-  }
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    max-width: ${({ theme }) => theme.padding.xl};
   }
 `;
 

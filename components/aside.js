@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 import Anchor from "./anchor";
+import Button from "./button";
 
 const Container = styled.aside`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.padding.md};
+  justify-content: center;
+
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     grid-column-end: -1;
     grid-row-start: 1;
@@ -37,27 +44,65 @@ const ListTitle = styled.p`
   text-align: center;
 `;
 
+const PrimaryLink = styled(Button)`
+  max-width: ${({ theme }) => theme.maxWidthHeader};
+  text-align: center;
+  width: 100%;
+`;
+
 export default function Aside({ links }) {
+  const primaryLinks = useMemo(
+    () => links.filter(({ fields: { primary } }) => primary),
+    [links]
+  );
+  const secondaryLinks = useMemo(
+    () => links.filter(({ fields: { primary } }) => !primary),
+    [links]
+  );
+
   return (
     <Container>
       {links && links.length ? (
         <>
-          <ListTitle>
-            <small>
-              <strong>Related Links</strong>
-            </small>
-          </ListTitle>
-          <List>
-            {links.map(({ fields: { link, primary, title } }) => (
-              <ListItem key={title}>
-                <ListP>
-                  <Anchor href={link} rel="noopener noreferrer" target="_blank">
-                    {title}
-                  </Anchor>
-                </ListP>
-              </ListItem>
-            ))}
-          </List>
+          {primaryLinks?.length ? (
+            <>
+              {primaryLinks.map(({ fields: { link, title } }) => (
+                <PrimaryLink
+                  as="a"
+                  href={link}
+                  key={link}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {title}
+                </PrimaryLink>
+              ))}
+            </>
+          ) : null}
+          {secondaryLinks?.length ? (
+            <div>
+              <ListTitle>
+                <small>
+                  <strong>Related Links</strong>
+                </small>
+              </ListTitle>
+              <List>
+                {secondaryLinks.map(({ fields: { link, title } }) => (
+                  <ListItem key={link}>
+                    <ListP>
+                      <Anchor
+                        href={link}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        {title}
+                      </Anchor>
+                    </ListP>
+                  </ListItem>
+                ))}
+              </List>
+            </div>
+          ) : null}
         </>
       ) : null}
     </Container>
