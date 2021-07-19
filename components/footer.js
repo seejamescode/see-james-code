@@ -6,8 +6,7 @@ import ShareLinks from "./share";
 const Container = styled.footer`
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     grid-column-end: -1;
-    grid-row-end: -1;
-    grid-row-start: 1;
+    grid-row: ${({ allRows }) => (allRows ? "1 / -1" : "2 / -1")};
   }
 `;
 
@@ -32,9 +31,9 @@ const HeartsAndShare = styled.div`
   }
 `;
 
-export default function Footer({ slug }) {
+export default function Footer({ allRows, slug }) {
   return (
-    <Container>
+    <Container allRows={allRows}>
       <Content>
         <HeartsAndShare>
           <Hearts slug={slug} />

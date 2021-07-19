@@ -37,7 +37,7 @@ const ListTitle = styled.p`
   text-align: center;
 `;
 
-export default function Sidebar({ links }) {
+export default function Aside({ links }) {
   return (
     <Container>
       {links && links.length ? (

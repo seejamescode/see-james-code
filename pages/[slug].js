@@ -26,6 +26,7 @@ const RichTextContainer = styled.section`
 `;
 
 export default function Post({ post = {}, posts }) {
+  const hasLinks = post?.links?.length;
   const router = useRouter();
   const pageTitle = `${post.title}${TITLE_SUFFIX}`;
 
@@ -84,8 +85,8 @@ export default function Post({ post = {}, posts }) {
             <RichTextContainer>
               <RichText content={post.description} />
             </RichTextContainer>
-            <Aside links={post.links} />
-            <Footer slug={post.slug} />
+            {hasLinks ? <Aside links={post.links} /> : null}
+            <Footer allRows={!hasLinks} slug={post.slug} />
           </Article>
           <Bio />
           <Posts posts={posts.entries} title="More Stuff" />
