@@ -1,15 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import { ServerStyleSheet } from "styled-components";
-import Router from "next/router";
-
-Router.events.on("routeChangeComplete", (url) => {
-  setTimeout(() => {
-    window.gtag("config", process.env.NEXT_PUBLIC_GA_TRACKING_ID, {
-      page_location: url,
-      page_title: document.title,
-    });
-  }, 0);
-});
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -135,20 +125,6 @@ export default class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
-          <script
-            async
-            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_TRACKING_ID}`}
-          />
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${process.env.NEXT_PUBLIC_GA_TRACKING_ID}');
-          `,
-            }}
-          />
         </body>
       </Html>
     );

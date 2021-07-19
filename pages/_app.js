@@ -1,5 +1,6 @@
 import Link from "next/link";
 import withDarkMode from "next-dark-mode";
+import PlausibleProvider from "next-plausible";
 import styled, { createGlobalStyle } from "styled-components";
 import Anchor from "../components/anchor";
 import Layout from "../components/layout";
@@ -63,28 +64,30 @@ const Footer = styled.div`
 
 function App({ Component, pageProps }) {
   return (
-    <Theme>
-      {({ toggleTheme }) => (
-        <>
-          <GlobalStyle />
-          <Nav toggleTheme={toggleTheme} />
-          <Layout as="main">
-            <Component {...pageProps} />
-          </Layout>
-          <Layout as="footer">
-            <Footer>
-              <small>
-                You're still here? It's over!{" "}
-                <Link href="/" passHref>
-                  <Anchor>Go home.</Anchor>
-                </Link>{" "}
-                Go!
-              </small>
-            </Footer>
-          </Layout>
-        </>
-      )}
-    </Theme>
+    <PlausibleProvider domain="seejamescode.com">
+      <Theme>
+        {({ toggleTheme }) => (
+          <>
+            <GlobalStyle />
+            <Nav toggleTheme={toggleTheme} />
+            <Layout as="main">
+              <Component {...pageProps} />
+            </Layout>
+            <Layout as="footer">
+              <Footer>
+                <small>
+                  You're still here? It's over!{" "}
+                  <Link href="/" passHref>
+                    <Anchor>Go home.</Anchor>
+                  </Link>{" "}
+                  Go!
+                </small>
+              </Footer>
+            </Layout>
+          </>
+        )}
+      </Theme>
+    </PlausibleProvider>
   );
 }
 
