@@ -73,7 +73,7 @@ const darkTheme = {
     backgroundShadowHover: "0px 0px 10px #180619, 0px 5px 10px #180619",
     backgroundShadowHoverSmall: "5px 5px 15px #2e0c30, -5px -5px 15px #3e1042",
     dropShadow: "drop-shadow(5px 5px 5px rgba(46, 12, 48, .7))",
-    body: "#343a3f",
+    body: "#22262a",
     font: "#f7faff",
     fontBackground: "linear-gradient(145deg, #dee1e6, #ffffff)",
     fontBackgroundFocus:

@@ -41,6 +41,7 @@ const Container = styled.a`
 const ImageContainer = styled.div.attrs(() => ({
   className: "image-container",
 }))`
+  background: ${({ theme }) => theme.colors.background};
   border-radius: ${({ theme }) => theme.padding.sm};
   box-shadow: ${({ theme }) => theme.colors.backgroundShadow};
   display: inline-block;

@@ -16,8 +16,12 @@ const Container = styled.div`
 `;
 
 const ButtonStyled = styled(Button)`
+  display: flex;
+  flex-direction: column;
   font-size: ${({ theme }) => theme.type.small.size};
+  justify-content: flex-end;
   padding: ${({ theme }) => theme.padding.xs};
+  text-align: center;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     font-size: ${({ theme }) => theme.type.a.size};
