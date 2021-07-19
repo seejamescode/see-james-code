@@ -53,8 +53,8 @@ const Title = styled.h1`
   max-width: ${({ theme }) => theme.maxWidthHeader};
 
   @media (min-height: ${({ theme }) => theme.breakpoints.md}) {
-    font-size: ${({ theme }) => theme.type.e.size};
-    line-height: ${({ theme }) => theme.type.e.line};
+    font-size: ${({ theme }) => theme.type.d.size};
+    line-height: ${({ theme }) => theme.type.d.line};
   }
 `;
 

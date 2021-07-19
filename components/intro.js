@@ -9,14 +9,50 @@ const HoverCursor = styled.span`
   }
 `;
 
-const IntroSection = styled.section`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  min-height: 50vh;
+const IntroGrid = styled.div`
+  display: grid;
+  gap: ${({ theme }) => theme.padding.xl};
+  justify-content: flex-start;
 
-  > * {
+  p {
+    margin-top: 0;
     max-width: ${({ theme }) => theme.maxWidth};
+
+    :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    gap: ${({ theme }) => theme.padding.lg};
+    grid-auto-flow: row;
+    grid-template-columns: 3fr 1fr;
+  }
+
+  p {
+    margin-bottom: ${({ theme }) => theme.padding.lg};
+    max-width: ${({ theme }) => theme.maxWidth};
+  }
+`;
+
+const IntroSection = styled.section`
+  display: grid;
+  gap: ${({ theme }) => theme.padding.xxl};
+`;
+
+const Tagline = styled.p`
+  font-size: ${({ theme }) => theme.type.b.size};
+  line-height: ${({ theme }) => theme.type.b.line};
+  margin: 0;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    font-size: ${({ theme }) => theme.type.d.size};
+    line-height: ${({ theme }) => theme.type.d.line};
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    font-size: ${({ theme }) => theme.type.e.size};
+    line-height: ${({ theme }) => theme.type.e.line};
   }
 `;
 
@@ -25,11 +61,6 @@ const Title = styled.p`
   line-height: ${({ theme }) => theme.type.a.line};
   margin: 0;
   width: 100%;
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    font-size: ${({ theme }) => theme.type.c.size};
-    line-height: ${({ theme }) => theme.type.c.line};
-  }
 `;
 
 export default function Intro() {
@@ -43,50 +74,60 @@ export default function Intro() {
         </Title>
       </section>
       <IntroSection>
-        <p>
-          I have a love for <i>making</i> at every step of the process. My joy
-          comes from collaborating with others on successful user outcomes.
-          During free time, I write{" "}
-          <Link href="/search?type=article" passHref>
-            <Anchor>blog articles</Anchor>
-          </Link>
-          , collect posters, and make{" "}
-          <Link href="/search?type=project" passHref>
-            <Anchor>light-hearted products</Anchor>
-          </Link>
-          .
-        </p>
-        <p>
-          My strongest skills involve{" "}
-          <strong>product design, user research, and web development</strong>.
-          At{" "}
-          <Anchor
-            href="https://pingboard.com"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Pingboard
-          </Anchor>
-          , I collaborated on data-driven UI experiences on the Growth Team.
-          Previously, I was helping every business unit a IBM align on the{" "}
-          <Anchor
-            href="https://www.ibm.com/design/language/"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            IBM Design Language
-          </Anchor>{" "}
-          and{" "}
-          <Anchor
-            href="https://www.carbondesignsystem.com/"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Carbon Design System
-          </Anchor>
-          .
-        </p>
-        <PrimaryActions />
+        <Tagline>
+          I'm a designer and coder that loves making delightful experiences for{" "}
+          <i>everyone</i> using user-centered processes.
+        </Tagline>
+        <IntroGrid>
+          <div>
+            <p>
+              I enjoy{" "}
+              <strong>
+                product design, user research, and web development
+              </strong>
+              . During free time, I write{" "}
+              <Link href="/search?type=article" passHref>
+                <Anchor>blog articles</Anchor>
+              </Link>
+              , collect posters, and make{" "}
+              <Link href="/search?type=project" passHref>
+                <Anchor>light-hearted products</Anchor>
+              </Link>
+              .
+            </p>
+            <p>
+              At{" "}
+              <Anchor
+                href="https://pingboard.com"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Pingboard
+              </Anchor>
+              , I collaborated on data-driven UI experiences on the Growth Team.
+              Previously, I was helping every business unit a IBM align on the{" "}
+              <Anchor
+                href="https://www.ibm.com/design/language/"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                IBM Design Language
+              </Anchor>{" "}
+              and{" "}
+              <Anchor
+                href="https://www.carbondesignsystem.com/"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Carbon Design System
+              </Anchor>
+              .
+            </p>
+          </div>
+          <div>
+            <PrimaryActions />
+          </div>
+        </IntroGrid>
       </IntroSection>
     </>
   );

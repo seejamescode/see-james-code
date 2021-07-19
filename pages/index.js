@@ -1,18 +1,60 @@
 import Head from "next/head";
+import styled from "styled-components";
 import Filter from "../components/filter";
 import Intro from "../components/intro";
 import Pagination from "../components/pagination";
-import Posts from "../components/posts";
+import Cards from "../components/cards";
 import { getAllPosts } from "../lib/contentful";
-import { DESCRIPTION, TITLE_SUFFIX } from "../lib/constants";
+import { DESCRIPTION, TITLE_SUFFIX, TYPES } from "../lib/constants";
 
+const TYPES_KEYS = Object.keys(TYPES);
 const TITLE = `Home${TITLE_SUFFIX}`;
+
+const FeaturedSection = styled.section`
+  display: grid;
+  gap: ${({ theme }) => theme.padding.xl};
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    gap: ${({ theme }) => `${theme.padding.xl} ${theme.padding.lg}`};
+    grid-template-rows: max-content;
+    grid-template-columns: 3fr 1fr;
+  }
+`;
+
+const FeaturedArticle = styled.div`
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+`;
+
+const FeaturedCases = styled.div`
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+`;
+
+const FeaturedSidebar = styled.div`
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    grid-column: 2;
+    grid-row: 1 / 3;
+  }
+`;
+
+const Layout = styled.div`
+  display: grid;
+  gap: ${({ theme }) => theme.padding.xxl};
+`;
 
 export default function Index({
   allPosts: { entries = [], page, totalPages },
+  latestArticles: { entries: articleEntries = [] },
+  latestCaseStudies: { entries: caseStudyEntries = [] },
+  latestProjects: { entries: projectEntries = [] },
 }) {
   return (
-    <>
+    <Layout>
       <Head>
         <title key="title">{TITLE}</title>
         <meta key="og:title" property="og:title" content={TITLE} />
@@ -36,19 +78,74 @@ export default function Index({
         <meta key="og:image:height" property="og:image:height" content="630" />
       </Head>
       <Intro />
-      <div>
+      <FeaturedSection>
+        <FeaturedArticle>
+          <Cards posts={articleEntries} title="Latest Article" />
+        </FeaturedArticle>
+        <FeaturedSidebar>
+          <Cards
+            directionLg="row"
+            directionMd="column"
+            gap="lg"
+            gapLg="md"
+            gapMd="md"
+            hideDates
+            hideDescriptions
+            isCardsVertical
+            posts={projectEntries}
+            title="Recent Projects"
+            titleSize="small"
+          />
+        </FeaturedSidebar>
+        <FeaturedCases>
+          <Cards
+            directionMd="column"
+            directionLg="column"
+            gapLg="md"
+            gapMd="md"
+            isCardsVertical
+            hideDates
+            posts={caseStudyEntries}
+            title="Case Studies"
+            textSize="small"
+            titleSize="a"
+          />
+        </FeaturedCases>
+      </FeaturedSection>
+      <section>
         <Filter />
-        <Posts posts={entries} />
-      </div>
-      <Pagination page={page} totalPages={totalPages} url="/search" />
-    </>
+        <Cards posts={entries} />
+        <Pagination page={page} totalPages={totalPages} url="/search" />
+      </section>
+    </Layout>
   );
 }
 
 export async function getStaticProps({ preview = false }) {
   const allPosts = await getAllPosts({ preview });
+  const latestArticles = await getAllPosts({
+    limit: 1,
+    preview,
+    type: TYPES_KEYS[1],
+  });
+  const latestCaseStudies = await getAllPosts({
+    limit: 3,
+    preview,
+    type: TYPES_KEYS[0],
+  });
+  const latestProjects = await getAllPosts({
+    limit: 3,
+    preview,
+    type: TYPES_KEYS[2],
+  });
 
   return {
-    props: { preview, allPosts },
+    props: {
+      allPosts,
+      latestArticles,
+      latestCaseStudies,
+      latestProjects,
+      preview,
+    },
   };
 }

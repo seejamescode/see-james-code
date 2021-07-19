@@ -11,7 +11,6 @@ const Container = styled.div`
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     justify-content: center;
-    margin-bottom: ${({ theme }) => theme.padding.xl};
   }
 `;
 

@@ -22,12 +22,12 @@ const HeartsAndShare = styled.div`
   grid-template-columns: max-content 1fr;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    grid-gap: ${({ theme }) => theme.padding.md};
+    gap: ${({ theme }) => theme.padding.md};
     grid-template-columns: 1fr;
   }
 
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    grid-gap: 0;
+    gap: 0;
   }
 `;
 

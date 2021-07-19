@@ -13,11 +13,16 @@ const BioText = styled.p`
 
 const Container = styled.section`
   align-items: center;
-  display: grid;
-  grid-gap: 1rem;
-  grid-template-columns: ${({ theme }) => theme.padding.xl} 1fr;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: ${({ theme }) => theme.padding.md};
   margin: auto;
   max-width: ${({ theme }) => theme.maxWidth};
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    display: grid;
+    grid-template-columns: ${({ theme }) => theme.padding.xl} 1fr;
+  }
 `;
 
 const PortraitHover = styled.div`

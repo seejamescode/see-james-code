@@ -10,7 +10,7 @@ const Buttons = styled.div`
   grid-auto-flow: column;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    grid-gap: ${({ theme }) => theme.padding.sm};
+    gap: ${({ theme }) => theme.padding.sm};
   }
 `;
 

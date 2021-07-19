@@ -11,7 +11,7 @@ const Container = styled.aside`
 
 const List = styled.ul`
   display: grid;
-  grid-gap: ${({ theme }) => theme.padding.xs};
+  gap: ${({ theme }) => theme.padding.xs};
   list-style: none;
   margin: 0;
   padding: 0;

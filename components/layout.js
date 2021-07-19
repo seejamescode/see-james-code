@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Layout = styled.div`
   display: grid;
-  grid-gap: ${({ theme }) => theme.padding.xl} 0;
+  gap: ${({ theme }) => theme.padding.xl} 0;
   grid-template-columns:
     1fr
     min(${({ theme }) => theme.breakpoints.max}, 100%)
@@ -21,7 +21,7 @@ const Layout = styled.div`
     width: 100%;
 
     display: grid;
-    grid-gap: ${({ theme }) => theme.padding.xl} 0;
+    gap: ${({ theme }) => theme.padding.xl} 0;
     grid-template-columns:
       1fr
       min(${({ theme }) => theme.breakpoints.max}, 100%)

@@ -6,14 +6,14 @@ import Aside from "../components/aside";
 import Bio from "../components/bio";
 import Footer from "../components/footer";
 import Header from "../components/header";
-import Posts from "../components/posts";
+import Cards from "../components/cards";
 import RichText from "../components/rich-text";
 import { getAllPosts, getAllPostSlugs, getPost } from "../lib/contentful";
 import { TITLE_SUFFIX } from "../lib/constants";
 
 const Article = styled.article`
   display: grid;
-  grid-gap: ${({ theme }) => theme.padding.lg};
+  gap: ${({ theme }) => theme.padding.lg};
 
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     grid-template-rows: min-content 1fr;
@@ -89,7 +89,7 @@ export default function Post({ post = {}, posts }) {
             <Footer allRows={!hasLinks} slug={post.slug} />
           </Article>
           <Bio />
-          <Posts posts={posts.entries} title="More Stuff" />
+          <Cards posts={posts.entries} title="More Stuff" />
         </>
       )}
     </>

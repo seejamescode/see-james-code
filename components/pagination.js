@@ -6,8 +6,9 @@ import Button from "./button";
 
 const Container = styled.nav`
   display: grid;
-  grid-gap: ${({ theme }) => theme.padding.sm};
+  gap: ${({ theme }) => theme.padding.sm};
   grid-template-columns: 1fr 1fr 1fr;
+  margin-top: ${({ theme }) => theme.padding.lg};
 `;
 
 const Flex = styled.div`
@@ -17,7 +18,7 @@ const Flex = styled.div`
 
 const Range = styled.div`
   display: grid;
-  grid-gap: ${({ theme }) => theme.padding.sm};
+  gap: ${({ theme }) => theme.padding.sm};
 
   > * {
     grid-row: 1;

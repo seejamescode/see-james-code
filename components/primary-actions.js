@@ -7,7 +7,7 @@ import Anchor from "./anchor";
 
 const List = styled.ul`
   list-style: none;
-  margin: ${({ theme }) => theme.padding.lg} 0;
+  margin: 0;
   padding: 0;
 
   > li {
@@ -20,12 +20,22 @@ function PrimaryActions() {
     <List>
       <li>
         <Anchor
+          href="https://twitter.com/seejamescode"
+          icon={<Twitter20 />}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Follow on Twitter
+        </Anchor>
+      </li>
+      <li>
+        <Anchor
           href="https://drive.google.com/file/d/1YtKEgIAPdBOm1fMSg5dpdLY65zTZFJLP/view?usp=sharing"
           icon={<Document20 />}
           rel="noopener noreferrer"
           target="_blank"
         >
-          Review my life with a resume.
+          View Resume
         </Anchor>
       </li>
       <li>
@@ -35,17 +45,7 @@ function PrimaryActions() {
           rel="noopener noreferrer"
           target="_blank"
         >
-          Email me about opportunities.
-        </Anchor>
-      </li>
-      <li>
-        <Anchor
-          href="https://twitter.com/seejamescode"
-          icon={<Twitter20 />}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          Follow in a non-creepy way.
+          Email Me
         </Anchor>
       </li>
     </List>

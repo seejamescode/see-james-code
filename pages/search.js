@@ -3,7 +3,7 @@ import Head from "next/head";
 import styled from "styled-components";
 import Filter from "../components/filter";
 import Pagination from "../components/pagination";
-import Posts from "../components/posts";
+import Cards from "../components/cards";
 import { DESCRIPTION, FILTERS, TITLE_SUFFIX } from "../lib/constants";
 import { getAllPosts } from "../lib/contentful";
 
@@ -51,7 +51,7 @@ export default function SearchPage({
       {entries.length ? (
         <Container>
           <Filter query={query} type={type} />
-          <Posts posts={entries} />
+          <Cards posts={entries} />
         </Container>
       ) : (
         <NoResults>Oof, no results for "{query}." Try again?</NoResults>

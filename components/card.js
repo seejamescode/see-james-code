@@ -4,14 +4,24 @@ import styled from "styled-components";
 import Anchor from "./anchor";
 import AspectRatio from "./aspect-ratio";
 
+const AllText = styled.div`
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.padding.sm};
+`;
+
 const Container = styled.a`
   display: grid;
-  grid-gap: ${({ theme }) => theme.padding.sm};
+  grid-auto-rows: min-content;
+  gap: ${({ theme }) => theme.padding.sm};
   text-decoration: none;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    grid-gap: ${({ theme }) => theme.padding.md};
-    grid-template-columns: 1fr 2fr;
+    gap: ${({ isVertical, theme }) =>
+      isVertical ? theme.padding.sm : theme.padding.lg};
+    grid-template-columns: ${({ isVertical }) =>
+      isVertical ? "1fr" : "1fr 2fr"};
   }
 
   :focus,
@@ -80,7 +90,6 @@ const Text = styled.p.attrs(() => ({
 }))`
   color: ${({ theme }) => theme.colors.font};
   margin: 0;
-  padding-bottom: ${({ theme }) => theme.padding.sm};
   text-decoration: none;
 
   :active {
@@ -88,21 +97,45 @@ const Text = styled.p.attrs(() => ({
   }
 `;
 
-const Title = styled.h3`
-  font-size: ${({ theme }) => theme.type.b.size};
-  margin: 0;
+const Date = styled(Text)`
+  font-size: ${({ theme }) => theme.type.small.size};
+  line-height: ${({ theme }) => theme.type.small.line};
 `;
 
-export default function PostPreview({
-  title,
+const Description = styled(Text)`
+  font-size: ${({ theme }) => theme.type.a.size};
+  line-height: ${({ theme }) => theme.type.a.line};
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    font-size: ${({ theme, textSize }) => theme.type[textSize].size};
+    line-height: ${({ theme, textSize }) => theme.type[textSize].line};
+  }
+`;
+
+const Title = styled.h3`
+  font-size: ${({ theme }) => theme.type.a.size};
+  line-height: ${({ theme }) => theme.type.a.line};
+  margin: 0;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    font-size: ${({ theme, titleSize }) => theme.type[titleSize].size};
+    line-height: ${({ theme, titleSize }) => theme.type[titleSize].line};
+  }
+`;
+
+export default function Card({
   coverImage,
   date,
-  tagline,
+  isVertical,
   slug,
+  tagline,
+  title,
+  textSize = "a",
+  titleSize = "b",
 }) {
   return (
     <Link href={`/${slug}`} passHref>
-      <Container>
+      <Container isVertical={isVertical}>
         <div>
           <AspectRatio ratio={0.67}>
             <ImageContainer>
@@ -115,17 +148,19 @@ export default function PostPreview({
             </ImageContainer>
           </AspectRatio>
         </div>
-        <div>
-          <Title>
-            <Anchor as="span" className="title">
-              {title}
-            </Anchor>
-          </Title>
-          <Text>
-            <small>{date}</small>
-          </Text>
-          <Text>{tagline}</Text>
-        </div>
+        <AllText>
+          <div>
+            <Title titleSize={titleSize}>
+              <Anchor as="span" className="title">
+                {title}
+              </Anchor>
+            </Title>
+            {date ? <Date>{date}</Date> : null}
+          </div>
+          {tagline ? (
+            <Description textSize={textSize}>{tagline}</Description>
+          ) : null}
+        </AllText>
       </Container>
     </Link>
   );

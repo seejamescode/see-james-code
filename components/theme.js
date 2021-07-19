@@ -54,7 +54,7 @@ const baseTheme = {
     },
     e: {
       line: "4.0625rem",
-      size: "2.625rem",
+      size: "3.052rem",
     },
   },
 };
