@@ -10,7 +10,7 @@ const baseTheme = {
   breakpoints: {
     md: "40rem",
     lg: "60rem",
-    max: "70rem",
+    max: "90rem",
   },
   colors: {
     brands: {

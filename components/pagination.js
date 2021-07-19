@@ -31,9 +31,11 @@ const Section = styled.div`
   justify-content: ${({ align }) => align};
 `;
 
-const Pagination = ({ page, query, totalPages, url }) => {
+const Pagination = ({ page, query, totalPages, type, url }) => {
   const delta = 2;
-  const queryText = query ? `&query=${encodeURI(query)}` : "";
+  const queryText = `${type ? `&type=${type}` : ""}${
+    query ? `&query=${encodeURI(query)}` : ""
+  }`;
   const hasNextPage = totalPages > page;
   const hasPrevPage = page > 1;
 

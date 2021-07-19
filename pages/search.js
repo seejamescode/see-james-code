@@ -51,13 +51,18 @@ export default function SearchPage({
       {entries.length ? (
         <Container>
           <Filter query={query} type={type} />
-          <Cards posts={entries} />
+          <Cards isCardsCentered posts={entries} />
         </Container>
       ) : (
         <NoResults>Oof, no results for "{query}." Try again?</NoResults>
       )}
       {totalPages > 1 ? (
-        <Pagination page={page} totalPages={totalPages} url="/search" />
+        <Pagination
+          page={page}
+          totalPages={totalPages}
+          type={type}
+          url="/search"
+        />
       ) : null}
     </>
   );

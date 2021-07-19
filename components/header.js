@@ -12,7 +12,6 @@ const Container = styled.header`
   min-height: 50vh;
   overflow: hidden;
   margin-top: ${({ theme }) => theme.padding.md};
-  padding-bottom: ${({ theme }) => theme.padding.md};
   position: relative;
 `;
 
@@ -44,15 +43,23 @@ const Text = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  padding-bottom: ${({ theme }) => theme.padding.md};
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    justify-content: center;
+    margin: 0 auto;
+    padding-bottom: 0;
+    text-align: center;
+  }
 `;
 
 const Title = styled.h1`
-  font-size: ${({ theme }) => theme.type.c.size};
-  line-height: ${({ theme }) => theme.type.c.line};
+  font-size: ${({ theme }) => theme.type.b.size};
+  line-height: ${({ theme }) => theme.type.b.line};
   margin: 0;
   max-width: ${({ theme }) => theme.maxWidthHeader};
 
-  @media (min-height: ${({ theme }) => theme.breakpoints.md}) {
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     font-size: ${({ theme }) => theme.type.d.size};
     line-height: ${({ theme }) => theme.type.d.line};
   }

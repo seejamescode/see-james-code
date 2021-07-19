@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Card from "./card";
 
 const H2 = styled.h2`
@@ -8,9 +8,9 @@ const H2 = styled.h2`
   margin-top: 0;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    font-size: ${({ theme }) => theme.type.small.size};
-    line-height: ${({ theme }) => theme.type.small.line};
-    margin-bottom: ${({ theme }) => theme.padding.sm};
+    font-size: ${({ theme }) => theme.type.a.size};
+    line-height: ${({ theme }) => theme.type.a.line};
+    text-align: ${({ isCentered }) => isCentered && "center"};
   }
 `;
 
@@ -27,17 +27,24 @@ const Grid = styled.div`
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     gap: ${({ gapLg, theme }) => theme.padding[gapLg]};
     grid-auto-flow: ${({ directionLg }) => directionLg};
+    ${({ isCardsCentered }) =>
+      isCardsCentered &&
+      css`
+        grid-template-columns: max-content;
+        justify-content: center;
+      `}
   }
 `;
 
 export default function Cards({
+  aspectRatio,
   directionLg = "row",
   directionMd = "row",
   gap = "xl",
   gapLg = "xl",
   gapMd = "xl",
+  isCardsCentered,
   isCardsVertical,
-  isHorizontal,
   hideDates,
   hideDescriptions,
   posts,
@@ -47,17 +54,18 @@ export default function Cards({
 }) {
   return (
     <div>
-      {title ? <H2>{title}</H2> : null}
+      {title ? <H2 isCentered={isCardsCentered}>{title}</H2> : null}
       <Grid
         directionLg={directionLg}
         directionMd={directionMd}
         gap={gap}
         gapMd={gapMd}
         gapLg={gapLg}
-        isHorizontal={isHorizontal}
+        isCardsCentered={isCardsCentered}
       >
         {posts.map((post) => (
           <Card
+            aspectRatio={aspectRatio}
             coverImage={post.thumbnail}
             date={!hideDates && post.created}
             key={post.slug}

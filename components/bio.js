@@ -89,12 +89,12 @@ export default function Bio() {
         also writes snippets from the third-person.
         <br />
         <Anchor
-          href="https://twitter.com/SeeJamesCode?ref_src=twsrc%5Etfw"
+          href="https://twitter.com/seejamescode"
           icon={<Twitter20 />}
           rel="noopener noreferrer"
           target="_blank"
         >
-          @seejamescode
+          Follow on Twitter
         </Anchor>
       </BioText>
     </Container>

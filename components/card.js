@@ -105,6 +105,7 @@ const Date = styled(Text)`
 const Description = styled(Text)`
   font-size: ${({ theme }) => theme.type.a.size};
   line-height: ${({ theme }) => theme.type.a.line};
+  max-width: 50ch;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     font-size: ${({ theme, textSize }) => theme.type[textSize].size};
@@ -116,6 +117,7 @@ const Title = styled.h3`
   font-size: ${({ theme }) => theme.type.a.size};
   line-height: ${({ theme }) => theme.type.a.line};
   margin: 0;
+  max-width: 35ch;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     font-size: ${({ theme, titleSize }) => theme.type[titleSize].size};
@@ -124,6 +126,7 @@ const Title = styled.h3`
 `;
 
 export default function Card({
+  aspectRatio = 0.67,
   coverImage,
   date,
   isVertical,
@@ -137,7 +140,7 @@ export default function Card({
     <Link href={`/${slug}`} passHref>
       <Container isVertical={isVertical}>
         <div>
-          <AspectRatio ratio={0.67}>
+          <AspectRatio ratio={aspectRatio}>
             <ImageContainer>
               <Image
                 alt={`Cover Image for ${title}`}

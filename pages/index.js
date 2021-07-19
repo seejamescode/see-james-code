@@ -114,7 +114,7 @@ export default function Index({
       </FeaturedSection>
       <section>
         <Filter />
-        <Cards posts={entries} />
+        <Cards isCardsCentered posts={entries} />
         <Pagination page={page} totalPages={totalPages} url="/search" />
       </section>
     </Layout>

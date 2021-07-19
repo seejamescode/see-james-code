@@ -41,9 +41,10 @@ const IntroSection = styled.section`
 `;
 
 const Tagline = styled.p`
-  font-size: ${({ theme }) => theme.type.b.size};
-  line-height: ${({ theme }) => theme.type.b.line};
+  font-size: ${({ theme }) => theme.type.c.size};
+  line-height: ${({ theme }) => theme.type.c.line};
   margin: 0;
+  max-width: 35ch;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     font-size: ${({ theme }) => theme.type.d.size};
