@@ -1,7 +1,9 @@
+import Head from "next/head";
 import Link from "next/link";
 import withDarkMode from "next-dark-mode";
 import PlausibleProvider from "next-plausible";
 import styled, { createGlobalStyle } from "styled-components";
+import useWindowFocus from "use-window-focus";
 import Anchor from "../components/anchor";
 import Layout from "../components/layout";
 import Nav from "../components/nav";
@@ -63,11 +65,21 @@ const Footer = styled.div`
 `;
 
 function App({ Component, pageProps }) {
+  const windowFocused = useWindowFocus();
+
   return (
     <PlausibleProvider domain="seejamescode.com">
       <Theme>
         {({ toggleTheme }) => (
           <>
+            <Head>
+              <link
+                rel="shortcut icon"
+                href={`/graphics/icon-${
+                  windowFocused ? "active" : "inactive"
+                }.png`}
+              />
+            </Head>
             <GlobalStyle />
             <Nav toggleTheme={toggleTheme} />
             <Layout as="main">

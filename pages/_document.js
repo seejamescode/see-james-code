@@ -21,7 +21,6 @@ export default class MyDocument extends Document {
             <link rel="manifest" href="/manifest.json" />
             <meta charSet="utf-8" />
             <meta name="theme-color" content="#E366FF" />
-            <link rel="shortcut icon" href="/graphics/icon-114.png" />
             <link
               rel="apple-touch-icon"
               sizes="57x57"

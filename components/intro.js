@@ -105,8 +105,8 @@ export default function Intro() {
               >
                 Pingboard
               </Anchor>
-              , I collaborated on data-driven UI experiences on the Growth Team.
-              Previously, I was helping every business unit a IBM align on the{" "}
+              , I designed data-driven UI experiences on the Growth Team.
+              Previously, I was helping every business unit at IBM align on the{" "}
               <Anchor
                 href="https://www.ibm.com/design/language/"
                 rel="noopener noreferrer"

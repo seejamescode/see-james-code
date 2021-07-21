@@ -5,10 +5,10 @@ import Intro from "../components/intro";
 import Pagination from "../components/pagination";
 import Cards from "../components/cards";
 import { getAllPosts } from "../lib/contentful";
-import { DESCRIPTION, TITLE_SUFFIX, TYPES } from "../lib/constants";
+import { DESCRIPTION, TYPES } from "../lib/constants";
 
 const TYPES_KEYS = Object.keys(TYPES);
-const TITLE = `Home${TITLE_SUFFIX}`;
+const TITLE = `James Y Rauhut`;
 
 const FeaturedSection = styled.section`
   display: grid;
