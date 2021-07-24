@@ -27,13 +27,6 @@ const Form = styled.form`
   }
 `;
 
-const PLACEHOLDER_QUERIES = [
-  "Progressive Web App",
-  "Component Library",
-  "Design System",
-  "Grid Design",
-];
-
 export default function Search({
   hideBoxShadow,
   isRequired,
@@ -41,16 +34,7 @@ export default function Search({
   shouldClearOnSubmit,
   query = "",
 }) {
-  const [placeholder, setPlaceholder] = useState();
   const [value, setValue] = useState(query);
-
-  useEffect(() => {
-    setPlaceholder(
-      PLACEHOLDER_QUERIES[
-        Math.floor(Math.random() * PLACEHOLDER_QUERIES.length)
-      ]
-    );
-  }, []);
 
   return (
     <Form
@@ -73,7 +57,7 @@ export default function Search({
         hasTrailingIcon
         name="query"
         onChange={(e) => setValue(e.target.value)}
-        placeholder={placeholder}
+        placeholder="Find articles and more"
         required={isRequired}
         type="text"
         value={value}

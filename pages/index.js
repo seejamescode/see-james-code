@@ -15,7 +15,7 @@ const FeaturedSection = styled.section`
   gap: ${({ theme }) => theme.padding.xl};
 
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    gap: ${({ theme }) => `${theme.padding.xl} ${theme.padding.lg}`};
+    gap: ${({ theme }) => theme.padding.lg};
     grid-template-rows: max-content;
     grid-template-columns: 3fr 1fr;
   }

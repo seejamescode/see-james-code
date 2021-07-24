@@ -39,7 +39,6 @@ const Name = styled.a`
   margin: 0;
   position: relative;
   text-decoration: none;
-  text-shadow: ${({ theme }) => theme.colors.linkShadow};
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     font-size: ${({ theme }) => theme.type.c.size};
@@ -57,6 +56,7 @@ const Name = styled.a`
       font-size: ${({ theme }) => theme.type.a.size};
       font-weight: 200;
       position: absolute;
+      text-shadow: ${({ theme }) => theme.colors.linkShadow};
       top: 0;
       transform: translate(0.75rem, 0.15rem);
       width: 6rem;

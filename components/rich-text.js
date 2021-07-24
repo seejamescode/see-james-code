@@ -50,6 +50,11 @@ const Section = styled.section`
     max-width: ${({ theme }) => theme.maxWidth};
   }
 
+  blockquote p {
+    font-size: ${({ theme }) => theme.type.b.size};
+    line-height: ${({ theme }) => theme.type.b.line};
+  }
+
   h1,
   h2,
   h3,
