@@ -58,15 +58,21 @@ export default function Index({
       <Head>
         <title key="title">{TITLE}</title>
         <meta key="og:title" property="og:title" content={TITLE} />
+        <meta name="twitter:title" content={TITLE} />
         <meta key="description" name="description" content={DESCRIPTION} />
         <meta
           key="og:description"
           property="og:description"
           content={DESCRIPTION}
         />
+        <meta name="twitter:description" content={DESCRIPTION} />
         <meta
           key="og:image"
           property="og:image"
+          content="https://seejamescode.com/graphics/open-graph.png"
+        />
+        <meta
+          name="twitter:image"
           content="https://seejamescode.com/graphics/open-graph.png"
         />
         <meta

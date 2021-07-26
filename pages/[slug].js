@@ -31,6 +31,13 @@ const RichTextContainer = styled.section`
 export default function Post({ post = {}, posts }) {
   const hasLinks = post?.links?.length;
   const router = useRouter();
+  const pageImage = `${
+    process.env.VERCEL_URL
+      ? `https://seejamescode.com`
+      : "http://localhost:3000"
+  }/api/social?url=${encodeURIComponent(
+    `https:${post?.thumbnail?.fields?.file?.url}?fm=jpg&w=1200&h=630&fit=crop`
+  )}`;
   const pageTitle = `${post.title}${TITLE_SUFFIX}`;
 
   if (!router.isFallback && !post) {
@@ -46,23 +53,16 @@ export default function Post({ post = {}, posts }) {
           <Head>
             <title key="title">{pageTitle}</title>
             <meta key="og:title" property="og:title" content={pageTitle} />
+            <meta name="twitter:title" content={pageTitle} />
             <meta key="description" name="description" content={post.tagline} />
             <meta
               key="og:description"
               property="og:description"
               content={post.tagline}
             />
-            <meta
-              key="og:image"
-              property="og:image"
-              content={`${
-                process.env.VERCEL_URL
-                  ? `https://seejamescode.com`
-                  : "http://localhost:3000"
-              }/api/social?url=${encodeURIComponent(
-                `https:${post?.thumbnail?.fields?.file?.url}?fm=jpg&w=1200&h=630&fit=crop`
-              )}`}
-            />
+            <meta name="twitter:description" content={post.tagline} />
+            <meta key="og:image" property="og:image" content={pageImage} />
+            <meta name="twitter:image" content={pageImage} />
             <meta
               key="og:image:alt"
               property="og:image:alt"
