@@ -57,9 +57,9 @@ export default function Post({ post = {}, posts }) {
               property="og:image"
               content={`${
                 process.env.VERCEL_URL
-                  ? `https://${process.env.VERCEL_URL}`
+                  ? `https://seejamescode.com`
                   : "http://localhost:3000"
-              }/api/social/${encodeURIComponent(
+              }/api/social?url=${encodeURIComponent(
                 `https:${post?.thumbnail?.fields?.file?.url}?fm=jpg&w=1200&h=630&fit=crop`
               )}`}
             />

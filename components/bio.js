@@ -38,7 +38,8 @@ const PortraitHover = styled.div`
   position: relative;
 
   :after {
-    background: url(${({ portrait }) => portrait}-hover.png);
+    background: ${({ portrait }) =>
+      portrait ? `url(${portrait}-hover.png)` : "none"};
     background-size: 100% 100%;
     content: "";
     height: 100%;
@@ -75,16 +76,18 @@ export default function Bio() {
   return (
     <Container>
       <div>
-        <PortraitHover portrait={portrait}>
-          <picture>
-            <source srcSet={`${portrait}.webp`} type="image/webp" />
-            <Portrait
-              alt="Portrait of James Y Rauhut"
-              title="Photo by David Avila"
-              src={`${portrait}.jpg`}
-            />
-          </picture>
-        </PortraitHover>
+        {portrait ? (
+          <PortraitHover portrait={portrait}>
+            <picture>
+              <source srcSet={`${portrait}.webp`} type="image/webp" />
+              <Portrait
+                alt="Portrait of James Y Rauhut"
+                title="Photo by David Avila"
+                src={`${portrait}.jpg`}
+              />
+            </picture>
+          </PortraitHover>
+        ) : null}
       </div>
       <BioText>
         James loves to design, code, and talk about weird web apps from ATX. He
