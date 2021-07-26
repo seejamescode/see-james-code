@@ -57,6 +57,7 @@ export default function Index({
     <Layout>
       <Head>
         <title key="title">{TITLE}</title>
+        <meta property="og:type" content="website" />
         <meta key="og:title" property="og:title" content={TITLE} />
         <meta name="twitter:title" content={TITLE} />
         <meta key="description" name="description" content={DESCRIPTION} />

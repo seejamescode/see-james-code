@@ -28,6 +28,7 @@ export default function SearchPage({
     <>
       <Head>
         <title key="title">{title}</title>
+        <meta property="og:type" content="website" />
         <meta key="og:title" property="og:title" content={title} />
         <meta key="description" name="description" content={DESCRIPTION} />
         <meta

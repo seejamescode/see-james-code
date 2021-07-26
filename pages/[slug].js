@@ -51,6 +51,7 @@ export default function Post({ post = {}, posts }) {
       ) : (
         <>
           <Head>
+            <meta property="og:type" content="article" />
             <title key="title">{pageTitle}</title>
             <meta key="og:title" property="og:title" content={pageTitle} />
             <meta name="twitter:title" content={pageTitle} />
