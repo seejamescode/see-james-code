@@ -21,8 +21,8 @@ export default class MyDocument extends Document {
             <link rel="manifest" href="/manifest.json" />
             <meta charSet="utf-8" />
             <meta name="theme-color" content="#E366FF" />
-            <meta name="twitter:site" content="@seejamescode" />
-            <meta name="twitter:creator" content="@seejamescode" />
+            {/* <meta name="twitter:site" content="@seejamescode" />
+            <meta name="twitter:creator" content="@seejamescode" /> */}
             <link
               rel="apple-touch-icon"
               sizes="57x57"

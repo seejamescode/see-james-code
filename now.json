@@ -1,6 +1,12 @@
 {
   "version": 2,
-  "alias": ["seejamescode", "seejamescode.com", "www.seejamescode.com"],
+  "alias": [
+    "seejamesdesign",
+    "seejamesdesign.com",
+    "www.seejamesdesign.com",
+    "seejamescode.com",
+    "www.seejamescode.com"
+  ],
   "build": {
     "env": {
       "CONTENTFUL_SPACE_ID": "@seejamescode-contentful-space-id",

@@ -70,11 +70,11 @@ export default function Index({
         <meta
           key="og:image"
           property="og:image"
-          content="https://seejamescode.com/graphics/open-graph.png"
+          content="https://seejamesdesign.com/graphics/open-graph.png"
         />
         <meta
           name="twitter:image"
-          content="https://seejamescode.com/graphics/open-graph.png"
+          content="https://seejamesdesign.com/graphics/open-graph.png"
         />
         <meta
           key="og:image:alt"

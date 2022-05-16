@@ -33,7 +33,7 @@ export default function Post({ post = {}, posts }) {
   const router = useRouter();
   const pageImage = `${
     process.env.VERCEL_URL
-      ? `https://seejamescode.com`
+      ? `https://seejamesdesign.com`
       : "http://localhost:3000"
   }/api/social?url=${encodeURIComponent(
     `https:${post?.thumbnail?.fields?.file?.url}?fm=jpg&w=1200&h=630&fit=crop`

@@ -35,6 +35,7 @@ const PopoverStyled = styled(Popover)`
     display: initial !important;
     left: 0 !important;
     position: relative !important;
+    top: 0 !important;
     transform: none !important;
   }
 `;

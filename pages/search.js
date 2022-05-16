@@ -39,12 +39,12 @@ export default function SearchPage({
         <meta
           key="og:image"
           property="og:image"
-          content="https://seejamescode.com/graphics/open-graph.png"
+          content="https://seejamesdesign.com/graphics/open-graph.png"
         />
         <meta
           key="og:image:alt"
           property="og:image:alt"
-          content="Superhero, robot, zombie, rockstar, and dinosaur all dancing together."
+          content="James Y Rauhut, UX Designer and Engineer"
         />
         <meta key="og:image:width" property="og:image:width" content="1201" />
         <meta key="og:image:height" property="og:image:height" content="630" />

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Document20 from "@carbon/icons-react/lib/document/20";
 import Email20 from "@carbon/icons-react/lib/email/20";
-import Twitter20 from "@carbon/icons-react/lib/logo--twitter/20";
+import LinkedIn20 from "@carbon/icons-react/lib/logo--linkedin/20";
 import Anchor from "./anchor";
 
 const List = styled.ul`
@@ -20,12 +20,12 @@ function PrimaryActions() {
     <List>
       <li>
         <Anchor
-          href="https://twitter.com/seejamescode"
-          icon={<Twitter20 />}
+          href="https://www.linkedin.com/in/seejamesdesign/"
+          icon={<LinkedIn20 />}
           rel="noopener noreferrer"
           target="_blank"
         >
-          Follow on Twitter
+          Connect on LinkedIn
         </Anchor>
       </li>
       <li>
@@ -40,7 +40,7 @@ function PrimaryActions() {
       </li>
       <li>
         <Anchor
-          href="mailto:james@seejamescode.com"
+          href="mailto:james@seejamesdesign.com"
           icon={<Email20 />}
           rel="noopener noreferrer"
           target="_blank"

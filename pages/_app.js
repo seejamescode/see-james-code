@@ -68,7 +68,7 @@ function App({ Component, pageProps }) {
   const windowFocused = useWindowFocus();
 
   return (
-    <PlausibleProvider domain="seejamescode.com">
+    <PlausibleProvider domain="seejamesdesign.com">
       <Theme>
         {({ toggleTheme }) => (
           <>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Twitter20 from "@carbon/icons-react/lib/logo--twitter/20";
+import Linkedin20 from "@carbon/icons-react/lib/logo--linkedin/20";
 import styled from "styled-components";
 import Anchor from "./anchor";
 
@@ -94,12 +94,12 @@ export default function Bio() {
         also writes snippets from the third-person.
         <br />
         <Anchor
-          href="https://twitter.com/seejamescode"
-          icon={<Twitter20 />}
+          href="https://www.linkedin.com/in/seejamesdesign/"
+          icon={<Linkedin20 />}
           rel="noopener noreferrer"
           target="_blank"
         >
-          Follow on Twitter
+          Connect on LinkedIn
         </Anchor>
       </BioText>
     </Container>
