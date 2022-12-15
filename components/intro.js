@@ -69,9 +69,8 @@ export default function Intro() {
     <>
       <section>
         <Title>
-          <HoverCursor cursor="pencil">UX Designer</HoverCursor> and{" "}
-          <HoverCursor cursor="computer">Engineer</HoverCursor> <br />
-          in <HoverCursor cursor="taco">Austin, Texas</HoverCursor>
+          <HoverCursor cursor="pencil">Product Designer</HoverCursor> in{" "}
+          <HoverCursor cursor="taco">Austin, Texas</HoverCursor>
         </Title>
       </section>
       <IntroSection>
@@ -97,7 +96,16 @@ export default function Intro() {
               .
             </p>
             <p>
-              At{" "}
+              I currently at{" "}
+              <Anchor
+                href="https://guideline.com"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Guideline
+              </Anchor>
+              , helping small business owners overcome the complexity of
+              offering retirement benefits. At{" "}
               <Anchor
                 href="https://pingboard.com"
                 rel="noopener noreferrer"

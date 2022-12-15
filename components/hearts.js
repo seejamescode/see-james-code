@@ -90,11 +90,11 @@ const Skeleton = styled.div`
   width: 1rem;
 `;
 
-const TooltipArrowStyled = styled(TooltipArrow)`
+export const TooltipArrowStyled = styled(TooltipArrow)`
   fill: ${({ theme }) => theme.colors.font};
 `;
 
-const TooltipStyled = styled(TooltipReference)`
+export const TooltipStyled = styled(TooltipReference)`
   background: ${({ theme }) => theme.colors.font};
   border-radius: 0.5rem;
   color: ${({ theme }) => theme.colors.background};

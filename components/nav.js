@@ -4,6 +4,7 @@ import styled, { keyframes } from "styled-components";
 import SearchToggle from "../components/search-toggle";
 import Layout from "./layout";
 import ThemeToggle from "./theme-toggle";
+import CaseStudyAccess from "./case-study-access";
 
 const Buttons = styled.div`
   display: grid;
@@ -64,7 +65,7 @@ const Name = styled.a`
   }
 `;
 
-export default function Header({ isHomepage, toggleTheme }) {
+export default function Header({ isAuthenticated, isHomepage, toggleTheme }) {
   return (
     <Layout as="nav">
       <Container isHomepage={isHomepage}>
@@ -74,6 +75,7 @@ export default function Header({ isHomepage, toggleTheme }) {
         <Buttons>
           <SearchToggle />
           <ThemeToggle toggleTheme={toggleTheme} />
+          <CaseStudyAccess isAuthenticated={isAuthenticated} />
         </Buttons>
       </Container>
     </Layout>

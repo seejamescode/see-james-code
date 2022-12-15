@@ -1,5 +1,12 @@
 import styled, { css } from "styled-components";
+import LockedIcon from "@carbon/icons-react/lib/locked/32";
 import Card from "./card";
+import CaseStudyForm from "./case-study-form";
+import CaseStudyBlock from "./case-study-block";
+
+const Description = styled.p`
+  margin: 0;
+`;
 
 const H2 = styled.h2`
   font-size: ${({ theme }) => theme.type.c.size};
@@ -36,6 +43,18 @@ const Grid = styled.div`
   }
 `;
 
+const ValidationBox = styled.div`
+  align-items: center;
+  background: ${({ theme }) => theme.colors.background};
+  border-radius: ${({ theme }) => theme.padding.sm};
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.padding.md};
+  justify-content: center;
+  height: 100%;
+  padding: ${({ theme }) => `${theme.padding.xl} ${theme.padding.sm}`};
+`;
+
 export default function Cards({
   aspectRatio,
   directionLg = "row",
@@ -45,6 +64,7 @@ export default function Cards({
   gapMd = "xl",
   isCardsCentered,
   isCardsVertical,
+  isValidated,
   hideDates,
   hideDescriptions,
   posts,
@@ -55,29 +75,37 @@ export default function Cards({
   return (
     <div>
       {title ? <H2 isCentered={isCardsCentered}>{title}</H2> : null}
-      <Grid
-        directionLg={directionLg}
-        directionMd={directionMd}
-        gap={gap}
-        gapMd={gapMd}
-        gapLg={gapLg}
-        isCardsCentered={isCardsCentered}
-      >
-        {posts.map((post) => (
-          <Card
-            aspectRatio={aspectRatio}
-            coverImage={post.thumbnail}
-            date={!hideDates && post.created}
-            key={post.slug}
-            isVertical={isCardsVertical}
-            title={post.title}
-            slug={post.slug}
-            tagline={!hideDescriptions && post.tagline}
-            textSize={textSize}
-            titleSize={titleSize}
-          />
-        ))}
-      </Grid>
+      {isValidated ? (
+        posts?.length ? (
+          <Grid
+            directionLg={directionLg}
+            directionMd={directionMd}
+            gap={gap}
+            gapMd={gapMd}
+            gapLg={gapLg}
+            isCardsCentered={isCardsCentered}
+          >
+            {posts.map((post) => (
+              <Card
+                aspectRatio={aspectRatio}
+                coverImage={post.thumbnail}
+                date={!hideDates && post.created}
+                key={post.slug}
+                isVertical={isCardsVertical}
+                title={post.title}
+                slug={post.slug}
+                tagline={!hideDescriptions && post.tagline}
+                textSize={textSize}
+                titleSize={titleSize}
+              />
+            ))}
+          </Grid>
+        ) : (
+          <></>
+        )
+      ) : (
+        <CaseStudyBlock />
+      )}
     </div>
   );
 }
