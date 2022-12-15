@@ -96,7 +96,7 @@ export default function Intro() {
               .
             </p>
             <p>
-              I currently at{" "}
+              I currently work at{" "}
               <Anchor
                 href="https://guideline.com"
                 rel="noopener noreferrer"
