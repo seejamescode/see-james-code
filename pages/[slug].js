@@ -50,16 +50,22 @@ export default function Post({
     `https:${post?.thumbnail?.fields?.file?.url}?fm=jpg&w=1200&h=630&fit=crop`
   )}`;
   const pageTitle = `${post.title}${TITLE_SUFFIX}`;
-
+  console.log({ post, slug });
   useEffect(async () => {
-    if (slug && isAuthenticated && !post?.title) {
+    if (slug && isAuthenticated) {
       const result = await getAuthenticatedPost({ preview, slug });
+      console.log({ result });
       if (result?.post && result?.posts) {
         setPost(result.post);
         setPosts(result.posts);
       }
     }
   }, [isAuthenticated, slug]);
+
+  useEffect(async () => {
+    setPost(initialPost);
+    setPosts(initialPosts);
+  }, [slug]);
 
   if (!router.isFallback && !post) {
     return <ErrorPage statusCode={404} />;
