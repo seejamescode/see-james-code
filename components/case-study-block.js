@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import LockedIcon from "@carbon/icons-react/lib/locked/32";
-import CaseStudyForm from "./case-study-form";
+import Button from "./button";
 
 const Description = styled.p`
   margin: 0;
+  max-width: 30ch;
+  text-align: center;
 `;
 
 const ValidationBox = styled.div`
@@ -12,7 +14,7 @@ const ValidationBox = styled.div`
   border-radius: ${({ theme }) => theme.padding.sm};
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.padding.md};
+  gap: ${({ theme }) => theme.padding.sm};
   justify-content: center;
   height: 100%;
   padding: ${({ theme }) => `${theme.padding.xl} ${theme.padding.sm}`};
@@ -23,9 +25,16 @@ export default function CaseStudyBlock({}) {
     <ValidationBox>
       <LockedIcon />
       <Description>
-        The case studies are private. Access them with a password below:
+        The case studies in my design portfolio are password-protected.
       </Description>
-      <CaseStudyForm />
+      <Button
+        as="a"
+        href={process.env.NEXT_PUBLIC_PORTFOLIO_LINK}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        View portfolio
+      </Button>
     </ValidationBox>
   );
 }

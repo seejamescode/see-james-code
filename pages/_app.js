@@ -8,8 +8,6 @@ import Anchor from "../components/anchor";
 import Layout from "../components/layout";
 import Nav from "../components/nav";
 import Theme from "../components/theme";
-import { useEffect, useState } from "react";
-import checkAuthenticated from "../lib/checkAuth";
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -68,14 +66,6 @@ const Footer = styled.div`
 
 function App({ Component, pageProps }) {
   const windowFocused = useWindowFocus();
-  const [isAuthenticated, setIsAuthenticated] = useState();
-
-  useEffect(async () => {
-    setIsAuthenticated(
-      await checkAuthenticated({ preview: pageProps?.preview })
-    );
-  }, []);
-
   return (
     <PlausibleProvider domain="seejamesdesign.com">
       <Theme>
@@ -90,9 +80,9 @@ function App({ Component, pageProps }) {
               />
             </Head>
             <GlobalStyle />
-            <Nav isAuthenticated={isAuthenticated} toggleTheme={toggleTheme} />
+            <Nav toggleTheme={toggleTheme} />
             <Layout as="main">
-              <Component {...pageProps} isAuthenticated={isAuthenticated} />
+              <Component {...pageProps} />
             </Layout>
             <Layout as="footer">
               <Footer>

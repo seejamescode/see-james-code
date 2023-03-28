@@ -14,7 +14,6 @@ import { getAllPosts, getAllPublicPostSlugs, getPost } from "../lib/contentful";
 import { TITLE_SUFFIX } from "../lib/constants";
 import CaseStudyBlock from "../components/case-study-block";
 import { useEffect, useState } from "react";
-import { getAuthenticatedPost } from "../lib/checkAuth";
 
 const Article = styled.article`
   display: grid;
@@ -50,17 +49,6 @@ export default function Post({
     `https:${post?.thumbnail?.fields?.file?.url}?fm=jpg&w=1200&h=630&fit=crop`
   )}`;
   const pageTitle = `${post.title}${TITLE_SUFFIX}`;
-  console.log({ post, slug });
-  useEffect(async () => {
-    if (slug && isAuthenticated) {
-      const result = await getAuthenticatedPost({ preview, slug });
-      console.log({ result });
-      if (result?.post && result?.posts) {
-        setPost(result.post);
-        setPosts(result.posts);
-      }
-    }
-  }, [isAuthenticated, slug]);
 
   useEffect(async () => {
     setPost(initialPost);
@@ -81,7 +69,7 @@ export default function Post({
           {posts?.entries?.length ? (
             <section>
               <Filter />
-              <Cards isCardsCentered isValidated posts={posts.entries} />
+              <Cards isCardsCentered posts={posts.entries} />
               <Pagination
                 page={posts.page}
                 totalPages={posts.totalPages}
@@ -138,7 +126,7 @@ export default function Post({
           {posts?.entries?.length ? (
             <section>
               <Filter type={post?.types} />
-              <Cards isCardsCentered isValidated posts={posts.entries} />
+              <Cards isCardsCentered posts={posts.entries} />
               <Pagination
                 page={posts.page}
                 totalPages={posts.totalPages}

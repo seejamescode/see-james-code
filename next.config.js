@@ -4,6 +4,15 @@ const { withPlausibleProxy } = require("next-plausible");
 
 module.exports = withPlausibleProxy()(
   withPWA({
+    async redirects() {
+      return [
+        {
+          source: "/portfolio",
+          destination: process.env.NEXT_PUBLIC_PORTFOLIO_LINK,
+          permanent: false,
+        },
+      ];
+    },
     images: {
       domains: ["images.ctfassets.net"],
     },

@@ -1,15 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Head from "next/head";
 import styled from "styled-components";
 import Filter from "../components/filter";
 import Pagination from "../components/pagination";
 import Cards from "../components/cards";
-import { DESCRIPTION, FILTERS, TITLE_SUFFIX, TYPES } from "../lib/constants";
+import { DESCRIPTION, FILTERS, TITLE_SUFFIX } from "../lib/constants";
 import { getAllPosts } from "../lib/contentful";
-import { getAuthenticatedPosts } from "../lib/checkAuth";
-import CaseStudyBlock from "../components/case-study-block";
-
-const TYPES_KEYS = Object.keys(TYPES);
 
 const Container = styled.div`
   margin-top: ${({ theme }) => theme.padding.xl};
@@ -22,32 +18,7 @@ const NoResults = styled.p`
   text-align: center;
 `;
 
-export default function SearchPage({
-  allPosts: initialAllPosts,
-  isAuthenticated,
-  page,
-  preview,
-  query,
-  title,
-  type,
-}) {
-  const [allPosts, setAllPosts] = useState(initialAllPosts);
-
-  useEffect(async () => {
-    if (isAuthenticated) {
-      const allResults = await getAuthenticatedPosts({
-        page,
-        preview,
-        query,
-        type,
-      });
-
-      if (allResults?.posts?.entries?.length) {
-        setAllPosts(allResults?.posts);
-      }
-    }
-  }, [isAuthenticated, page, query, type]);
-
+export default function SearchPage({ allPosts, query, title, type }) {
   return (
     <>
       <Head>
@@ -76,14 +47,8 @@ export default function SearchPage({
       {allPosts?.entries?.length ? (
         <Container>
           <Filter query={query} type={type} />
-          <Cards
-            isCardsCentered
-            isValidated={isAuthenticated || type !== TYPES_KEYS[0]}
-            posts={allPosts?.entries}
-          />
+          <Cards isCardsCentered posts={allPosts?.entries} />
         </Container>
-      ) : type === TYPES_KEYS[0] && !isAuthenticated ? (
-        <CaseStudyBlock />
       ) : (
         <NoResults>Oof, no results for "{query}." Try again?</NoResults>
       )}
@@ -103,10 +68,6 @@ export async function getServerSideProps({
   query: { page, query = "", type = "" },
   preview = false,
 }) {
-  if (type === TYPES_KEYS[0]) {
-    return { props: { allPosts: {}, preview, query, title: "Search", type } };
-  }
-
   const allPosts = await getAllPosts({ page, preview, query, type });
   const category = FILTERS[type];
   const title = `${

@@ -44,7 +44,7 @@ const Tagline = styled.p`
   font-size: ${({ theme }) => theme.type.c.size};
   line-height: ${({ theme }) => theme.type.c.line};
   margin: 0;
-  max-width: 35ch;
+  max-width: 37ch;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     font-size: ${({ theme }) => theme.type.d.size};
@@ -75,25 +75,17 @@ export default function Intro() {
       </section>
       <IntroSection>
         <Tagline>
-          I'm a designer and coder that loves making delightful experiences for{" "}
-          <i>everyone</i> using user-centered processes.
+          I'm a product designer that loves making delightful and helpful
+          experiences for <i>everyone</i>.
         </Tagline>
         <IntroGrid>
           <div>
             <p>
-              I enjoy{" "}
-              <strong>
-                product design, user research, and web development
-              </strong>
-              . During free time, I write{" "}
-              <Link href="/search?type=article" passHref>
-                <Anchor>blog articles</Anchor>
-              </Link>
-              , collect posters, and make{" "}
+              I enjoy product design and user research. During free time, I make{" "}
               <Link href="/search?type=project" passHref>
                 <Anchor>light-hearted products</Anchor>
               </Link>
-              .
+              , collect posters, and pet my dog.
             </p>
             <p>
               I currently work at{" "}
@@ -113,8 +105,9 @@ export default function Intro() {
               >
                 Pingboard
               </Anchor>
-              , I designed data-driven UI experiences on the Growth Team.
-              Previously, I was helping every business unit at IBM align on the{" "}
+              , I designed data-driven UI experiences on the Growth Team. At
+              IBM, I used front-end engineering skills to help all business
+              units align on the{" "}
               <Anchor
                 href="https://www.ibm.com/design/language/"
                 rel="noopener noreferrer"

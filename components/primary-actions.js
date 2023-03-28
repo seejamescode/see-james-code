@@ -4,6 +4,7 @@ import Document20 from "@carbon/icons-react/lib/document/20";
 import Email20 from "@carbon/icons-react/lib/email/20";
 import LinkedIn20 from "@carbon/icons-react/lib/logo--linkedin/20";
 import Anchor from "./anchor";
+import Locked20 from "@carbon/icons-react/lib/locked/20";
 
 const List = styled.ul`
   list-style: none;
@@ -36,6 +37,16 @@ function PrimaryActions() {
           target="_blank"
         >
           View Resume
+        </Anchor>
+      </li>
+      <li>
+        <Anchor
+          href={process.env.NEXT_PUBLIC_PORTFOLIO_LINK}
+          icon={<Locked20 />}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Explore the portfolio
         </Anchor>
       </li>
       <li>

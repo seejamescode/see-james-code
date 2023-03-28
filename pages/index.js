@@ -6,8 +6,6 @@ import Pagination from "../components/pagination";
 import Cards from "../components/cards";
 import { getAllPosts } from "../lib/contentful";
 import { DESCRIPTION, TYPES } from "../lib/constants";
-import { useEffect, useState } from "react";
-import { getAuthenticatedPosts } from "../lib/checkAuth";
 
 const TYPES_KEYS = Object.keys(TYPES);
 const TITLE = `James Y Rauhut`;
@@ -50,36 +48,11 @@ const Layout = styled.div`
 `;
 
 export default function Index({
-  allPosts: initialAllPosts,
+  allPosts,
   isAuthenticated,
   latestArticles: { entries: articleEntries = [] },
   latestProjects: { entries: projectEntries = [] },
-  preview,
 }) {
-  const [caseStudyEntries, setCaseStudyEntries] = useState();
-  const [allPosts, setAllPosts] = useState(initialAllPosts);
-
-  useEffect(async () => {
-    if (isAuthenticated) {
-      const caseStudyResults = await getAuthenticatedPosts({
-        limit: 2,
-        preview,
-        type: TYPES_KEYS[0],
-      });
-      const allResults = await getAuthenticatedPosts({
-        preview,
-      });
-
-      if (
-        caseStudyResults?.posts?.entries?.length &&
-        allResults?.posts?.entries?.length
-      ) {
-        setCaseStudyEntries(caseStudyResults.posts.entries);
-        setAllPosts(allResults?.posts);
-      }
-    }
-  }, [isAuthenticated]);
-
   return (
     <Layout>
       <Head>
@@ -114,7 +87,7 @@ export default function Index({
       <Intro />
       <FeaturedSection>
         <FeaturedArticle>
-          <Cards isValidated posts={articleEntries} title="Latest Article" />
+          <Cards posts={articleEntries} title="Latest Article" />
         </FeaturedArticle>
         <FeaturedSidebar>
           <Cards
@@ -126,7 +99,6 @@ export default function Index({
             hideDates
             hideDescriptions
             isCardsVertical
-            isValidated
             posts={projectEntries}
             title="Recent Personal Projects"
             titleSize="small"
@@ -139,9 +111,7 @@ export default function Index({
             gapLg="md"
             gapMd="md"
             isCardsVertical
-            isValidated={isAuthenticated}
             hideDates
-            posts={caseStudyEntries}
             title="Case Studies"
             textSize="small"
             titleSize="a"
@@ -150,7 +120,7 @@ export default function Index({
       </FeaturedSection>
       <section>
         <Filter />
-        <Cards isCardsCentered isValidated posts={allPosts?.entries} />
+        <Cards isCardsCentered posts={allPosts?.entries} />
         <Pagination
           page={allPosts?.page}
           totalPages={allPosts?.totalPages}
@@ -166,12 +136,12 @@ export async function getStaticProps({ preview = false }) {
   const latestArticles = await getAllPosts({
     limit: 1,
     preview,
-    type: TYPES_KEYS[1],
+    type: TYPES_KEYS[0],
   });
   const latestProjects = await getAllPosts({
     limit: 3,
     preview,
-    type: TYPES_KEYS[2],
+    type: TYPES_KEYS[1],
   });
 
   return {

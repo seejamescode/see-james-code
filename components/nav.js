@@ -65,7 +65,7 @@ const Name = styled.a`
   }
 `;
 
-export default function Header({ isAuthenticated, isHomepage, toggleTheme }) {
+export default function Header({ isHomepage, toggleTheme }) {
   return (
     <Layout as="nav">
       <Container isHomepage={isHomepage}>
@@ -75,7 +75,7 @@ export default function Header({ isAuthenticated, isHomepage, toggleTheme }) {
         <Buttons>
           <SearchToggle />
           <ThemeToggle toggleTheme={toggleTheme} />
-          <CaseStudyAccess isAuthenticated={isAuthenticated} />
+          <CaseStudyAccess />
         </Buttons>
       </Container>
     </Layout>
